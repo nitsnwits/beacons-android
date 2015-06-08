@@ -1,5 +1,5 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-
+// this is to check git push after changes. 
 buildscript {
     repositories {
         jcenter()

@@ -1,0 +1,57 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="cmpe295.sjsu.edu.salesman.RegistrationActivity">
+    <LinearLayout
+
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+        <EditText android:layout_width="fill_parent"
+                  android:layout_height="40dp"
+                    android:hint="name"
+                    android:background="#f3f3f3"
+                    android:paddingLeft="5dp"
+                    android:layout_marginTop="30dp"/>
+        <EditText android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:hint="email"
+                    android:background="#f3f3f3"
+                    android:paddingLeft="5dp"
+                    android:layout_marginTop="15dp"/>
+        <EditText android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:hint="password"
+            android:background="#f3f3f3"
+            android:paddingLeft="5dp"
+            android:layout_marginTop="15dp"/>
+        <EditText android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:hint="confirm password"
+            android:background="#f3f3f3"
+            android:paddingLeft="5dp"
+            android:layout_marginTop="15dp"/>
+        <EditText android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:hint="mobile"
+                    android:background="#f3f3f3"
+                    android:paddingLeft="5dp"
+                    android:layout_marginTop="15dp"/>
+        <EditText android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:hint="address"
+                    android:background="#f3f3f3"
+                    android:paddingLeft="5dp"
+                    android:layout_marginTop="15dp"/>
+
+        <Button android:layout_width="190dp"
+                    android:layout_height="38dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="16dp"
+                    android:text="submit"
+                    android:textColor="#fff"></Button>
+    </LinearLayout>
+</RelativeLayout>

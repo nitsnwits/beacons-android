@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Salesman</string>
+
+    <string name="home_page">Home Page</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_user_registration">UserRegistrationActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_registration">RegistrationActivity</string>
+</resources>

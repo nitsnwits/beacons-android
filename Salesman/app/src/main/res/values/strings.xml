@@ -8,4 +8,7 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_registration">RegistrationActivity</string>
+    <string name="title_activity_offer">OfferActivity</string>
+    <string name="title_activity_offer_detail">OfferDetailActivity</string>
+    <string name="title_activity_navigation">NavigationActivity</string>
 </resources>

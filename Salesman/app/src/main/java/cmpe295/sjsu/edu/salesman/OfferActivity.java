@@ -8,18 +8,18 @@ import android.view.MenuItem;
 import android.view.View;
 
 
-public class RegistrationActivity extends ActionBarActivity {
+public class OfferActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registration);
+        setContentView(R.layout.activity_offer);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_registration, menu);
+        getMenuInflater().inflate(R.menu.menu_offer, menu);
         return true;
     }
 
@@ -38,12 +38,10 @@ public class RegistrationActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * Method which navigates from Login Activity to User Registration
-     */
     public void offerDetails(View view){
-        Intent offerDetailsIntent = new Intent(getApplicationContext(),OfferActivity.class);
+        Intent offerDetailsIntent = new Intent(getApplicationContext(),OfferDetailActivity.class);
 //        homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(offerDetailsIntent);
     }
+
 }

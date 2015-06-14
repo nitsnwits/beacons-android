@@ -24,14 +24,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cmpe295.sjsu.edu.salesman.LoginActivity" />
         </activity>
-        <activity
-            android:name=".UserRegistrationActivity"
-            android:label="@string/title_activity_user_registration"
-            android:parentActivityName=".LoginActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="cmpe295.sjsu.edu.salesman.LoginActivity" />
-        </activity>
+        <!-- <activity -->
+        <!-- android:name=".UserRegistrationActivity" -->
+        <!-- android:label="@string/title_activity_user_registration" -->
+        <!-- android:parentActivityName=".LoginActivity" > -->
+        <!-- <meta-data -->
+        <!-- android:name="android.support.PARENT_ACTIVITY" -->
+        <!-- android:value="cmpe295.sjsu.edu.salesman.LoginActivity" /> -->
+        <!-- </activity> -->
         <activity
             android:name=".RegistrationActivity"
             android:label="@string/title_activity_registration"
@@ -39,6 +39,30 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cmpe295.sjsu.edu.salesman.LoginActivity" />
+        </activity>
+        <activity
+            android:name=".OfferActivity"
+            android:label="@string/title_activity_offer"
+            android:parentActivityName=".HomeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cmpe295.sjsu.edu.salesman.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".OfferDetailActivity"
+            android:label="@string/title_activity_offer_detail"
+            android:parentActivityName=".OfferActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cmpe295.sjsu.edu.salesman.OfferActivity" />
+        </activity>
+        <activity
+            android:name=".NavigationActivity"
+            android:label="@string/title_activity_navigation"
+            android:parentActivityName=".OfferDetailActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cmpe295.sjsu.edu.salesman.OfferDetailActivity" />
         </activity>
     </application>
 

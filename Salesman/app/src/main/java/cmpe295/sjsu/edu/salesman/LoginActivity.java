@@ -2,6 +2,7 @@ package cmpe295.sjsu.edu.salesman;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,6 +13,21 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
+
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+import retrofit.http.Field;
+
 
 public class LoginActivity extends ActionBarActivity {
 
@@ -19,12 +35,12 @@ public class LoginActivity extends ActionBarActivity {
     private EditText password;
     private Button login;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        setupVariables();
+        login = (Button) findViewById(R.id.loginBtn);
+      //  setupVariables();
     }
 
     @Override
@@ -48,22 +64,44 @@ public class LoginActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    //This method is called when user submits login button
     public void authenticateUser(View view) {
-        System.out.print("I am here");
-        
-        if (username.getText().toString().equals("admin") &&
-                password.getText().toString().equals("admin")) {
-//            Toast.makeText(getApplicationContext(), "Hello admin!",
-//                    Toast.LENGTH_SHORT).show();
-            navigatetoHomeActivity();
-        } else {
-            Toast.makeText(getApplicationContext(), "Seems like you 're not admin!",
-                    Toast.LENGTH_SHORT).show();
 
+        EditText usernameEditText = (EditText) findViewById(R.id.usernameET);
+        final String username = usernameEditText.getText().toString();
+        System.out.println("Username:" + username);
+        EditText passwordEditText = (EditText) findViewById(R.id.passwordET);
+        String password = passwordEditText.getText().toString();
+        System.out.println("Pwd:" + password);
 
+        RestClient.get().loginUser(username, password, new Callback<LoginUserResponse>() {
+            @Override
+            public void success(LoginUserResponse loginUserResponse, Response response) {
+                System.out.println("I am success");
+                Toast.makeText(getApplicationContext(), "Hello" + username + "!!",
+                        Toast.LENGTH_SHORT).show();
+                navigatetoHomeActivity();
+            }
 
-        }
+            @Override
+            public void failure(RetrofitError error) {
+                System.out.println("I am error");
+                Toast.makeText(getApplicationContext(), "Incorrect username or password!",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+
+//        if (username.equals("admin") &&
+//                pwd.equals("admin")) {
+////            Toast.makeText(getApplicationContext(), "Hello admin!",
+////                    Toast.LENGTH_SHORT).show();
+//            navigatetoHomeActivity();
+//        } else {
+//            Toast.makeText(getApplicationContext(), "Seems like you 're not admin!",
+//                    Toast.LENGTH_SHORT).show();
+//        }
+
 
     private void setupVariables() {
         username = (EditText) findViewById(R.id.usernameET);
@@ -89,4 +127,6 @@ public class LoginActivity extends ActionBarActivity {
 //        homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(registerIntent);
     }
+
 }
+

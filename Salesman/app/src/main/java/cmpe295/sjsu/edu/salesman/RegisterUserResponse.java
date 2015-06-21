@@ -17,8 +17,8 @@ public class RegisterUserResponse {
     public Date created;
     public String userId;
     public String accessToken;
-    public Name name;
     public String email;
+    public Name name;
 
 
 

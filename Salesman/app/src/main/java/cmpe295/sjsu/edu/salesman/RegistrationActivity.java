@@ -11,6 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -86,39 +90,24 @@ public class RegistrationActivity extends ActionBarActivity {
 
         System.out.println("User is::" + firstStr + lastStr + pwd + emailStr);
 
+
         RestClient.get().registerUser(user1, new Callback<RegisterUserResponse>() {
+
             @Override
             public void success(RegisterUserResponse registerUserResponse, Response response) {
-
-                RestClient.get().getUserStatus(registerUserResponse.getUserId(), new Callback<userStatusResponse>() {
-                    @Override
-                    public void success(userStatusResponse userStatusResponse, Response response) {
-                        RestClient.get().verifyUser(userStatusResponse.getUserId(), new Callback<String>() {
-                            @Override
-                            public void success(String s, Response response) {
-                                System.out.println("user created!!");
-                                navigatetoHomeActivity();
-                            }
-
-                            @Override
-                            public void failure(RetrofitError error) {
-                                System.out.println("user nt verified!!");
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void failure(RetrofitError error) {
-
-                    }
-                });
+                System.out.println("user created!!");
+                Toast.makeText(getApplicationContext(), "User created!",
+                        Toast.LENGTH_SHORT).show();
+                navigatetoHomeActivity();
 
             }
 
+
             @Override
             public void failure(RetrofitError error) {
+
                 System.out.println("User creation errro");
-                error.getCause();
+                error.getBody();
 
                 Toast.makeText(getApplicationContext(), "Sorry not able to create a user!",
                         Toast.LENGTH_SHORT).show();

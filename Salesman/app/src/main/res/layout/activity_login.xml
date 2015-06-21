@@ -61,14 +61,23 @@
         android:layout_gravity="center_horizontal" />
 
     <Button
-        android:id="@+id/registerBtn"
+    android:id="@+id/registerBtn"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/loginBtn"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="50dp"
+    android:onClick="registerUser"
+    android:text="Register Here" />
+    <Button
+        android:id="@+id/resetBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/loginBtn"
+        android:layout_below="@+id/registerBtn"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:onClick="registerUser"
-        android:text="Register Here" />
+        android:onClick="resetPwd"
+        android:text="Reset Pwd" />
 
 
 </LinearLayout>

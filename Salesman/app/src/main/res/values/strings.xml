@@ -14,11 +14,14 @@
     <string name="title_activity_offer">OfferActivity</string>
     <string name="title_activity_offer_detail">OfferDetailActivity</string>
     <string name="title_activity_navigation">NavigationActivity</string>
+    <string name="photo_upload">Photo Upload</string>
 
     <string name="first">First Name</string>
     <string name="last">Last Name</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
+    <string name="title_activity_photo_upload">PhotoUploadActivity</string>
+    <string name="title_activity_pick_your_favourites">PickYourFavouritesActivity</string>
 
 
 </resources>

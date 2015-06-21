@@ -10,6 +10,8 @@ import java.lang.reflect.Type;
 
 /**
  * Created by Rucha on 6/17/15.
+ * As there is no straightforward object representation of this entire response in Java,
+ * so we would implement our own custom deserializer to parse this JSON response.
  */
 public class MyDeserializer implements JsonDeserializer<Name> {
 

@@ -64,6 +64,8 @@ public class LoginActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
     //This method is called when user submits login button
     public void authenticateUser(View view) {
 
@@ -92,16 +94,6 @@ public class LoginActivity extends ActionBarActivity {
         });
     }
 
-//        if (username.equals("admin") &&
-//                pwd.equals("admin")) {
-////            Toast.makeText(getApplicationContext(), "Hello admin!",
-////                    Toast.LENGTH_SHORT).show();
-//            navigatetoHomeActivity();
-//        } else {
-//            Toast.makeText(getApplicationContext(), "Seems like you 're not admin!",
-//                    Toast.LENGTH_SHORT).show();
-//        }
-
 
     private void setupVariables() {
         username = (EditText) findViewById(R.id.usernameET);
@@ -119,13 +111,10 @@ public class LoginActivity extends ActionBarActivity {
         startActivity(homeIntent);
     }
 
-    /**
-     * Method which navigates from Login Activity to User Registration
-     */
+
     public void registerUser(View view){
-        Intent registerIntent = new Intent(getApplicationContext(),RegistrationActivity.class);
-//        homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(registerIntent);
+        Intent registerUserIntent = new Intent(getApplicationContext(),RegistrationActivity .class);
+        startActivity(registerUserIntent);
     }
 
 }

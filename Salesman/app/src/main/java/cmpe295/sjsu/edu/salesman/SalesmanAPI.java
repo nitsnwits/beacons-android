@@ -7,6 +7,7 @@ import retrofit.http.Body;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
+import retrofit.http.Headers;
 import retrofit.http.POST;
 import retrofit.http.Path;
 
@@ -21,18 +22,25 @@ public interface SalesmanAPI {
     @POST("/auth")
     public void loginUser(@Field("email")String email,@Field("password")String password, Callback<LoginUserResponse> cb);
 
+    @FormUrlEncoded
+    @POST("/auth/reset/password")
+    public void resetPwd(@Field("email")String email, Callback<String> cb);
+
+
     //2.USERS
 
-    @FormUrlEncoded
     @POST("/users")
-    public void registerUser(@Field("first") String first,
-                             @Field("last") String last,
-                             @Field("email")String email,
-                             @Field("password")String password,
+    public void registerUser(@Body User user,
                              Callback<RegisterUserResponse> cb);
 
-//    @GET("/users/{userId}")
-//    void listUsers(@Path("userId") int id, Callback<> cb);
+    @GET("/users/{userId}")
+    public void getUserStatus(@Path("userId")String userId,Callback<userStatusResponse> cb);
+
+    @GET("/users/{userId}/verify")
+    public void verifyUser(@Path("userId")String userId,Callback<String> cb);
+
+
+
 
 
 

@@ -33,15 +33,11 @@ public class RestClient {
         return REST_CLIENT;
     }
 
-    static Gson gson =
-            new GsonBuilder()
-                    .registerTypeAdapter(Name.class, new MyDeserializer())
-                    .create();
+
 
     private static void setupRestClient() {
         RestAdapter.Builder builder = new RestAdapter.Builder()
                 .setEndpoint(ROOT)
-                .setConverter(new GsonConverter(gson))
                 .setClient(new OkClient(new OkHttpClient()));
                  builder.setLogLevel(RestAdapter.LogLevel.FULL);
         RestAdapter restAdapter = builder.build();

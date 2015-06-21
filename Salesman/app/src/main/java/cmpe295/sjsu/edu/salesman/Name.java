@@ -7,12 +7,10 @@ import com.google.gson.annotations.SerializedName;
  * Created by Rucha on 6/17/15.
  */
 public class Name {
-    @SerializedName("first")
-    @Expose
+
     public String first;
 
-    @SerializedName("last")
-    @Expose
+
     public String last;
 
     public String getFirst() {
@@ -31,3 +29,4 @@ public class Name {
         this.last = last;
     }
 }
+

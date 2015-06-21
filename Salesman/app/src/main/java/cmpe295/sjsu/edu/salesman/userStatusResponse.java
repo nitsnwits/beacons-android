@@ -1,27 +1,26 @@
 package cmpe295.sjsu.edu.salesman;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
-
-import java.lang.reflect.Type;
 import java.util.Date;
 
 /**
- * Created by Rucha on 6/17/15.
+ * Created by Rucha on 6/20/15.
  */
-public class RegisterUserResponse {
+public class userStatusResponse {
     public Date updated;
     public Date created;
     public String userId;
     public String accessToken;
     public Name name;
     public String email;
+    public boolean verified;
 
+    public boolean isVerified() {
+        return verified;
+    }
 
-
+    public void setVerified(boolean verified) {
+        this.verified = verified;
+    }
 
     public Name getName() {
         return name;
@@ -74,4 +73,3 @@ public class RegisterUserResponse {
 
 
 }
-

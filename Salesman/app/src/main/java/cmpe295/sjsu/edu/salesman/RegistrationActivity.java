@@ -105,10 +105,8 @@ public class RegistrationActivity extends ActionBarActivity {
 
             @Override
             public void failure(RetrofitError error) {
-
                 System.out.println("User creation errro");
                 error.getBody();
-
                 Toast.makeText(getApplicationContext(), "Sorry not able to create a user!",
                         Toast.LENGTH_SHORT).show();
             }

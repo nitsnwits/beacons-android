@@ -95,18 +95,55 @@ public class RegistrationActivity extends ActionBarActivity {
 
             @Override
             public void success(RegisterUserResponse registerUserResponse, Response response) {
+<<<<<<< HEAD
                 System.out.println("user created!!");
                 Toast.makeText(getApplicationContext(), "User created!",
                         Toast.LENGTH_SHORT).show();
                 navigatetoHomeActivity();
+=======
+
+                System.out.println("user created!!");
+                navigatetoHomeActivity();
+
+               /* RestClient.get().getUserStatus(registerUserResponse.getUserId(), new Callback<userStatusResponse>() {
+                    @Override
+                    public void success(userStatusResponse userStatusResponse, Response response) {
+                        RestClient.get().verifyUser(userStatusResponse.getUserId(), new Callback<String>() {
+                            @Override
+                            public void success(String s, Response response) {
+                                System.out.println("user created!!");
+                                navigatetoHomeActivity();
+                            }
+
+                            @Override
+                            public void failure(RetrofitError error) {
+                                System.out.println("user nt verified!!");
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+
+                    }
+                });*/
+>>>>>>> d547ad3c4fff5aa3ccdb6e01e28bbed5e28ec74b
 
             }
 
 
             @Override
+<<<<<<< HEAD
             public void failure(RetrofitError error) {
                 System.out.println("User creation errro");
                 error.getBody();
+=======
+            public void failure(RetrofitError cause) {
+                System.out.println("User creation error");
+                Response r = cause.getResponse();
+                System.out.println(r.getReason());
+
+>>>>>>> d547ad3c4fff5aa3ccdb6e01e28bbed5e28ec74b
                 Toast.makeText(getApplicationContext(), "Sorry not able to create a user!",
                         Toast.LENGTH_SHORT).show();
             }

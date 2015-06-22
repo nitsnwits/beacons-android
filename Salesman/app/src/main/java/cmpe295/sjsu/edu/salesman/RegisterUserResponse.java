@@ -13,15 +13,30 @@ import java.util.Date;
  * Created by Rucha on 6/17/15.
  */
 public class RegisterUserResponse {
-    public Date updated;
-    public Date created;
+
+
+    public long updated;
+    public long created;
     public String userId;
     public String accessToken;
     public String email;
     public Name name;
 
+    public long getCreated() {
+        return created;
+    }
 
+    public void setCreated(long created) {
+        this.created = created;
+    }
 
+    public long getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(long updated) {
+        this.updated = updated;
+    }
 
     public Name getName() {
         return name;
@@ -31,21 +46,7 @@ public class RegisterUserResponse {
         this.name = name;
     }
 
-    public Date getUpdated() {
-        return updated;
-    }
 
-    public void setUpdated(Date updated) {
-        this.updated = updated;
-    }
-
-    public Date getCreated() {
-        return created;
-    }
-
-    public void setCreated(Date created) {
-        this.created = created;
-    }
 
     public String getUserId() {
         return userId;

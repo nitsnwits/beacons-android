@@ -90,7 +90,10 @@ public class RegistrationActivity extends ActionBarActivity {
             @Override
             public void success(RegisterUserResponse registerUserResponse, Response response) {
 
-                RestClient.get().getUserStatus(registerUserResponse.getUserId(), new Callback<userStatusResponse>() {
+                System.out.println("user created!!");
+                navigatetoHomeActivity();
+
+               /* RestClient.get().getUserStatus(registerUserResponse.getUserId(), new Callback<userStatusResponse>() {
                     @Override
                     public void success(userStatusResponse userStatusResponse, Response response) {
                         RestClient.get().verifyUser(userStatusResponse.getUserId(), new Callback<String>() {
@@ -111,14 +114,15 @@ public class RegistrationActivity extends ActionBarActivity {
                     public void failure(RetrofitError error) {
 
                     }
-                });
+                });*/
 
             }
 
             @Override
-            public void failure(RetrofitError error) {
-                System.out.println("User creation errro");
-                error.getCause();
+            public void failure(RetrofitError cause) {
+                System.out.println("User creation error");
+                Response r = cause.getResponse();
+                System.out.println(r.getReason());
 
                 Toast.makeText(getApplicationContext(), "Sorry not able to create a user!",
                         Toast.LENGTH_SHORT).show();

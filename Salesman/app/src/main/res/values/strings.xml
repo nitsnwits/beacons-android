@@ -23,5 +23,13 @@
     <string name="title_activity_photo_upload">PhotoUploadActivity</string>
     <string name="title_activity_pick_your_favourites">PickYourFavouritesActivity</string>
 
+    <string-array name="nav_drawer_items">
 
+        <item>Offers</item>
+        <item>Store Map</item>
+        <item>Settings</item>
+        <item>About Salesman</item>
+    </string-array>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
 </resources>

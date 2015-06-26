@@ -95,15 +95,15 @@ public class RegistrationActivity extends ActionBarActivity {
 
             @Override
             public void success(RegisterUserResponse registerUserResponse, Response response) {
-<<<<<<< HEAD
-                System.out.println("user created!!");
-                Toast.makeText(getApplicationContext(), "User created!",
-                        Toast.LENGTH_SHORT).show();
-                navigatetoHomeActivity();
-=======
 
-                System.out.println("user created!!");
-                navigatetoHomeActivity();
+//                System.out.println("user created!!");
+
+//                navigatetoHomeActivity();
+
+                Toast.makeText(getApplicationContext(), "Welcome to Salesman!",
+                        Toast.LENGTH_SHORT).show();
+               // System.out.println("user created!!");
+                navigatetoPhotoUplaodActivity();
 
                /* RestClient.get().getUserStatus(registerUserResponse.getUserId(), new Callback<userStatusResponse>() {
                     @Override
@@ -127,29 +127,29 @@ public class RegistrationActivity extends ActionBarActivity {
 
                     }
                 });*/
->>>>>>> d547ad3c4fff5aa3ccdb6e01e28bbed5e28ec74b
+
 
             }
 
 
             @Override
-<<<<<<< HEAD
-            public void failure(RetrofitError error) {
-                System.out.println("User creation errro");
-                error.getBody();
-=======
+
+//            public void failure(RetrofitError error) {
+//                System.out.println("User creation errro");
+//                error.getBody();
+
             public void failure(RetrofitError cause) {
                 System.out.println("User creation error");
                 Response r = cause.getResponse();
                 System.out.println(r.getReason());
 
->>>>>>> d547ad3c4fff5aa3ccdb6e01e28bbed5e28ec74b
                 Toast.makeText(getApplicationContext(), "Sorry not able to create a user!",
                         Toast.LENGTH_SHORT).show();
             }
         });
     }
 
+    //After the registration the user navigates to photo upload activity
     /**
      * Method which navigates from Registration Activity to Home Activity
      */
@@ -157,6 +157,15 @@ public class RegistrationActivity extends ActionBarActivity {
         Intent homeIntent = new Intent(getApplicationContext(),HomeActivity.class);
 //        homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(homeIntent);
+    }
+
+    /**
+     * Method which navigates from Registration Activity to Home Activity
+     */
+    public void navigatetoPhotoUplaodActivity(){
+        Intent photoIntent = new Intent(getApplicationContext(),PhotoUploadActivity.class);
+//        homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(photoIntent);
     }
     /**
      * Method which navigates from Registration Screen to Offer Screen

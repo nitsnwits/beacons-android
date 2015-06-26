@@ -29,6 +29,8 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Date;
 
@@ -57,8 +59,20 @@ public class PhotoUploadActivity extends ActionBarActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK) {
-            Bitmap bitmap = getPath(data.getData());
-            imageView.setImageBitmap(bitmap);
+            if (data == null) {
+                //Display an error
+                return;
+            }
+
+            try {
+                InputStream inputStream = getBaseContext().getContentResolver().openInputStream(data.getData());
+                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                imageView.setImageBitmap(bitmap);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+//
         }
     }
 
@@ -96,7 +110,7 @@ public class PhotoUploadActivity extends ActionBarActivity {
 
             Bitmap bitmap = drawable.getBitmap();
 
-            bitmap.compress(CompressFormat.JPEG, 50, bos);
+            bitmap.compress(CompressFormat.PNG, 50, bos);
 
             byte[] data = bos.toByteArray();
 

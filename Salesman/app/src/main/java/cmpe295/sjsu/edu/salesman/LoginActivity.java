@@ -1,6 +1,7 @@
 package cmpe295.sjsu.edu.salesman;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
@@ -35,11 +36,20 @@ public class LoginActivity extends ActionBarActivity {
     private EditText password;
     private Button login;
 
+    //Shared Preference:
+    SharedPreferences sharedpreferences ;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         login = (Button) findViewById(R.id.loginBtn);
+        sharedpreferences = getBaseContext().getSharedPreferences("salesmanPreference", 0);
+
+
+
       //  setupVariables();
     }
 
@@ -65,6 +75,24 @@ public class LoginActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //This method is called when user wants to reset the pwd
+    public void resetPwd(View view){
+        EditText usernameEditText = (EditText) findViewById(R.id.usernameET);
+        final String username = usernameEditText.getText().toString();
+        System.out.println("Username:" + username);
+
+        RestClient.get().resetPwd(username, new Callback<String>() {
+            @Override
+            public void success(String s, Response response) {
+
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
+    }
 
     //This method is called when user submits login button
     public void authenticateUser(View view) {
@@ -79,6 +107,12 @@ public class LoginActivity extends ActionBarActivity {
         RestClient.get().loginUser(username, password, new Callback<LoginUserResponse>() {
             @Override
             public void success(LoginUserResponse loginUserResponse, Response response) {
+                String uid = loginUserResponse.getUserId(); //for preference
+
+                SharedPreferences.Editor editor = sharedpreferences.edit(); //
+                editor.putString("userId",uid);
+                editor.commit();
+
                 System.out.println("I am success");
                 Toast.makeText(getApplicationContext(), "Hello" + username + "!!",
                         Toast.LENGTH_SHORT).show();

@@ -5,11 +5,11 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
-<<<<<<< HEAD
+
 import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-=======
+
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -17,7 +17,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
->>>>>>> 27bdca47cfcabbeaa904e0f7ccbc9a52aa3832ab
+
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -47,10 +47,10 @@ public class HomeActivity extends Activity  implements NavDrawerAdapter.OnItemCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-<<<<<<< HEAD
+
         sharedpreferences = getBaseContext().getSharedPreferences("salesmanPreference", 0);
 
-=======
+
 
         mMenuTitles = getResources().getStringArray(R.array.nav_drawer_items);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -93,7 +93,7 @@ public class HomeActivity extends Activity  implements NavDrawerAdapter.OnItemCl
         if (savedInstanceState == null) {
             selectItem(0);
         }
->>>>>>> 27bdca47cfcabbeaa904e0f7ccbc9a52aa3832ab
+
     }
 
     @Override

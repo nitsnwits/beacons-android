@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "cmpe295.sjsu.edu.salesman"
-        minSdkVersion 11
+        minSdkVersion 21
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
@@ -20,12 +20,13 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.0'
     compile 'com.squareup.okhttp:okhttp:2.0.0'
     compile 'com.squareup.okio:okio:1.0.1'
-
-
+    compile files('libs/tileviewlib-1.0.13.jar')
+    compile 'com.android.support:recyclerview-v7:+'
+    compile 'com.android.support:cardview-v7:22.2.0'
 }

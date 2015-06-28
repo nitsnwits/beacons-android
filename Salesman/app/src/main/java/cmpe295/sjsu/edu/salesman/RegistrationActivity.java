@@ -102,31 +102,10 @@ public class RegistrationActivity extends Activity {
                 Toast.makeText(getApplicationContext(), "Welcome to Salesman!",
                         Toast.LENGTH_SHORT).show();
                // System.out.println("user created!!");
-                navigatetoPhotoUplaodActivity();
+             //   navigatetoPhotoUplaodActivity();
+                //navigatetoPhotoUplaodActivity();
 
-               /* RestClient.get().getUserStatus(registerUserResponse.getUserId(), new Callback<userStatusResponse>() {
-                    @Override
-                    public void success(userStatusResponse userStatusResponse, Response response) {
-                        RestClient.get().verifyUser(userStatusResponse.getUserId(), new Callback<String>() {
-                            @Override
-                            public void success(String s, Response response) {
-                                System.out.println("user created!!");
-                                navigatetoHomeActivity();
-                            }
-
-                            @Override
-                            public void failure(RetrofitError error) {
-                                System.out.println("user nt verified!!");
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void failure(RetrofitError error) {
-
-                    }
-                });*/
-
+                navigatetoPickYourFavouritesActivity();
 
             }
 
@@ -137,13 +116,34 @@ public class RegistrationActivity extends Activity {
 //                System.out.println("User creation errro");
 //                error.getBody();
 
-            public void failure(RetrofitError cause) {
-                System.out.println("User creation error");
-                Response r = cause.getResponse();
-                System.out.println(r.getReason());
+            public void failure(RetrofitError error) {
 
-                Toast.makeText(getApplicationContext(), "Sorry not able to create a user!",
-                        Toast.LENGTH_SHORT).show();
+                RestError body = (RestError) error.getBodyAs(RestError.class);
+                //dynamic error handling
+                if(body.errorCode==400){
+                    Toast.makeText(getApplicationContext(), body.getErrorMessage(),
+                            Toast.LENGTH_SHORT).show();
+                }
+                if(body.errorCode==401){
+                    Toast.makeText(getApplicationContext(), body.getErrorMessage(),
+                            Toast.LENGTH_SHORT).show();
+                }
+                if(body.errorCode==404){
+                    Toast.makeText(getApplicationContext(), body.getErrorMessage(),
+                            Toast.LENGTH_SHORT).show();
+                }
+                if(body.errorCode==500){
+                    Toast.makeText(getApplicationContext(), body.getErrorMessage(),
+                            Toast.LENGTH_SHORT).show();
+                }
+                if(body.errorCode==503){
+                    Toast.makeText(getApplicationContext(), body.getErrorMessage(),
+                            Toast.LENGTH_SHORT).show();
+                }
+//                System.out.println("User creation error");
+//
+//                Toast.makeText(getApplicationContext(), "Sorry not able to create a user!",
+//                        Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -158,13 +158,19 @@ public class RegistrationActivity extends Activity {
         startActivity(homeIntent);
     }
 
-    /**
-     * Method which navigates from Registration Activity to Home Activity
-     */
-    public void navigatetoPhotoUplaodActivity(){
-        Intent photoIntent = new Intent(getApplicationContext(),PhotoUploadActivity.class);
+//    /**
+//     * Method which navigates from Registration Activity to Home Activity
+//     */
+//    public void navigatetoPhotoUplaodActivity(){
+//        Intent photoIntent = new Intent(getApplicationContext(),PhotoUploadActivity.class);
+////        homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        startActivity(photoIntent);
+//    }
+
+    public void navigatetoPickYourFavouritesActivity(){
+        Intent favouritesIntent = new Intent(getApplicationContext(),PickYourFavouritesActivity.class);
 //        homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(photoIntent);
+        startActivity(favouritesIntent);
     }
     /**
      * Method which navigates from Registration Screen to Offer Screen
@@ -174,4 +180,6 @@ public class RegistrationActivity extends Activity {
 //        homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(offerDetailsIntent);
     }
+
+
 }

@@ -1,15 +1,26 @@
 package cmpe295.sjsu.edu.salesman;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
+import android.text.style.URLSpan;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +29,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import retrofit.Callback;
@@ -41,6 +53,7 @@ public class LoginActivity extends Activity {
     private SharedPreferences.Editor loginEditor;
     private Boolean saveLogin;
 
+    private String key;
 
 
     @Override
@@ -98,33 +111,137 @@ public class LoginActivity extends Activity {
 
     //This method is called when user wants to reset the pwd
     public void resetPwd(View view){
-        //Get the access token for the user
 
-        EditText usernameEditText = (EditText) findViewById(R.id.usernameET);
-        final String username = usernameEditText.getText().toString();
+        username = usernameET.getText().toString();
         System.out.println("Username:" + username);
+       if(username.length()==0) {
+           Toast.makeText(getApplicationContext(), "Please enter your email.",
+                   Toast.LENGTH_SHORT).show();
+           return;
+       }
+
+
+
 
         RestClient.get().resetPwd(username, new Callback<resetPwdResponse>() {
             @Override
             public void success(resetPwdResponse resetPwdresponse, Response response) {
-               //String url = resetPwdresponse.getUrl();
+
                 String message = resetPwdresponse.getMessage();
+                final String url = resetPwdresponse.getUrl();
+
+
                 Toast.makeText(getApplicationContext(), resetPwdresponse.getMessage(),
                         Toast.LENGTH_SHORT).show();
+                if(url!=null) {
+                    //Linkify
+                    final SpannableString s = new SpannableString("Click here to reset password.");
+                    s.setSpan(new ForegroundColorSpan(Color.BLUE), 6, 10, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    s.setSpan(new URLSpan(url),6,10, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
+                    //added a TextView
+                    final TextView tx1=new TextView(LoginActivity.this);
+
+                    tx1.setText(s);
+                    tx1.setAutoLinkMask(RESULT_OK);
+                    tx1.setMovementMethod(LinkMovementMethod.getInstance());
+
+
+                    Linkify.addLinks(s, Linkify.WEB_URLS);
+
+                //Display an alert box with the url
+                    final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                            LoginActivity.this);
+
+                    // set title   .setView(tx1)
+                    alertDialogBuilder.setTitle("Reset Password");
+
+                    // set dialog message
+                    alertDialogBuilder
+                            .setView(tx1)
+                            .show();
+
+                    tx1.setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View v) {
+                            String[] urlArr = url.split("/");
+                            key = urlArr[urlArr.length-1];
+                            RestClient.get().getPwd(key, new Callback<resetPwdLinkResponse>() {
+                                @Override
+                                public void success(resetPwdLinkResponse resetPwdLinkResponse, Response response) {
+                                    Toast.makeText(getApplicationContext(),resetPwdLinkResponse.getMessage(),
+                                            Toast.LENGTH_SHORT).show();
+                                }
+
+                                @Override
+                                public void failure(RetrofitError error) {
+                                    RestError body = (RestError) error.getBodyAs(RestError.class);
+                                    //dynamic error handling
+                                    if(body.errorCode==400){
+                                        Toast.makeText(getApplicationContext(), body.getErrorMessage(),
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                                    if(body.errorCode==401){
+                                        Toast.makeText(getApplicationContext(), body.getErrorMessage(),
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                                    if(body.errorCode==404){
+                                        Toast.makeText(getApplicationContext(), body.getErrorMessage(),
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                                    if(body.errorCode==500){
+                                        Toast.makeText(getApplicationContext(), body.getErrorMessage(),
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                                    if(body.errorCode==503){
+                                        Toast.makeText(getApplicationContext(), body.getErrorMessage(),
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+
+                        }
+                    });
+
+
+//                    // create alert dialog
+//                    AlertDialog alertDialog = alertDialogBuilder.create();
+//
+//                    // show it
+//                    alertDialog.show();
+//                    Toast.makeText(getApplicationContext(),"Please click on this url to reset your password",
+//                            Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getApplicationContext(), url,
+//                            Toast.LENGTH_SHORT).show();
+                }
 
             }
 
             @Override
             public void failure(RetrofitError error) {
-                Toast.makeText(getApplicationContext(), "Please verify your email before resetting the pwd",
-                        Toast.LENGTH_SHORT).show();
-                String json =  new String(((TypedByteArray)error.getResponse().getBody()).getBytes());
-                Log.v("failure", json.toString());
-                if(error.getResponse()!=null){
-                    System.out.println(error.getResponse());
-                    resetPwdResponse body = (resetPwdResponse) error.getBodyAs(resetPwdResponse.class);
-                   // System.out.print("Fail  errorbody" + body.getUrl());
-
+                RestError body = (RestError) error.getBodyAs(RestError.class);
+                //dynamic error handling
+                if(body.errorCode==400){
+                    Toast.makeText(getApplicationContext(), body.getErrorMessage(),
+                            Toast.LENGTH_SHORT).show();
+                }
+                if(body.errorCode==401){
+                    Toast.makeText(getApplicationContext(), body.getErrorMessage(),
+                            Toast.LENGTH_SHORT).show();
+                }
+                if(body.errorCode==404){
+                    Toast.makeText(getApplicationContext(), body.getErrorMessage(),
+                            Toast.LENGTH_SHORT).show();
+                }
+                if(body.errorCode==500){
+                    Toast.makeText(getApplicationContext(), body.getErrorMessage(),
+                            Toast.LENGTH_SHORT).show();
+                }
+                if(body.errorCode==503){
+                    Toast.makeText(getApplicationContext(), body.getErrorMessage(),
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -170,9 +287,31 @@ public class LoginActivity extends Activity {
 
                 @Override
                 public void failure(RetrofitError error) {
-                    System.out.println("I am error");
-                    Toast.makeText(getApplicationContext(), "Incorrect username or password!",
-                            Toast.LENGTH_SHORT).show();
+                    RestError body = (RestError) error.getBodyAs(RestError.class);
+                    //dynamic error handling
+                    if(body.errorCode==400){
+                        Toast.makeText(getApplicationContext(), body.getErrorMessage(),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    if(body.errorCode==401){
+                        Toast.makeText(getApplicationContext(), body.getErrorMessage(),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    if(body.errorCode==404){
+                        Toast.makeText(getApplicationContext(), body.getErrorMessage(),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    if(body.errorCode==500){
+                        Toast.makeText(getApplicationContext(), body.getErrorMessage(),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    if(body.errorCode==503){
+                        Toast.makeText(getApplicationContext(), body.getErrorMessage(),
+                                Toast.LENGTH_SHORT).show();
+                    }
+//                    System.out.println("I am error");
+//                    Toast.makeText(getApplicationContext(), "Incorrect username or password!",
+//                            Toast.LENGTH_SHORT).show();
                 }
             });
         }

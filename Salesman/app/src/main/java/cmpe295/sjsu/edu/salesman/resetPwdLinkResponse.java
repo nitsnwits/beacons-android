@@ -1,19 +1,9 @@
 package cmpe295.sjsu.edu.salesman;
 
 /**
- * Created by Rucha on 6/27/15.
+ * Created by Rucha on 6/28/15.
  */
-public class resetPwdResponse {
-
-    public String url;
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
+public class resetPwdLinkResponse {
 
     public String message;
 
@@ -25,5 +15,3 @@ public class resetPwdResponse {
         this.message = message;
     }
 }
-
-

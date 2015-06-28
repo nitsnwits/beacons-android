@@ -4,6 +4,7 @@ package cmpe295.sjsu.edu.salesman;
 
 import retrofit.Callback;
 import retrofit.http.Body;
+import retrofit.http.EncodedPath;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
@@ -17,22 +18,29 @@ import retrofit.http.Path;
  */
 public interface SalesmanAPI {
 
-    //1.AUTH
+    //1.User Login
     @FormUrlEncoded
     @POST("/auth")
     public void loginUser(@Field("email")String email,@Field("password")String password, Callback<LoginUserResponse> cb);
-
-    //Ask neeraj regarding forgot password
-    @FormUrlEncoded
-    @POST("/auth/reset/password")
-    public void resetPwd(@Field("email")String email, Callback<resetPwdResponse> cb);
-
 
     //2.USERS
 
     @POST("/users")
     public void registerUser(@Body User user,
                              Callback<RegisterUserResponse> cb);
+
+    //3.Reset Password
+
+    @FormUrlEncoded
+    @POST("/auth/reset/password")
+    public void resetPwd(@Field("email")String email, Callback<resetPwdResponse> cb);
+
+
+    //4.Send Password to User
+
+    @GET("/auth/reset/password/{key}")
+    public void getPwd(@Path("key") String key,Callback<resetPwdLinkResponse> cb);
+
 
     @GET("/users/{userId}")
     public void getUserStatus(@Path("userId")String userId,Callback<userStatusResponse> cb);

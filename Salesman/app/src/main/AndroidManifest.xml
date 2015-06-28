@@ -35,7 +35,15 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cmpe295.sjsu.edu.salesman.MainActivity" />
-
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"></action>
+                <category android:name="android.intent.category.DEFAULT"></category>
+                <category android:name="android.intent.category.BROWSABLE"></category>
+                <data android:host="http://salesman-betasjsu.rhcloud.com/api/v1"
+                    android:pathPrefix="/reset/password/d7a6c474-61de-40e3-b1f3-3c232ea5621e"
+                    android:scheme="http">
+                </data>
+            </intent-filter>
         </activity>
         <activity
             android:name=".HomeActivity"
@@ -53,6 +61,14 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cmpe295.sjsu.edu.salesman.LoginActivity" />
+        </activity>
+        <activity
+            android:name=".PickYourFavouritesActivity"
+            android:label="@string/title_activity_pick_your_favourites"
+            android:parentActivityName=".RegistrationActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cmpe295.sjsu.edu.salesman.RegistrationActivity" />
         </activity>
         <activity
             android:name=".OfferActivity"
@@ -78,22 +94,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cmpe295.sjsu.edu.salesman.OfferDetailActivity" />
         </activity>
-        <activity
-            android:name=".PhotoUploadActivity"
-            android:label="@string/title_activity_photo_upload"
-            android:parentActivityName=".RegistrationActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="cmpe295.sjsu.edu.salesman.RegistrationActivity" />
-        </activity>
-        <activity
-            android:name=".PickYourFavouritesActivity"
-            android:label="@string/title_activity_pick_your_favourites"
-            android:parentActivityName=".PhotoUploadActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="cmpe295.sjsu.edu.salesman.PhotoUploadActivity" />
-        </activity>
+        <!--<activity-->
+            <!--android:name=".PhotoUploadActivity"-->
+            <!--android:label="@string/title_activity_photo_upload"-->
+            <!--android:parentActivityName=".RegistrationActivity" >-->
+            <!--<meta-data-->
+                <!--android:name="android.support.PARENT_ACTIVITY"-->
+                <!--android:value="cmpe295.sjsu.edu.salesman.RegistrationActivity" />-->
+        <!--</activity>-->
+
 
     </application>
 

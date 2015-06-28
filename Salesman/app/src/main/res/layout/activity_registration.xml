@@ -79,7 +79,7 @@
         android:layout_marginTop="50dp"
         android:onClick="createUser"
         android:text="Submit"
-        android:background="#ff60b9ff"/>
+        android:background="@color/fav_blue"/>
 
 
 </LinearLayout>

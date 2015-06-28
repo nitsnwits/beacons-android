@@ -1,5 +1,6 @@
 package cmpe295.sjsu.edu.salesman;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -7,7 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class PickYourFavouritesActivity extends ActionBarActivity {
+public class PickYourFavouritesActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

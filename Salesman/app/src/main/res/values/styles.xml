@@ -1,57 +1,66 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--&lt;!&ndash;<resources>&ndash;&gt;-->
+    <!--&lt;!&ndash;&lt;!&ndash; the theme applied to the application or activity &ndash;&gt;&ndash;&gt;-->
+    <!--&lt;!&ndash;<style name="AppTheme"&ndash;&gt;-->
+        <!--&lt;!&ndash;parent="@android:style/Theme.Holo.Light.DarkActionBar">&ndash;&gt;-->
+        <!--&lt;!&ndash;&lt;!&ndash;<item name="android:actionBarStyle">@style/AppTheme.Light.ActionBar</item>&ndash;&gt;&ndash;&gt;-->
+
+
+    <!--&lt;!&ndash;</style>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;&lt;!&ndash;<style name="dialogtheme" parent="@android:style/Theme.Holo.Light.DarkActionBar"></style>&ndash;&gt;&ndash;&gt;-->
+
+    <!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash; Transparent ActionBar Style &ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+    <!--&lt;!&ndash;&lt;!&ndash;<style name="AppTheme.Light.ActionBar" parent="@android:style/Widget.Holo.ActionBar">&ndash;&gt;&ndash;&gt;-->
+        <!--&lt;!&ndash;&lt;!&ndash;<item name="android:background">#ffff6b31</item>&ndash;&gt;&ndash;&gt;-->
+
+    <!--&lt;!&ndash;&lt;!&ndash;</style>&ndash;&gt;&ndash;&gt;-->
+
+    <!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash; ActionBar styles &ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+    <!--&lt;!&ndash;&lt;!&ndash;<style name="MyActionBar"&ndash;&gt;&ndash;&gt;-->
+        <!--&lt;!&ndash;&lt;!&ndash;parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">&ndash;&gt;&ndash;&gt;-->
+        <!--&lt;!&ndash;&lt;!&ndash;<item name="android:background">@drawable/actionbar_background</item>&ndash;&gt;&ndash;&gt;-->
+    <!--&lt;!&ndash;&lt;!&ndash;</style>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;</resources>&ndash;&gt;-->
+
 <!--<resources>-->
-    <!--&lt;!&ndash; the theme applied to the application or activity &ndash;&gt;-->
+
     <!--<style name="AppTheme"-->
-        <!--parent="@android:style/Theme.Holo.Light.DarkActionBar">-->
-        <!--&lt;!&ndash;<item name="android:actionBarStyle">@style/AppTheme.Light.ActionBar</item>&ndash;&gt;-->
-
-
+       <!--parent="Theme.AppCompat.Light.DarkActionBar">-->
+        <!--<item name="colorPrimaryDark">@color/white</item>-->
+        <!--<item name="colorPrimary">@color/fav_blue</item>-->
     <!--</style>-->
 
-    <!--&lt;!&ndash;<style name="dialogtheme" parent="@android:style/Theme.Holo.Light.DarkActionBar"></style>&ndash;&gt;-->
 
-    <!--&lt;!&ndash;&lt;!&ndash; Transparent ActionBar Style &ndash;&gt;&ndash;&gt;-->
-    <!--&lt;!&ndash;<style name="AppTheme.Light.ActionBar" parent="@android:style/Widget.Holo.ActionBar">&ndash;&gt;-->
-        <!--&lt;!&ndash;<item name="android:background">#ffff6b31</item>&ndash;&gt;-->
 
-    <!--&lt;!&ndash;</style>&ndash;&gt;-->
+    <!--<style name="spinner_style">-->
+        <!--<item name="android:paddingLeft">0dp</item>-->
+        <!--<item name="android:dropDownWidth">533dp</item>-->
+        <!--<item name="android:layout_gravity">center_horizontal</item>-->
+        <!--<item name="android:gravity">center</item>-->
+        <!--<item name="android:dividerHeight">0dp</item>-->
+        <!--<item name="android:popupBackground">@color/transparent</item>-->
+        <!--<item name="android:dropDownHeight">70dp</item>-->
+        <!--<item name="android:scrollbarAlwaysDrawVerticalTrack">true</item>-->
+        <!--<item name="android:dropDownSelector">@android:color/white</item>-->
+    <!--</style>-->
 
-    <!--&lt;!&ndash;&lt;!&ndash; ActionBar styles &ndash;&gt;&ndash;&gt;-->
-    <!--&lt;!&ndash;<style name="MyActionBar"&ndash;&gt;-->
-        <!--&lt;!&ndash;parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">&ndash;&gt;-->
-        <!--&lt;!&ndash;<item name="android:background">@drawable/actionbar_background</item>&ndash;&gt;-->
-    <!--&lt;!&ndash;</style>&ndash;&gt;-->
+    <!--<style name="CB_style" parent="@android:style/TextAppearance.Medium">-->
+        <!--<item name="android:layout_gravity">center_horizontal</item>-->
+        <!--<item name="android:layout_weight">1</item>-->
+        <!--<item name="android:gravity">center</item>-->
+        <!--<item name="android:checked">false</item>-->
+        <!--<item name="android:layout_width">wrap_content</item>-->
+        <!--<item name="android:layout_height">wrap_content</item>-->
+    <!--</style>-->
+
 <!--</resources>-->
 
 <resources>
 
-    <style name="AppTheme"
-       parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimaryDark">@color/white</item>
-        <item name="colorPrimary">@color/fav_blue</item>
-    </style>
-
-
-
-    <style name="spinner_style">
-        <item name="android:paddingLeft">0dp</item>
-        <item name="android:dropDownWidth">533dp</item>
-        <item name="android:layout_gravity">center_horizontal</item>
-        <item name="android:gravity">center</item>
-        <item name="android:dividerHeight">0dp</item>
-        <item name="android:popupBackground">@color/transparent</item>
-        <item name="android:dropDownHeight">70dp</item>
-        <item name="android:scrollbarAlwaysDrawVerticalTrack">true</item>
-        <item name="android:dropDownSelector">@android:color/white</item>
-    </style>
-
-    <style name="CB_style" parent="@android:style/TextAppearance.Medium">
-        <item name="android:layout_gravity">center_horizontal</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:gravity">center</item>
-        <item name="android:checked">false</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
     </style>
 
 </resources>

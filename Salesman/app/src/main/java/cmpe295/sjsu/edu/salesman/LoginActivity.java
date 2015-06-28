@@ -1,6 +1,7 @@
 package cmpe295.sjsu.edu.salesman;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 
 import android.content.SharedPreferences;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -26,10 +28,14 @@ import retrofit.mime.TypedByteArray;
 
 public class LoginActivity extends Activity {
 
-    private EditText username;
-    private EditText password;
+    private EditText usernameET;
+    private EditText passwordET;
+
+    private String username;
+    private String password;
+
     private Button login;
-    private CheckBox checkBox;
+    private CheckBox loginCheckBox;
     //Shared Preference:
     private SharedPreferences loginSharedpreferences ;
     private SharedPreferences.Editor loginEditor;
@@ -41,38 +47,34 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        login = (Button) findViewById(R.id.loginBtn);
-        checkBox = (CheckBox)findViewById(R.id.checkBox);
-         loginSharedpreferences = getSharedPreferences("loginPrefs",MODE_PRIVATE);
-        loginEditor = loginSharedpreferences.edit();
 
-        saveLogin = loginSharedpreferences.getBoolean("saveLogin",false);
-        if(saveLogin == true){
-            username.setText(loginSharedpreferences.getString("username",""));
-            password.setText(loginSharedpreferences.getString("password",""));
-            checkBox.setChecked(true);
+        usernameET = (EditText) findViewById(R.id.usernameET);
+
+        passwordET = (EditText) findViewById(R.id.passwordET);
+
+        login = (Button) findViewById(R.id.loginBtn);
+
+        loginCheckBox = (CheckBox)findViewById(R.id.checkBox);
+        loginSharedpreferences = getBaseContext().getSharedPreferences("loginPrefs", MODE_PRIVATE);
+        loginEditor = loginSharedpreferences.edit();
+        saveLogin = loginSharedpreferences.getBoolean("saveLogin", false);
+        System.out.println("SaveLogin1:" + saveLogin);
+        if (saveLogin==true) {
+
+            System.out.println(loginSharedpreferences.getString("username", ""));
+            usernameET.setText(loginSharedpreferences.getString("username", ""));
+            passwordET.setText(loginSharedpreferences.getString("password", ""));
+            loginCheckBox.setChecked(true);
+
         }
+
 
         //sharedpreferences = getBaseContext().getSharedPreferences("salesmanPreference", 0);
 
     }
 
-//    public void addListenerOnCheckBox(){
-//        checkBox = (CheckBox)findViewById(R.id.checkBox);
-//        checkBox.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //is checkboc checked?
-//                if(((CheckBox) v ).isChecked()){
-//                    Toast.makeText(getApplicationContext(), "Checkbox is checked..",
-//                            Toast.LENGTH_SHORT).show();
-//
-//                }
-//            }
-//        });
-//    }
 
-    @Override
+@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_login, menu);
@@ -128,53 +130,55 @@ public class LoginActivity extends Activity {
         });
     }
 
+
     //This method is called when user submits login button
     public void authenticateUser(View view) {
-        EditText usernameEditText = (EditText) findViewById(R.id.usernameET);
-        final String username = usernameEditText.getText().toString();
+        username = usernameET.getText().toString();
         System.out.println("Username:" + username);
-        EditText passwordEditText = (EditText) findViewById(R.id.passwordET);
-        String password = passwordEditText.getText().toString();
+        password = passwordET.getText().toString();
         System.out.println("Pwd:" + password);
 
-        if(checkBox.isChecked()== true){
-            loginEditor.putString("username",username);
-            loginEditor.putString("password",password);
-            loginEditor.putBoolean("saveLogin",true);
-        } else{
+        if(loginCheckBox.isChecked()){
+            loginEditor.putString("username", username);
+            loginEditor.putString("password", password);
+            loginEditor.putBoolean("saveLogin", true);
+
+        }else {
             loginEditor.clear();
             loginEditor.commit();
         }
 
-        RestClient.get().loginUser(username, password, new Callback<LoginUserResponse>() {
-            @Override
-            public void success(LoginUserResponse loginUserResponse, Response response) {
-                String uid = loginUserResponse.getUserId(); //for preference
-                String accessToken = loginUserResponse.getAccessToken();//for preference
-                //now save the preferences using ediot object
+            System.out.println("SaveLogin2:" + loginCheckBox.isChecked());
+
+            RestClient.get().loginUser(username, password, new Callback<LoginUserResponse>() {
+                @Override
+                public void success(LoginUserResponse loginUserResponse, Response response) {
+                    String uid = loginUserResponse.getUserId(); //for preference
+                    String accessToken = loginUserResponse.getAccessToken();//for preference
+                    //now save the preferences using ediot object
 //                SharedPreferences.Editor editor = sharedpreferences.edit();
 //                editor.putString("userId",uid);
 //                editor.putString("accessToken",accessToken);
 //                editor.commit();
-                System.out.println("I am success");
-                Toast.makeText(getApplicationContext(), "Hello" + username + "!!",
-                        Toast.LENGTH_SHORT).show();
-                navigatetoHomeActivity();
-            }
+                    System.out.println("I am success");
+                    Toast.makeText(getApplicationContext(), "Hello" + username + "!!",
+                            Toast.LENGTH_SHORT).show();
+                    navigatetoHomeActivity();
+                }
 
-            @Override
-            public void failure(RetrofitError error) {
-                System.out.println("I am error");
-                Toast.makeText(getApplicationContext(), "Incorrect username or password!",
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
+                @Override
+                public void failure(RetrofitError error) {
+                    System.out.println("I am error");
+                    Toast.makeText(getApplicationContext(), "Incorrect username or password!",
+                            Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
 
 
     private void setupVariables() {
-        username = (EditText) findViewById(R.id.usernameET);
-        password = (EditText) findViewById(R.id.passwordET);
+        usernameET = (EditText) findViewById(R.id.usernameET);
+        passwordET = (EditText) findViewById(R.id.passwordET);
         login = (Button) findViewById(R.id.loginBtn);
     }
 

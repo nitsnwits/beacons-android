@@ -62,7 +62,6 @@
         android:layout_height="wrap_content"
         android:text="Remember Me"
         android:id="@+id/checkBox"
-        android:checked="@color/fav_blue"
         android:layout_weight="0.04" />
 
     <Button

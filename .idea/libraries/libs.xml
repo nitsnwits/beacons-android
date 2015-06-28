@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="libs">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Salesman/app/libs/gson-2.2.4-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Salesman/app/libs/tileviewlib-1.0.13.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Salesman/app/libs/httpmime-4.1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Salesman/app/libs/retrofit-1.9.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Salesman/app/libs/google-api-client-1.4.1-beta.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

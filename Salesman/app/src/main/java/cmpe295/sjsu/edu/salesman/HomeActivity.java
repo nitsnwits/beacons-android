@@ -1,10 +1,16 @@
 package cmpe295.sjsu.edu.salesman;
+//Hi
 
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+
+import android.content.SharedPreferences;
+import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
+
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -12,6 +18,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,10 +43,15 @@ public class HomeActivity extends Activity  implements NavDrawerAdapter.OnItemCl
     private String[] mMenuTitles;
 
 
+    SharedPreferences sharedpreferences ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        sharedpreferences = getBaseContext().getSharedPreferences("salesmanPreference", 0);
+
+
 
         mMenuTitles = getResources().getStringArray(R.array.nav_drawer_items);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -82,12 +94,17 @@ public class HomeActivity extends Activity  implements NavDrawerAdapter.OnItemCl
         if (savedInstanceState == null) {
             selectItem(0);
         }
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_home, menu);
+        String userId = sharedpreferences.getString("userId","default");
+        String accessToken = sharedpreferences.getString("accessToken","default");
+        Log.d("SalesmanPref:userId" , userId);
+        Log.d("SalesmanPref:aT" , accessToken);
         return true;
     }
 

@@ -11,6 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -85,12 +89,20 @@ public class RegistrationActivity extends Activity {
 
         System.out.println("User is::" + firstStr + lastStr + pwd + emailStr);
 
+
         RestClient.get().registerUser(user1, new Callback<RegisterUserResponse>() {
+
             @Override
             public void success(RegisterUserResponse registerUserResponse, Response response) {
 
-                System.out.println("user created!!");
-                navigatetoHomeActivity();
+//                System.out.println("user created!!");
+
+//                navigatetoHomeActivity();
+
+                Toast.makeText(getApplicationContext(), "Welcome to Salesman!",
+                        Toast.LENGTH_SHORT).show();
+               // System.out.println("user created!!");
+                navigatetoPhotoUplaodActivity();
 
                /* RestClient.get().getUserStatus(registerUserResponse.getUserId(), new Callback<userStatusResponse>() {
                     @Override
@@ -115,9 +127,16 @@ public class RegistrationActivity extends Activity {
                     }
                 });*/
 
+
             }
 
+
             @Override
+
+//            public void failure(RetrofitError error) {
+//                System.out.println("User creation errro");
+//                error.getBody();
+
             public void failure(RetrofitError cause) {
                 System.out.println("User creation error");
                 Response r = cause.getResponse();
@@ -129,6 +148,7 @@ public class RegistrationActivity extends Activity {
         });
     }
 
+    //After the registration the user navigates to photo upload activity
     /**
      * Method which navigates from Registration Activity to Home Activity
      */
@@ -136,6 +156,15 @@ public class RegistrationActivity extends Activity {
         Intent homeIntent = new Intent(getApplicationContext(),HomeActivity.class);
 //        homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(homeIntent);
+    }
+
+    /**
+     * Method which navigates from Registration Activity to Home Activity
+     */
+    public void navigatetoPhotoUplaodActivity(){
+        Intent photoIntent = new Intent(getApplicationContext(),PhotoUploadActivity.class);
+//        homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(photoIntent);
     }
     /**
      * Method which navigates from Registration Screen to Offer Screen

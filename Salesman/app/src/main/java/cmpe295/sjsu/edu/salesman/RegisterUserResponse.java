@@ -19,8 +19,8 @@ public class RegisterUserResponse {
     public long created;
     public String userId;
     public String accessToken;
-    public Name name;
     public String email;
+    public Name name;
 
     public long getCreated() {
         return created;

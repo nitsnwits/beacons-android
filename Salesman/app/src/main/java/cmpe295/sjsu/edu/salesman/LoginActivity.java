@@ -142,6 +142,8 @@ public class LoginActivity extends Activity {
             loginEditor.putString("username", username);
             loginEditor.putString("password", password);
             loginEditor.putBoolean("saveLogin", true);
+            loginEditor.commit();
+
 
         }else {
             loginEditor.clear();

@@ -1,0 +1,20 @@
+<component name="libraryTable">
+  <library name="debug">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Salesman/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.0-622b6a056940807b376fc24939347957d982f74f.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Salesman/app/build/intermediates/pre-dexed/debug/httpmime-4.1.1-feeca72223d80eaa282c1736b91ef8f666f571f0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Salesman/app/build/intermediates/pre-dexed/debug/classes-fabdb4ec3789a31d92c6327585c35bd7f92288b0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Salesman/app/build/intermediates/pre-dexed/debug/okhttp-urlconnection-2.0.0-a9c5a57db3e7e31679b43455fd1a461582477a5c.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Salesman/app/build/intermediates/pre-dexed/debug/retrofit-1.9.0-3f43dec638d7f2defaa6660202777f127ccb4f87.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Salesman/app/build/intermediates/pre-dexed/debug/google-api-client-1.4.1-beta-ec42dd8f78aab0c162bf3751ec7be5d9b8288c15.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Salesman/app/build/intermediates/pre-dexed/debug/okio-1.0.1-1b6a26de72ddce675e6cd7764c7deac1c2244ce5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Salesman/app/build/intermediates/pre-dexed/debug/classes-2cdad049822bdddce5bd53bf43266461d7901ba9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Salesman/app/build/intermediates/pre-dexed/debug/okhttp-2.0.0-ed0b616becdc31f398e5b1597c12d1f54228584f.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Salesman/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.0-6633084cbb0cb2bca48b5dd21ae45b77bf488890.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Salesman/app/build/intermediates/pre-dexed/debug/gson-2.3.1-c5ac015a58279784dba6aa9e48cf74c0b49f32a4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Salesman/app/build/intermediates/pre-dexed/debug/gson-2.2.4-sources-6dd8695d53e8dc6ac556668726cf1dcad880eafb.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

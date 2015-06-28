@@ -22,9 +22,10 @@ public interface SalesmanAPI {
     @POST("/auth")
     public void loginUser(@Field("email")String email,@Field("password")String password, Callback<LoginUserResponse> cb);
 
+    //Ask neeraj regarding forgot password
     @FormUrlEncoded
     @POST("/auth/reset/password")
-    public void resetPwd(@Field("email")String email, Callback<String> cb);
+    public void resetPwd(@Field("email")String email, Callback<resetPwdResponse> cb);
 
 
     //2.USERS
@@ -38,10 +39,6 @@ public interface SalesmanAPI {
 
     @GET("/users/{userId}/verify")
     public void verifyUser(@Path("userId")String userId,Callback<String> cb);
-
-
-
-
 
 
 }

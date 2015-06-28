@@ -7,23 +7,21 @@
     tools:context=".LoginActivity"
     android:id="@+id/loginscreen"
     android:layout_centerInParent="true"
-    style="@style/Theme.AppCompat.Light.NoActionBar">
+    android:background="#ffffffff"
+    android:weightSum="1">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Salesman"
-        android:id="@+id/textView"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:textSize="35dp"
-        android:background="#00ff959a"
-        />
+        android:background="#ffffffff"></LinearLayout>
+
+
     <EditText
         android:id="@+id/usernameET"
         android:layout_width="wrap_content"
         android:hint="@string/username"
-        android:focusable="true"
+        android:textColorHint="#ee1b0c11"
         android:ems="10"
         android:layout_height="wrap_content"
         android:layout_marginTop="46dp"
@@ -32,15 +30,17 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:drawableLeft="@drawable/email"
         style="@style/Base.TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"
         >
         <requestFocus />
     </EditText>
+
     <EditText
         android:id="@+id/passwordET"
         android:layout_width="wrap_content"
         android:hint="@string/password"
-        android:focusable="true"
+        android:textColorHint="#ee1b0c11"
         android:ems="10"
         android:layout_height="wrap_content"
         android:layout_below="@+id/usernameET"
@@ -48,36 +48,57 @@
         android:layout_alignParentStart="true"
         android:layout_alignLeft="@+id/usernameET"
         android:layout_alignRight="@+id/usernameET"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:autoText="true"
+        android:drawableLeft="@drawable/password"
+        style="@style/Base.TextAppearance.AppCompat.Light.Widget.PopupMenu.Large">
+    <requestFocus />
+    </EditText>
+
+
+    <CheckBox
+        android:layout_gravity="center"
+        android:layout_width="155dp"
+        android:layout_height="wrap_content"
+        android:text="Remember Me"
+        android:id="@+id/checkBox"
+        android:checked="@color/fav_blue"
+        android:layout_weight="0.04" />
+
     <Button
         android:id="@+id/loginBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/passwordET"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="94dp"
+        android:layout_marginTop="120dp"
         android:onClick="authenticateUser"
         android:text="@string/button_login"
-        android:layout_gravity="center_horizontal" />
+        android:background="@color/fav_blue"
+        />
 
     <Button
     android:id="@+id/registerBtn"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_below="@+id/loginBtn"
     android:layout_centerHorizontal="true"
-    android:layout_marginTop="50dp"
+    android:layout_marginTop="20dp"
     android:onClick="registerUser"
+        android:background="@color/fav_blue"
     android:text="Register Here" />
     <Button
         android:id="@+id/resetBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/registerBtn"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:onClick="resetPwd"
-        android:text="Reset Pwd" />
+        android:textColor="@color/fav_blue"
+        android:gravity="left"
+        android:text="Forgot Password?"
+        android:background="@color/white"/>
 
 
 </LinearLayout>

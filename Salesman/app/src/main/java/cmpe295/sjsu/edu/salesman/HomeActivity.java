@@ -1,4 +1,5 @@
 package cmpe295.sjsu.edu.salesman;
+//Hi
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -101,7 +102,9 @@ public class HomeActivity extends Activity  implements NavDrawerAdapter.OnItemCl
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_home, menu);
         String userId = sharedpreferences.getString("userId","default");
-        Log.d("SalesmanPrefernce" , userId);
+        String accessToken = sharedpreferences.getString("accessToken","default");
+        Log.d("SalesmanPref:userId" , userId);
+        Log.d("SalesmanPref:aT" , accessToken);
         return true;
     }
 

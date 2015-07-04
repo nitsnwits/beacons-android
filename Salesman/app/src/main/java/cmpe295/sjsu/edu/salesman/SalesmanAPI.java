@@ -2,12 +2,16 @@ package cmpe295.sjsu.edu.salesman;
 
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import retrofit.Callback;
 import retrofit.http.Body;
 import retrofit.http.EncodedPath;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
+import retrofit.http.Header;
 import retrofit.http.Headers;
 import retrofit.http.POST;
 import retrofit.http.Path;
@@ -40,6 +44,10 @@ public interface SalesmanAPI {
 
     @GET("/auth/reset/password/{key}")
     public void getPwd(@Path("key") String key,Callback<resetPwdLinkResponse> cb);
+
+    //5.Get all the categories
+    @GET("/categories")
+    public void getCategories(@Header("Authorization") String accessToken,Callback<ArrayList<categoryResponse>> cb);
 
 
     @GET("/users/{userId}")

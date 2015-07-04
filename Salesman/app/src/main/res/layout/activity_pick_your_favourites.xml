@@ -1,5 +1,9 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -7,165 +11,167 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:orientation="vertical"
+    android:id="@+id/pickcategory"
     tools:context="cmpe295.sjsu.edu.salesman.PickYourFavouritesActivity">
-    <TextView android:text="Pick Your Favourites"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"/>
-   <LinearLayout
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:orientation="horizontal">
+    <!--<TextView android:text="Pick Your Favourites"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal"/>-->
+   <!--<LinearLayout-->
+       <!--android:layout_width="wrap_content"-->
+       <!--android:layout_height="wrap_content"-->
+       <!--android:orientation="horizontal">-->
 
-    <TextView android:id="@+id/option01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Baby">
-    </TextView>
-    <CheckBox
-        android:id="@+id/checkBox01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    </CheckBox>
+    <!--<TextView android:id="@+id/option01"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Baby">-->
+    <!--</TextView>-->
+    <!--<CheckBox-->
+        <!--android:id="@+id/checkBox01"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content">-->
+    <!--</CheckBox>-->
 
-    <TextView
-        android:id="@+id/option02"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Beauty">
-        </TextView>
-        <CheckBox android:id="@+id/checkBox02"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </CheckBox>
-        <TextView android:id="@+id/option03"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Books">
-        </TextView>
-        <CheckBox android:id="@+id/checkBox03"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </CheckBox>
+    <!--<TextView-->
+        <!--android:id="@+id/option02"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Beauty">-->
+        <!--</TextView>-->
+        <!--<CheckBox android:id="@+id/checkBox02"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content">-->
+        <!--</CheckBox>-->
+        <!--<TextView android:id="@+id/option03"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Books">-->
+        <!--</TextView>-->
+        <!--<CheckBox android:id="@+id/checkBox03"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content">-->
+        <!--</CheckBox>-->
 
-        <TextView android:id="@+id/option04"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:text="Cellphones">
-        </TextView>
-        <CheckBox android:id="@+id/checkBox04"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent">
-        </CheckBox>
-    </LinearLayout>
-<!--Second Row-->
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        <!--<TextView android:id="@+id/option04"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="fill_parent"-->
+            <!--android:text="Cellphones">-->
+        <!--</TextView>-->
+        <!--<CheckBox android:id="@+id/checkBox04"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="fill_parent">-->
+        <!--</CheckBox>-->
+    <!--</LinearLayout>-->
+<!--&lt;!&ndash;Second Row&ndash;&gt;-->
+    <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal">-->
 
-        <TextView android:id="@+id/option05"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Clothes">
-        </TextView>
-        <CheckBox
-            android:id="@+id/checkBox05"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </CheckBox>
+        <!--<TextView android:id="@+id/option05"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Clothes">-->
+        <!--</TextView>-->
+        <!--<CheckBox-->
+            <!--android:id="@+id/checkBox05"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content">-->
+        <!--</CheckBox>-->
 
-        <TextView
-            android:id="@+id/option06"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Food">
-        </TextView>
-        <CheckBox android:id="@+id/checkBox06"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </CheckBox>
-        <TextView android:id="@+id/option07"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Gifts">
-        </TextView>
-        <CheckBox android:id="@+id/checkBox07"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </CheckBox>
+        <!--<TextView-->
+            <!--android:id="@+id/option06"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Food">-->
+        <!--</TextView>-->
+        <!--<CheckBox android:id="@+id/checkBox06"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content">-->
+        <!--</CheckBox>-->
+        <!--<TextView android:id="@+id/option07"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Gifts">-->
+        <!--</TextView>-->
+        <!--<CheckBox android:id="@+id/checkBox07"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content">-->
+        <!--</CheckBox>-->
 
-        <TextView android:id="@+id/option08"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:text="Music">
-        </TextView>
-        <CheckBox android:id="@+id/checkBox08"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent">
-        </CheckBox>
-    </LinearLayout>
+        <!--<TextView android:id="@+id/option08"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="fill_parent"-->
+            <!--android:text="Music">-->
+        <!--</TextView>-->
+        <!--<CheckBox android:id="@+id/checkBox08"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="fill_parent">-->
+        <!--</CheckBox>-->
+    <!--</LinearLayout>-->
 
-    <!--Third Row-->
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+    <!--&lt;!&ndash;Third Row&ndash;&gt;-->
+    <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal">-->
 
-        <TextView android:id="@+id/option09"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Movies">
-        </TextView>
-        <CheckBox
-            android:id="@+id/checkBox09"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </CheckBox>
+        <!--<TextView android:id="@+id/option09"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Movies">-->
+        <!--</TextView>-->
+        <!--<CheckBox-->
+            <!--android:id="@+id/checkBox09"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content">-->
+        <!--</CheckBox>-->
 
-        <TextView
-            android:id="@+id/option10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Party">
-        </TextView>
-        <CheckBox android:id="@+id/checkBox10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </CheckBox>
-        <TextView android:id="@+id/option11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pets">
-        </TextView>
-        <CheckBox android:id="@+id/checkBox11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </CheckBox>
+        <!--<TextView-->
+            <!--android:id="@+id/option10"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Party">-->
+        <!--</TextView>-->
+        <!--<CheckBox android:id="@+id/checkBox10"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content">-->
+        <!--</CheckBox>-->
+        <!--<TextView android:id="@+id/option11"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Pets">-->
+        <!--</TextView>-->
+        <!--<CheckBox android:id="@+id/checkBox11"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content">-->
+        <!--</CheckBox>-->
 
-        <TextView android:id="@+id/option12"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:text="Sports">
-        </TextView>
-        <CheckBox android:id="@+id/checkBox12"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent">
-        </CheckBox>
-    </LinearLayout>
+        <!--<TextView android:id="@+id/option12"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="fill_parent"-->
+            <!--android:text="Sports">-->
+        <!--</TextView>-->
+        <!--<CheckBox android:id="@+id/checkBox12"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="fill_parent">-->
+        <!--</CheckBox>-->
+    <!--</LinearLayout>-->
 
-    <Button
-        android:id="@+id/skipButton"
-        android:layout_width="match_parent"
-        android:onClick="navigatetoHomeActivity"
-        android:layout_height="wrap_content"
-        android:text="Skip" />
-    <Button
-        android:id="@+id/nextButton"
-        android:layout_width="match_parent"
-        android:onClick="navigatetoHomeActivity"
-        android:layout_height="wrap_content"
-        android:text="Next" />
+    <!--<Button-->
+        <!--android:id="@+id/skipButton"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:onClick="navigatetoHomeActivity"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Skip" />-->
+    <!--<Button-->
+        <!--android:id="@+id/nextButton"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:onClick="navigatetoHomeActivity"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Next" />-->
 
 
 </LinearLayout>
+</ScrollView>

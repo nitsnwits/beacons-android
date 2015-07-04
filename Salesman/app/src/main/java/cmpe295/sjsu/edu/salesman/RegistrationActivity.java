@@ -2,6 +2,7 @@ package cmpe295.sjsu.edu.salesman;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -27,6 +28,8 @@ public class RegistrationActivity extends Activity {
     private EditText password;
     private EditText email;
     private Button register;
+    private SharedPreferences userSharedpreferences ;
+    private SharedPreferences.Editor userEditor;
 
 
     @Override
@@ -34,6 +37,8 @@ public class RegistrationActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
         setupVariables();
+        userSharedpreferences = getBaseContext().getSharedPreferences("userPrefs", MODE_PRIVATE);
+
     }
 
     public void setupVariables(){
@@ -101,6 +106,13 @@ public class RegistrationActivity extends Activity {
 
                 Toast.makeText(getApplicationContext(), "Welcome to Salesman!",
                         Toast.LENGTH_SHORT).show();
+                System.out.println("In register user::" + registerUserResponse.getAccessToken());
+                userEditor = userSharedpreferences.edit();
+                userEditor.putString("accessToken",registerUserResponse.getAccessToken());
+                userEditor.putString("userId",registerUserResponse.getUserId());
+                userEditor.commit();
+
+                System.out.println("userPref Values:" + getApplicationContext().getSharedPreferences("userPrefs",0).getString("accessToken","default"));
                // System.out.println("user created!!");
              //   navigatetoPhotoUplaodActivity();
                 //navigatetoPhotoUplaodActivity();

@@ -46,5 +46,14 @@ public class MainActivity extends Activity{
 //        homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(loginIntent);
     }
+    public void signIn(View view) {
+        Intent registerUserIntent = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(registerUserIntent);
+    }
+
+    public void signUp(View view) {
+        Intent registerUserIntent = new Intent(getApplicationContext(), RegistrationActivity.class);
+        startActivity(registerUserIntent);
+    }
 
 }

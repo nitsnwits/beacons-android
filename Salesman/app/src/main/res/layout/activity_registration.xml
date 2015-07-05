@@ -78,8 +78,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         android:onClick="createUser"
+        android:background="@drawable/btn_layout"
         android:text="Submit"
-        android:background="@color/fav_blue"/>
+       />
 
 
 </LinearLayout>

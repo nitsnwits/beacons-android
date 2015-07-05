@@ -3,18 +3,33 @@
     android:orientation="vertical"
     android:gravity="center"
     android:layout_width="fill_parent"
+
     android:layout_height="fill_parent"
     tools:context=".LoginActivity"
     android:id="@+id/loginscreen"
     android:layout_centerInParent="true"
-    android:background="#ffffffff"
     android:weightSum="1">
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:orientation="vertical">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffffff"></LinearLayout>
+        android:background="#ffffffff">
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_layout"
+            android:gravity="center"
+            android:text="Salesman"
+            android:textColor="@color/white"
+            android:textSize="35dp" />
+    </LinearLayout>
 
 
     <EditText
@@ -66,33 +81,26 @@
 
     <Button
         android:id="@+id/loginBtn"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/passwordET"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="94dp"
+        android:textColor="@color/white"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="20dp"
+        android:background="@drawable/btn_layout"
         android:onClick="authenticateUser"
         android:text="@string/button_login"
-        android:background="@color/fav_blue"
-        />
 
-    <Button
-    android:id="@+id/registerBtn"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/loginBtn"
-    android:layout_centerHorizontal="true"
-    android:layout_marginTop="20dp"
-    android:onClick="registerUser"
-        android:background="@color/fav_blue"
-    android:text="Register Here" />
+        />
     <Button
         android:id="@+id/resetBtn"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/registerBtn"
+        android:layout_below="@+id/loginBtn"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
         android:onClick="resetPwd"
         android:textColor="@color/fav_blue"
         android:gravity="left"
@@ -100,4 +108,5 @@
         android:background="@color/white"/>
 
 
+</LinearLayout>
 </LinearLayout>

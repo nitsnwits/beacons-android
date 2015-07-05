@@ -1,49 +1,61 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/layout"
     android:orientation="vertical"
-    tools:context=".MainActivity_exa1">
+    android:background="@drawable/backgroundlayout"
+    tools:context="cmpe295.sjsu.edu.salesman.MainActivity">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:gravity="center"
-        android:background="#1A000000"
+        android:layout_weight="1"
+        android:background="@color/trans2"
+        android:gravity="top|center"
         android:text="Salesman"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ffffff"
-        android:textSize="50dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="110dp" />
+        android:textSize="50dp" />
 
 
     <LinearLayout
-        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@color/trans2"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="bottom"
+        android:layout_marginBottom="10dp"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/user_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:onClick="viewUserLogin"
             android:layout_margin="10dp"
+            android:layout_weight="1"
             android:background="#00BCD4"
-            android:text="Login"
+            android:gravity="center"
+            android:onClick="signUp"
+            android:text="Sign Up"
             android:textAllCaps="false"
-            android:textSize="18dp"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            android:textSize="18dp" />
 
-
+        <Button
+            android:id="@+id/admin_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="#00BCD4"
+            android:gravity="center"
+            android:onClick="signIn"
+            android:text="Sign In"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="18dp" />
     </LinearLayout>
-</RelativeLayout>
+</LinearLayout>

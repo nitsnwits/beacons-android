@@ -40,8 +40,6 @@ public class OfferDetailActivity extends ActionBarActivity {
 
 
     public void navigate(View view){
-        Intent navigateIntent = new Intent(getApplicationContext(),NavigationActivity.class);
-//        homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(navigateIntent);
+
     }
 }

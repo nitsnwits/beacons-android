@@ -5,9 +5,11 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 
 import android.content.SharedPreferences;
+import android.os.RemoteException;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 
@@ -23,6 +25,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
+
+import com.estimote.sdk.BeaconManager;
+import com.estimote.sdk.Region;
 
 import cmpe295.sjsu.edu.salesman.adapters.NavDrawerAdapter;
 import cmpe295.sjsu.edu.salesman.fragments.AboutSalesmanFragment;
@@ -44,6 +50,24 @@ public class HomeActivity extends Activity  implements NavDrawerAdapter.OnItemCl
 
 
     SharedPreferences sharedpreferences ;
+
+    // Beacon
+    private StoreMapFragment storeMapFragment;
+    private static BeaconManager beaconManager;
+    private static final String TAG = HomeActivity.class.getSimpleName();
+    private static final int REQUEST_ENABLE_BT = 1234;
+
+    private static final Region ALL_ESTIMOTE_BEACONS_REGION = new Region("rid", null, null, null);
+
+    public static BeaconManager getBeaconManager(){
+        return beaconManager;
+    }
+
+    public StoreMapFragment getStoreMapFragment(){
+        return storeMapFragment;
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +81,7 @@ public class HomeActivity extends Activity  implements NavDrawerAdapter.OnItemCl
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (RecyclerView) findViewById(R.id.left_drawer);
 
-        // set a custom shadow that overlays the main content when the drawer opens
+        // set a custom shadow that overlays the bg_strikethrough content when the drawer opens
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         // improve performance by indicating the list if fixed size.
         mDrawerList.setHasFixedSize(true);
@@ -90,6 +114,11 @@ public class HomeActivity extends Activity  implements NavDrawerAdapter.OnItemCl
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+        // Initialize beacons
+        // Configure BeaconManager.
+        beaconManager = new BeaconManager(this);
+        storeMapFragment = new StoreMapFragment();
 
         if (savedInstanceState == null) {
             selectItem(0);
@@ -147,7 +176,7 @@ public class HomeActivity extends Activity  implements NavDrawerAdapter.OnItemCl
 
 
     private void selectItem(int position) {
-        // update the main content by replacing fragments
+        // update the bg_strikethrough content by replacing fragments
 
         Fragment fragment = null;
         switch (position) {
@@ -207,6 +236,68 @@ public class HomeActivity extends Activity  implements NavDrawerAdapter.OnItemCl
         // Pass any configuration change to the drawer toggls
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        // Check if device supports Bluetooth Low Energy.
+        if (!beaconManager.hasBluetooth()) {
+            Toast.makeText(this, "Device does not have Bluetooth Low Energy", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        // If Bluetooth is not enabled, let user enable it.
+
+        if (!beaconManager.isBluetoothEnabled()) {
+            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+        }else {
+           connectToService();
+        }
+    }
+
+    @Override
+    protected void onStop(){
+        try{
+            beaconManager.stopRanging(ALL_ESTIMOTE_BEACONS_REGION);
+        }
+        catch (RemoteException e){
+            Log.d(TAG, "Error while stopping ranging", e);
+        }
+        super.onStop();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_ENABLE_BT) {
+            if (resultCode == Activity.RESULT_OK) {
+                connectToService();
+            }else {
+                Toast.makeText(this, "Bluetooth not enabled", Toast.LENGTH_LONG).show();
+                //getActionBar().setSubtitle("Bluetooth not enabled");
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void connectToService(){
+        beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
+            @Override
+            public void onServiceReady() {
+                try {
+                    beaconManager.startRanging(ALL_ESTIMOTE_BEACONS_REGION);
+                }catch (RemoteException e){
+                    Toast.makeText(HomeActivity.this, "Cannot start ranging, something terrible happended",Toast.LENGTH_LONG).show();
+                    Log.e(TAG, "Cannot start ranging", e);
+                }
+            }
+        });
+    }
+
+
+
+
+
 
 
 }

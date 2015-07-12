@@ -1,16 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
-    <TextView android:text="Offer Details" android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tmpText"/>
-    <Button
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/offerDetailsLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_floating_material_light">
+    <ImageView
+
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:id="@+id/offerImage"
+        android:src="@drawable/offer1" />
+
+   <Button
         android:id="@+id/backBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tmpText"
+        android:layout_below="@+id/offerImage"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         android:onClick="goBackToOffers"
         android:text="Back" />
-</LinearLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@+id/offerImage"
+        android:layout_alignParentStart="false"
+        android:background="@color/white"
+        android:id="@+id/relativeLayout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="The Tech Museum of Innovation"
+            android:textSize="20dp"
+            android:id="@+id/textView2"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:textStyle="normal"
+            android:padding="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Discount"
+            android:id="@+id/textView3"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:paddingStart="10dp"
+            android:password="false" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="42%"
+            android:id="@+id/textView4"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:paddingStart="10dp"
+            android:paddingBottom="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="$29"
+            android:id="@+id/textView5"
+            android:layout_below="@+id/textView3"
+            android:layout_alignParentEnd="true"
+            android:paddingEnd="10dp"
+            android:textColor="@color/green"
+            android:textStyle="bold|italic"
+            android:paddingTop="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="$50"
+
+            android:id="@+id/textView6"
+            android:layout_above="@+id/textView5"
+            android:layout_alignParentEnd="true"
+            android:paddingRight="10dp" />
+
+
+    </RelativeLayout>
+    <Space
+        android:id="@+id/spacer"
+        android:layout_below="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="40px" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200px"
+        android:layout_below="@+id/spacer"
+        android:layout_alignParentStart="true" android:background="@color/white"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:text="About this Offer"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <!-- Footer aligned to bottom -->
+    <LinearLayout
+        android:background="@color/white"
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:weightSum="1">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="4 days Left"
+            android:id="@+id/textView7"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_weight="0.35" />
+
+        <Space
+            android:layout_width="20px"
+            android:layout_height="20px" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Navigate"
+            android:id="@+id/navigateBtn"
+            android:textColor="@color/switch_thumb_material_light"
+            android:background="@color/green"
+            android:layout_weight="0.11" />
+
+
+    </LinearLayout>
+</RelativeLayout>

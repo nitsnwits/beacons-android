@@ -9,6 +9,17 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <!-- Needed permissions in order to scan for beacons. --> 
+    <uses-permission android:name="android.permission.BLUETOOTH" /> 
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />  
+
+    <!-- Declaration that this app is usable on phones with Bluetooth Low Energy. --> 
+    <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> 
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="18"/>
+    
+
     <application
         android:allowBackup="true"
         android:gravity="center_horizontal"
@@ -89,13 +100,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cmpe295.sjsu.edu.salesman.OfferActivity" />
         </activity>
-        <activity
+        <!--<activity
             android:name=".NavigationActivity"
             android:label="@string/title_activity_navigation"
             android:parentActivityName=".OfferDetailActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cmpe295.sjsu.edu.salesman.OfferDetailActivity" />
+<<<<<<< HEAD
         </activity>
         <!-- <activity -->
         <!-- android:name=".PhotoUploadActivity" -->
@@ -105,6 +117,22 @@
         <!-- android:name="android.support.PARENT_ACTIVITY" -->
         <!-- android:value="cmpe295.sjsu.edu.salesman.RegistrationActivity" /> -->
         <!-- </activity> -->
+=======
+        </activity>-->
+        <!--<activity-->
+            <!--android:name=".PhotoUploadActivity"-->
+            <!--android:label="@string/title_activity_photo_upload"-->
+            <!--android:parentActivityName=".RegistrationActivity" >-->
+            <!--<meta-data-->
+                <!--android:name="android.support.PARENT_ACTIVITY"-->
+                <!--android:value="cmpe295.sjsu.edu.salesman.RegistrationActivity" />-->
+        <!--</activity>-->
+
+        <!-- Estimote service responsible for scanning beacons. --> 
+<service android:name="com.estimote.sdk.service.BeaconService" android:exported="false"/>
+
+
+>>>>>>> 1fa8976b09557e8dc3da72cf6ac422ecb312ef75
 
         <activity
             android:name=".ProductActivity"

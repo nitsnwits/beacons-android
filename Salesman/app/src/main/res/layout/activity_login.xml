@@ -1,35 +1,25 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:gravity="center"
-    android:layout_width="fill_parent"
-
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     tools:context=".LoginActivity"
     android:id="@+id/loginscreen"
-    android:layout_centerInParent="true"
     android:weightSum="1">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="20dp"
-        android:gravity="center"
-        android:orientation="vertical">
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#ffffffff">
         <TextView
             android:id="@+id/textView"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
             android:background="@drawable/bg_layout"
             android:gravity="center"
-            android:text="Salesman"
+            android:text="SALESMAN"
             android:textColor="@color/white"
-            android:textSize="35dp" />
-    </LinearLayout>
+            android:textSize="35dp"
+            android:layout_weight="0.33"
+            android:textStyle="bold"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
 
 
     <EditText
@@ -39,74 +29,111 @@
         android:textColorHint="#ee1b0c11"
         android:ems="10"
         android:layout_height="wrap_content"
-        android:layout_marginTop="46dp"
+        android:layout_marginTop="50dp"
         android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:drawableLeft="@drawable/email"
+        android:drawablePadding="10dp"
         style="@style/Base.TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"
-        >
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
         <requestFocus />
     </EditText>
 
     <EditText
         android:id="@+id/passwordET"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:hint="@string/password"
         android:textColorHint="#ee1b0c11"
         android:ems="10"
         android:layout_height="wrap_content"
         android:layout_below="@+id/usernameET"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignLeft="@+id/usernameET"
-        android:layout_alignRight="@+id/usernameET"
         android:inputType="textPassword"
-        android:autoText="true"
+        android:drawablePadding="10dp"
         android:drawableLeft="@drawable/password"
-        style="@style/Base.TextAppearance.AppCompat.Light.Widget.PopupMenu.Large">
-    <requestFocus />
+        style="@style/Base.TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
     </EditText>
 
 
     <CheckBox
-        android:layout_gravity="center"
-        android:layout_width="155dp"
+
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Remember Me"
         android:id="@+id/checkBox"
-        android:layout_weight="0.04" />
+        android:layout_above="@+id/resetBtn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="160dp" />
 
     <Button
         android:id="@+id/loginBtn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/passwordET"
-        android:layout_marginTop="94dp"
+        android:layout_marginTop="30dp"
         android:textColor="@color/white"
         android:layout_gravity="center_horizontal"
-        android:layout_margin="20dp"
         android:background="@drawable/btn_layout"
         android:onClick="authenticateUser"
         android:text="@string/button_login"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:textStyle="bold" />
 
-        />
+
+
     <Button
-        android:id="@+id/resetBtn"
+        android:id="@+id/fbBtn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/loginBtn"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="10dp"
-        android:layout_weight="1"
-        android:onClick="resetPwd"
-        android:textColor="@color/fav_blue"
+        android:textColor="@color/white"
+        android:layout_gravity="center_horizontal"
+        android:background="#3b5998"
+        android:text="Log in with Facebook"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:textStyle="bold"
+        android:layout_above="@+id/resetBtn"
+        android:layout_marginBottom="50dp" />
+
+    <TextView
+        android:id="@+id/resetBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/switch_thumb_disabled_material_light"
         android:gravity="left"
         android:text="Forgot Password?"
-        android:background="@color/white"/>
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/checkBox"
+        android:layout_marginBottom="20dp"
+        android:textStyle="bold"
+        android:textSize="15dp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OR"
+        android:textColor="@color/switch_thumb_disabled_material_light"
+        android:id="@+id/textView8"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/fbBtn"
+        android:layout_marginBottom="30dp"
+        android:textSize="15dp" />
 
-</LinearLayout>
-</LinearLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/backArrow"
+        android:src="@drawable/white_arrow"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="15dp" />
+</RelativeLayout>

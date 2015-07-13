@@ -29,6 +29,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,15 +56,40 @@ public class LoginActivity extends Activity {
 
     private String key;
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         usernameET = (EditText) findViewById(R.id.usernameET);
-
         passwordET = (EditText) findViewById(R.id.passwordET);
+        TextView forgotPwd = (TextView)findViewById(R.id.resetBtn);
+        ImageView backImage = (ImageView)findViewById(R.id.backArrow);
+
+
+        // Method will be called on Back button click
+        backImage.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+
+        });
+
+
+        forgotPwd.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                resetPwd(v);
+            }
+
+        });
 
         login = (Button) findViewById(R.id.loginBtn);
 

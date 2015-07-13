@@ -5,23 +5,18 @@
     android:layout_height="match_parent"
     android:background="@color/background_floating_material_light">
     <ImageView
-
         android:layout_width="match_parent"
         android:layout_height="220dp"
         android:id="@+id/offerImage"
         android:src="@drawable/offer1" />
-
-   <Button
+    <ImageView
         android:id="@+id/backBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/offerImage"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_margin="15dp"
         android:onClick="goBackToOffers"
-        android:text="Back" />
-
-
+        android:src="@drawable/white_arrow" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -95,10 +90,12 @@
         android:id="@+id/spacer"
         android:layout_below="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="40px" />
+        android:layout_height="40px"
+        android:layout_marginLeft="10px"
+        android:paddingLeft="30px" />
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="200px"
+        android:layout_height="300px"
         android:layout_below="@+id/spacer"
         android:layout_alignParentStart="true" android:background="@color/white"
         android:padding="10dp">
@@ -114,11 +111,11 @@
     </RelativeLayout>
 
     <!-- Footer aligned to bottom -->
-    <LinearLayout
+    <RelativeLayout
         android:background="@color/white"
         android:id="@+id/footer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="180px"
         android:layout_alignParentBottom="true"
         android:gravity="center"
         android:layout_centerHorizontal="true"
@@ -129,23 +126,26 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="4 days Left"
             android:id="@+id/textView7"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:layout_weight="0.35" />
+            android:layout_weight="0.10"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp" />
 
         <Space
             android:layout_width="20px"
             android:layout_height="20px" />
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Navigate"
+            android:layout_width="127dp"
+            android:layout_height="32dp"
+            android:text="Show Map"
             android:id="@+id/navigateBtn"
-            android:textColor="@color/switch_thumb_material_light"
-            android:background="@color/green"
-            android:layout_weight="0.11" />
+            android:textColor="@color/white"
+            android:background="#70AA37"
+            android:layout_alignParentRight="true"
+            android:layout_margin="15dp"
+           />
 
 
-    </LinearLayout>
+    </RelativeLayout>
 </RelativeLayout>

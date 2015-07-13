@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,16 +32,19 @@ public class OfferDetailsFragment  extends Fragment {
 
         View rootView = inflater.inflate(R.layout.offer_details_fragment, container, false);
         getActivity().getActionBar().hide();
-        Button button = (Button) rootView.findViewById(R.id.backBtn);
+        ImageView button = (ImageView) rootView.findViewById(R.id.backBtn);
         Button navigatebBtn = (Button) rootView.findViewById(R.id.navigateBtn);
 
         // Method will be called on Back button click
         button.setOnClickListener(new View.OnClickListener() {
+
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 getFragmentManager().popBackStack();
             }
+
         });
+
 
         // Attache clickListener to navigateBtn
         navigatebBtn.setOnClickListener(new View.OnClickListener() {

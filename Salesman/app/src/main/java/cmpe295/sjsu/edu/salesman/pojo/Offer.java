@@ -1,38 +1,51 @@
 package cmpe295.sjsu.edu.salesman.pojo;
 
+import android.graphics.Bitmap;
+
 /**
  * Created by jijhaver on 6/24/15.
  */
 public class Offer {
-    private String name;
-    private String hexValue;
-    private int intValue;
-    private int resourceId;
 
-    public Offer(String name, String hexValue, int intValue,int resourceId) {
+    private String name;
+    private String price;
+    private int intValue;
+    private String url;
+
+
+
+
+    public Offer(String name, String price, int intValue, String url) {
         this.name = name;
-        this.hexValue = hexValue;
+        this.price = price;
         this.intValue = intValue;
-        this.resourceId = resourceId;
+        this.url = url;
     }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+
 
     public String getName() {
         return name;
     }
 
-    public String getHexValue() {
-        return hexValue;
-    }
 
     public int getIntValue() {
         return intValue;
     }
 
-    public int getResourceId() {
-        return resourceId;
+    public String getUrl() {
+        return url;
     }
 
-
-
-
+    public void setUrl(String url) {
+        this.url = url;
+    }
 }

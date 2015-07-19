@@ -25,6 +25,7 @@ import cmpe295.sjsu.edu.salesman.pojo.Point;
 public class OfferDetailsFragment  extends Fragment {
 
     private Map<Integer,Point> offerMap;
+    private String offerId;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,7 +72,7 @@ public class OfferDetailsFragment  extends Fragment {
 
     private void initializeOfferMap(){
         offerMap = new HashMap<>();
-        offerMap.put(1,new Point(1d,3d));
+        offerMap.put(1, new Point(1d, 3d));
 
     }
 
@@ -80,6 +81,14 @@ public class OfferDetailsFragment  extends Fragment {
         return  offerMap.get(offerId);
     }
 
+
+    public String getOfferId() {
+        return offerId;
+    }
+
+    public void setOfferId(String offerId) {
+        this.offerId = offerId;
+    }
 
 
 }

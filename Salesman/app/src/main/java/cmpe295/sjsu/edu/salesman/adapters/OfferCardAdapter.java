@@ -15,6 +15,7 @@ import java.util.List;
 import cmpe295.sjsu.edu.salesman.R;
 import cmpe295.sjsu.edu.salesman.fragments.OfferDetailsFragment;
 import cmpe295.sjsu.edu.salesman.pojo.Offer;
+import cmpe295.sjsu.edu.salesman.utils.ImageLoadTask;
 import cmpe295.sjsu.edu.salesman.views.OfferViewHolder;
 
 /**
@@ -51,8 +52,9 @@ public class OfferCardAdapter extends RecyclerView.Adapter<OfferViewHolder> {
     public void onBindViewHolder(OfferViewHolder offerViewHolder,final int position) {
         Offer offer = offers.get(position);
         offerViewHolder.titleText.setText(offer.getName());
-        offerViewHolder.contentText.setText(offer.getHexValue());
-        offerViewHolder.offerImage.setImageResource(offer.getResourceId());
+        offerViewHolder.contentText.setText(offer.getPrice());
+        //offerViewHolder.offerImage.setImageBitmap(offer.getResourceId());
+        new ImageLoadTask(offer.getUrl(), offerViewHolder.offerImage).execute();
 
 
         offerViewHolder.card.setOnClickListener(new View.OnClickListener() {

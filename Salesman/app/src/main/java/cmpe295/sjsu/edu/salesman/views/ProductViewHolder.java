@@ -20,8 +20,8 @@ public class ProductViewHolder extends RecyclerView.ViewHolder{
 
     public ProductViewHolder(View itemView) {
         super(itemView);
-        titleText = (TextView) itemView.findViewById(R.id.name);
-        contentText = (TextView) itemView.findViewById(R.id.hexValue);
+        titleText = (TextView) itemView.findViewById(R.id.productName);
+        contentText = (TextView) itemView.findViewById(R.id.productValue);
         productImage = (ImageView) itemView.findViewById(R.id.productImage);
         card = (CardView) itemView;
 

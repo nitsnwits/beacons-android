@@ -44,35 +44,22 @@
         <activity
             android:name=".LoginActivity"
             android:gravity="center_horizontal"
-<<<<<<< HEAD
+
             android:label="@string/app_name" >
-=======
             android:label="@string/app_name"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
->>>>>>> 1fe20d3f010d2cb0038842b015d4fc7e10272b28
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cmpe295.sjsu.edu.salesman.MainActivity" />
 
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="http://salesman-betasjsu.rhcloud.com/api/v1"
-                    android:pathPrefix="/reset/password/d7a6c474-61de-40e3-b1f3-3c232ea5621e"
-                    android:scheme="http" >
-=======
                 <action android:name="android.intent.action.VIEW"></action>
                 <category android:name="android.intent.category.DEFAULT"></category>
                 <category android:name="android.intent.category.BROWSABLE"></category>
                 <data android:host="http://salesman-betasjsu.rhcloud.com/api/v1"
                     android:pathPrefix="/reset/password/d7a6c474-61de-40e3-b1f3-3c232ea5621e"
                     android:scheme="http">
->>>>>>> .merge_file_C0gS7s
                 </data>
             </intent-filter>
         </activity>
@@ -118,25 +105,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cmpe295.sjsu.edu.salesman.OfferActivity" />
         </activity>
-        <!--<activity
-            android:name=".NavigationActivity"
-            android:label="@string/title_activity_navigation"
-            android:parentActivityName=".OfferDetailActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="cmpe295.sjsu.edu.salesman.OfferDetailActivity" />
-<<<<<<< HEAD
-        </activity>
-        <!-- <activity -->
-        <!-- android:name=".PhotoUploadActivity" -->
-        <!-- android:label="@string/title_activity_photo_upload" -->
-        <!-- android:parentActivityName=".RegistrationActivity" > -->
-        <!-- <meta-data -->
-        <!-- android:name="android.support.PARENT_ACTIVITY" -->
-        <!-- android:value="cmpe295.sjsu.edu.salesman.RegistrationActivity" /> -->
-        <!-- </activity> -->
-=======
-        </activity>-->
+
+
         <!--<activity-->
             <!--android:name=".PhotoUploadActivity"-->
             <!--android:label="@string/title_activity_photo_upload"-->
@@ -150,7 +120,6 @@
 <service android:name="com.estimote.sdk.service.BeaconService" android:exported="false"/>
 
 
->>>>>>> 1fa8976b09557e8dc3da72cf6ac422ecb312ef75
 
         <activity
             android:name=".ProductActivity"

@@ -35,12 +35,11 @@
     </string-array>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
-<<<<<<< HEAD
-    <string name="title_activity_main">MainActivity</string>
+
+    <!--<string name="title_activity_main">MainActivity</string>-->
     <string name="title_activity_product">ProductActivity</string>
     <string name="title_activity_product_detail">ProductDetailActivity</string>
     <string name="title_activity_product_navigation">ProductNavigationActivity</string>
-=======
+
     <string name="title_activity_main">Salesman</string>
->>>>>>> 347d36a4c567cf055df823189e6c4cd35475009f
 </resources>

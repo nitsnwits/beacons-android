@@ -5,6 +5,7 @@ package cmpe295.sjsu.edu.salesman;
 import java.util.ArrayList;
 import java.util.List;
 
+import cmpe295.sjsu.edu.salesman.pojo.Product;
 import retrofit.Callback;
 import retrofit.http.Body;
 import retrofit.http.EncodedPath;
@@ -15,6 +16,7 @@ import retrofit.http.Header;
 import retrofit.http.Headers;
 import retrofit.http.POST;
 import retrofit.http.Path;
+import retrofit.http.Query;
 
 
 /**
@@ -55,6 +57,10 @@ public interface SalesmanAPI {
 
     @GET("/users/{userId}/verify")
     public void verifyUser(@Path("userId")String userId,Callback<String> cb);
+
+    //Get the products on the product fragment
+    @GET("/products/search")
+    public void searchProduct(@Header("Authorization") String accessToken,@Query("query") String query,Callback<ArrayList<Product>> cb);
 
 
 }

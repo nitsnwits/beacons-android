@@ -5,6 +5,7 @@ package cmpe295.sjsu.edu.salesman;
 import java.util.ArrayList;
 import java.util.List;
 
+import cmpe295.sjsu.edu.salesman.pojo.OfferResponse;
 import retrofit.Callback;
 import retrofit.http.Body;
 import retrofit.http.EncodedPath;
@@ -55,6 +56,15 @@ public interface SalesmanAPI {
 
     @GET("/users/{userId}/verify")
     public void verifyUser(@Path("userId")String userId,Callback<String> cb);
+
+    //Get all offers
+
+    @GET("/offers")
+    public void getOffers(Callback<ArrayList<OfferResponse>> cb);
+
+    //6. Get Offer Details
+    @GET("/offers/{offerId}")
+    public  void getOfferDetails(@Path("offerId")String offerId, Callback<OfferResponse> cb);
 
 
 }

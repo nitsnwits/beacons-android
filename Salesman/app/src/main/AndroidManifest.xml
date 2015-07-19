@@ -65,6 +65,14 @@
                     android:host="http://salesman-betasjsu.rhcloud.com/api/v1"
                     android:pathPrefix="/reset/password/d7a6c474-61de-40e3-b1f3-3c232ea5621e"
                     android:scheme="http" >
+=======
+                <action android:name="android.intent.action.VIEW"></action>
+                <category android:name="android.intent.category.DEFAULT"></category>
+                <category android:name="android.intent.category.BROWSABLE"></category>
+                <data android:host="http://salesman-betasjsu.rhcloud.com/api/v1"
+                    android:pathPrefix="/reset/password/d7a6c474-61de-40e3-b1f3-3c232ea5621e"
+                    android:scheme="http">
+>>>>>>> .merge_file_C0gS7s
                 </data>
             </intent-filter>
         </activity>
@@ -76,6 +84,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cmpe295.sjsu.edu.salesman.LoginActivity" />
         </activity>
+
         <activity
             android:name=".RegistrationActivity"
             android:label="@string/title_activity_registration"

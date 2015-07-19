@@ -2,20 +2,25 @@ package cmpe295.sjsu.edu.salesman.fragments;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.CornerPathEffect;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.os.RemoteException;
-import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.estimote.sdk.Beacon;
@@ -23,7 +28,9 @@ import com.estimote.sdk.BeaconManager;
 import com.estimote.sdk.Region;
 import com.qozix.tileview.TileView;
 import com.qozix.tileview.markers.MarkerEventListener;
+import com.qozix.tileview.paths.DrawablePath;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cmpe295.sjsu.edu.salesman.HomeActivity;
@@ -40,10 +47,11 @@ import cmpe295.sjsu.edu.salesman.pojo.Point;
 
 public class StoreMapFragment extends Fragment  {
 
-    private  TileView tileView;
+    private TileView tileView;
     private Context context;
     private Activity activity;
     private static final String TAG = StoreMapFragment.class.getSimpleName();
+    private List<DrawablePath> locationPathList;
 
     private static final int REQUEST_ENABLE_BT = 1234;
     private static final Region ALL_ESTIMOTE_BEACONS_REGION = new Region("rid", null, null, null);
@@ -52,6 +60,14 @@ public class StoreMapFragment extends Fragment  {
     private ImageView userLocationView;
     private ImageView pointLocationView;
     private LocationAlgorithm locationAlgorithm;
+    private RelativeLayout relativeLayout;
+
+    // search box
+    private RelativeLayout searchBoxBackground;
+    private LinearLayout searchResultLayout;
+    private ImageButton menuButton;
+    private ImageButton backButton;
+    private EditText searchEditText;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,9 +75,14 @@ public class StoreMapFragment extends Fragment  {
 
         context = container.getContext();
         activity = this.getActivity();
+        relativeLayout = new RelativeLayout(context);
+        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        relativeLayout.setLayoutParams(lp);
         tileView =  new TileView(context);
+        tileView.setFocusable(true);
         // size of original image at 100% scale
         tileView.setSize(6220, 11060);
+        locationPathList = new ArrayList<>();
 
         // detail levels
         //tileView.addDetailLevel(1.000f, "tiles_1/floor/1000/%col%_%row%.jpg", "samples_1/floor_plan.jpg");
@@ -80,6 +101,10 @@ public class StoreMapFragment extends Fragment  {
         //addBeacon(0.75, 0.25);
         //addBeacon(0.75, 0.75);
 
+        // add offers
+        for (int count = 0; count < Constants.OFFER_ARRAY.length; count++){
+            addOffer(Constants.OFFER_ARRAY[count].getX(), Constants.OFFER_ARRAY[count].getY());
+        }
         // center markers along both axes
         tileView.setMarkerAnchorPoints(-0.5f, -0.5f);
 
@@ -115,66 +140,170 @@ public class StoreMapFragment extends Fragment  {
             }
         });
 
+        relativeLayout.addView(tileView);
+        addMapIcons(inflater, container);
+        return relativeLayout;
+    }
 
-        return tileView;
+
+    private void addMapIcons(LayoutInflater inflater, ViewGroup container) {
+
+        // Current location button
+        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        lp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        lp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        ImageButton currentLocationBtn = new ImageButton(context);
+        currentLocationBtn.setFocusable(true);
+        currentLocationBtn.setImageResource(R.drawable.current_location);
+        currentLocationBtn.setBackgroundColor(Color.TRANSPARENT);
+        currentLocationBtn.setOnClickListener(currentLocationClickListener);
+        relativeLayout.addView(currentLocationBtn, lp);
+
+        // Search Box
+        RelativeLayout.LayoutParams lp1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        lp1.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+        lp1.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+        View searchView = inflater.inflate(R.layout.searchbox, container, false);
+        relativeLayout.addView(searchView, lp1);
+        searchBoxBackground = (RelativeLayout) searchView.findViewById(R.id.searchBoxBackground);
+        menuButton = (ImageButton) searchView.findViewById(R.id.menuButton);
+        menuButton.setOnClickListener(menuBtnClickListener);
+        backButton = (ImageButton) searchView.findViewById(R.id.backButton);
+        backButton.setOnClickListener(backBtnClickListener);
+
+        searchEditText = (EditText) searchView.findViewById(R.id.searchEditText);
+        searchEditText.clearFocus();
+        //searchEditText.setOnFocusChangeListener(searchFocusChangeListener);
+        searchResultLayout = (LinearLayout) searchView.findViewById(R.id.search_result);
+        ListView poiListView = (ListView) searchView.findViewById(R.id.poi_list_view);
+        poiListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                searchResultLayout.setVisibility(View.INVISIBLE);
+                menuButton.setVisibility(View.VISIBLE);
+                backButton.setVisibility(View.INVISIBLE);
+                searchBoxBackground.setBackgroundColor(Color.TRANSPARENT);
+            }
+        });
+
+        ArrayList<String> listItems=new ArrayList<String>();
+        listItems.add(" Offers");
+        listItems.add(" Sale");
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, listItems);
+        poiListView.setAdapter(adapter);
+
+
+        searchEditText.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                searchResultLayout.setVisibility(View.VISIBLE);
+                menuButton.setVisibility(View.INVISIBLE);
+                backButton.setVisibility(View.VISIBLE);
+                searchBoxBackground.setBackgroundColor(Color.WHITE);
+            }
+
+        });
+
+        //Being inside the box and pressing a key
+        searchEditText.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                //If the event is a key-down event on the "enter" button
+                //If enter is pressed while inside the textbox
+                /*if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
+
+                }
+                return false;
+                */
+
+                return true;
+            }
+        });
+    }
+
+    private void addOffer(double x, double y )
+    {
+        ImageView imageView = new ImageView(context);
+        imageView.setTag(String.valueOf(x)+","+String.valueOf(y));
+        imageView.setImageResource(R.drawable.offer);
+        getTileView().addMarker(imageView, x, y);
     }
 
     private void addBeacon( double x, double y ) {
         ImageView imageView = new ImageView(context );
-        imageView.setImageResource(R.drawable.beacon );
+        imageView.setImageResource(R.drawable.beacon);
         getTileView().addMarker(imageView, x, y );
     }
 
-    private void addPathPoint( double x, double y ) {
-        ImageView imageView = new ImageView( context );
-        imageView.setImageResource(R.drawable.beacon );
-        getTileView().addMarker(imageView, x, y );
-    }
 
     public void addLocationMarker(double x, double y ) {
         getTileView().removeMarker(pointLocationView);
-        getTileView().addMarker(pointLocationView, x, y );
+        getTileView().addMarker(pointLocationView, x, y - 0.02);
     }
 
     private void setUserLocation(Point userLocationPoint){
         if (getTileView() != null && userLocationPoint != null) {
             getTileView().removeMarker(userLocationView);
-
             getTileView().addMarker(userLocationView, userLocationPoint.getX(), userLocationPoint.getY());
-            // getTileView().moveTo(userLocationPoint.x, userLocationPoint.y);
         }
     }
 
-    private void setUserLocation(Beacon beacon)
-    {
-        getTileView().removeMarker(userLocationView);
-        Point userLocationPoint = Constants.beaconPointMap.get(beacon.getMinor());
-        if (userLocationPoint != null) {
-            getTileView().addMarker(userLocationView, userLocationPoint.getX(), userLocationPoint.getY());
-            // getTileView().moveTo(userLocationPoint.x, userLocationPoint.y);
+    private View.OnClickListener menuBtnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            ((HomeActivity)activity).openDrawer();
         }
+    };
+    private View.OnClickListener backBtnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            searchResultLayout.setVisibility(View.INVISIBLE);
+            menuButton.setVisibility(View.VISIBLE);
+            backButton.setVisibility(View.INVISIBLE);
+            searchEditText.clearComposingText();
+            searchBoxBackground.setBackgroundColor(Color.TRANSPARENT);
+        }
+    };
 
-    }
+
+    private View.OnClickListener currentLocationClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Point userLocation = locationAlgorithm.getUserLocation();
+            if(userLocation != null)
+                //frameTo(userLocation.getX(), userLocation.getY());
+                frameTo(userLocationView);
+        }
+    };
 
     private MarkerEventListener markerEventListener = new MarkerEventListener() {
         @Override
         public void onMarkerTap( View v, int x, int y ) {
-            int beaconId = 3;//new Random().nextInt(3);
-            Toast.makeText(context.getApplicationContext(), "You tapped a pin: " + String.valueOf(x) + "," + String.valueOf(y) + "! BeaconId: " + String.valueOf(beaconId), Toast.LENGTH_LONG).show();
-            Point destinationPoint = Constants.beaconPointMap.get(Constants.BEACON_ARRAY[beaconId]);
-            List<List<Point>> pathList = locationAlgorithm.getAllPathsFromCurrentLocationTo(destinationPoint);
-            int[] colorList = {Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW};
-            int i = 0;
-            for(List<Point> path : pathList){
-                String pathString = Utility.ListToString(path);
-                Paint pathPaint = getTileView().getPathPaint();
-                pathPaint.setColor(colorList[i++]);
-                pathPaint.setShadowLayer(4, 2, 2, 0x66000000);
-                pathPaint.setPathEffect(new CornerPathEffect(5));
-                getTileView().drawPath(Utility.getDoubleList(path));
-                Log.i(TAG, "Path: " + pathString.toString());
-                break;
+            //Toast.makeText(context.getApplicationContext(), "You tapped a pin: " + String.valueOf(x) + "," + String.valueOf(y) + "!", Toast.LENGTH_LONG).show();
+            if(v.getTag() != null && v.getTag() instanceof String) {
+                Point destinationPoint = Constants.offerPointMap.get(v.getTag());
+                if(destinationPoint != null) {
+                    List<List<Point>> pathList = locationAlgorithm.getAllPathsFromCurrentLocationTo(destinationPoint);
+                    int[] colorList = {Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW};
+                    int i = 0;
+                    for (int j = 0; j < locationPathList.size(); j++) {
+                        getTileView().removePath(locationPathList.get(j));
+                    }
+                    for (List<Point> path : pathList) {
+                        String pathString = Utility.ListToString(path);
+                        Paint pathPaint = new Paint(getTileView().getPathPaint()); //getTileView().getPathPaint();
+                        pathPaint.setColor(colorList[i++]);
+                        pathPaint.setShadowLayer(4, 2, 2, 0x66000000);
+                        pathPaint.setPathEffect(new CornerPathEffect(5));
+                        DrawablePath locationPath = getTileView().drawPath(Utility.getDoubleList(path), pathPaint);
+                        if(locationPath != null)
+                            locationPathList.add(locationPath);
+                       // Log.i(TAG, "Path: " + pathString.toString());
+                        // Place a marker
+                        addLocationMarker(path.get(path.size()-1).getX(), path.get(path.size()-1).getY());
+                        //break;
 
+                    }
+                }
             }
         }
     };
@@ -190,8 +319,6 @@ public class StoreMapFragment extends Fragment  {
     public void onResume() {
         super.onResume();
         tileView.resume();
-
-        // Set the location marker to previous set location
 
     }
 
@@ -215,6 +342,15 @@ public class StoreMapFragment extends Fragment  {
             @Override
             public void run() {
                 getTileView().moveToAndCenter(x, y);
+            }
+        });
+    }
+
+    public void frameTo( final View marker ) {
+        getTileView().post(new Runnable() {
+            @Override
+            public void run() {
+                getTileView().moveToMarker(marker, true);
             }
         });
     }

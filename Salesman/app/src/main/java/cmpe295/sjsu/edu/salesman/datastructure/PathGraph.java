@@ -19,7 +19,7 @@ import cmpe295.sjsu.edu.salesman.pojo.Point;
 public class PathGraph {
     private static final String TAG = PathGraph.class.getSimpleName();
 
-    private  PathNode rootNode;
+    private PathNode rootNode;
     public HashMap<Point, PathNode> poiNodeMap;
 
     public PathGraph(){
@@ -28,18 +28,18 @@ public class PathGraph {
     public void storePath()
     {
         // Define POI
-        PathNode node1 = new PathNode(new Point(0.32, 1.0)); // Entry Node
-        PathNode node2 = new PathNode(new Point(0.32f, 0.85f));
-        PathNode node3 = new PathNode(new Point(0.68f, 0.85f));
+        PathNode node1 = new PathNode(new Point(0.315, 1.0)); // Entry Node
+        PathNode node2 = new PathNode(new Point(0.315, 0.88));
+        PathNode node3 = new PathNode(new Point(0.685, 0.88));
         PathNode node4 = new PathNode(Constants.BEACON_2_POINT);
         PathNode node5 = new PathNode(Constants.BEACON_1_POINT);
-        PathNode node6 = new PathNode(new Point(0.32f, 0.15f));
-        PathNode node7 = new PathNode(new Point(0.68f, 0.15f));
-        PathNode node8 = new PathNode(new Point(0.32f, 0.0f));
-        PathNode node9 = new PathNode(new Point(0.68f, 0.0f));
+        PathNode node6 = new PathNode(new Point(0.315, 0.05));
+        PathNode node7 = new PathNode(new Point(0.685, 0.05));
+        PathNode node8 = new PathNode(new Point(0.315, 0.0));
+        PathNode node9 = new PathNode(new Point(0.685, 0.0));
         PathNode node10 = new PathNode(Constants.BEACON_4_POINT);
         PathNode node11 = new PathNode(Constants.BEACON_3_POINT);
-        PathNode node12 = new PathNode(new Point(0.68f, 1.0f)); // Exit Node
+        PathNode node12 = new PathNode(new Point(0.685, 1.0)); // Exit Node
 
         // Add Neighbors
         node1.addNeighbors(node2);
@@ -79,19 +79,16 @@ public class PathGraph {
 
     public List<List<Point>> getAllPath(Point pointA, Point pointB) {
         List<List<Point>> pathList = new ArrayList<>();
-
-        if (poiNodeMap.containsKey(pointA) && poiNodeMap.containsKey(pointB)){
+        if (poiNodeMap.containsKey(pointA)){
             PathNode sourceNode =  poiNodeMap.get(pointA);
-            PathNode destinationNode =  poiNodeMap.get(pointB);
             Set<PathNode> visitedNodeSet = new HashSet<>();
             List<Point> path = new ArrayList<>();
-            getAllPath(sourceNode, destinationNode, path, pathList, visitedNodeSet);
-
+            getAllPath(sourceNode, pointB, path, pathList, visitedNodeSet);
         }
         return  pathList;
     }
 
-    private void getAllPath(PathNode sourceNode, PathNode destinationNode, List<Point> path, List<List<Point>> pathList, Set<PathNode> visitedNodeSet) {
+    private void getAllPath(PathNode sourceNode, Point destinationPoint, List<Point> path, List<List<Point>> pathList, Set<PathNode> visitedNodeSet) {
 
         if(visitedNodeSet.contains(sourceNode))
             return;
@@ -101,16 +98,17 @@ public class PathGraph {
         List<PathNode> neighborList = sourceNode.getNeighbors();
         for (int i = 0; i < neighborList.size(); i++) {
             PathNode neighbor = neighborList.get(i);
-            if (!neighbor.equals(sourceNode)){
-                if (neighbor.equals(destinationNode)){
-                    path.add(neighbor.getPoint());
+            if (!visitedNodeSet.contains(neighbor)){
+                Point closestPoint = PathUtility.getClosestPointOnSegment(sourceNode.getPoint(), neighbor.getPoint(), destinationPoint);
+                double distanceToPath = PathUtility.distanceOfTwoPoints(closestPoint, destinationPoint);
+                if( distanceToPath < Constants.CLOSEST_DISTANCE_TO_PATH ){
+                    path.add(closestPoint);
                     pathList.add(path);
                     return;
-
                 }
                 List<Point> pathCopy = new ArrayList<>(path);
                 Log.i(TAG, sourceNode.getPoint().toString()+" -->> "+ neighbor.getPoint().toString()+" || Path: " + Utility.ListToString(pathCopy));
-                getAllPath(neighbor, destinationNode, pathCopy, pathList, visitedNodeSet);
+                getAllPath(neighbor, destinationPoint, pathCopy, pathList, visitedNodeSet);
             }
         }
     }

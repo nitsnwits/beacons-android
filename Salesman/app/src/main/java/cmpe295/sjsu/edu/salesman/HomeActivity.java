@@ -22,6 +22,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -291,8 +292,8 @@ public class HomeActivity extends Activity  implements NavDrawerAdapter.OnItemCl
             public void onServiceReady() {
                 try {
                     beaconManager.startRanging(ALL_ESTIMOTE_BEACONS_REGION);
-                }catch (RemoteException e){
-                    Toast.makeText(HomeActivity.this, "Cannot start ranging, something terrible happended",Toast.LENGTH_LONG).show();
+                } catch (RemoteException e) {
+                    Toast.makeText(HomeActivity.this, "Cannot start ranging, something terrible happended", Toast.LENGTH_LONG).show();
                     Log.e(TAG, "Cannot start ranging", e);
                 }
             }
@@ -300,7 +301,9 @@ public class HomeActivity extends Activity  implements NavDrawerAdapter.OnItemCl
     }
 
 
-
+    public void openDrawer(){
+        mDrawerLayout.openDrawer(Gravity.LEFT);
+    }
 
 
 

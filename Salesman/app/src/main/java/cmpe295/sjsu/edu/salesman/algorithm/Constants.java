@@ -2,7 +2,6 @@ package cmpe295.sjsu.edu.salesman.algorithm;
 
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import cmpe295.sjsu.edu.salesman.pojo.Point;
@@ -24,10 +23,66 @@ public class Constants {
     public static final int BEACON_4 = 16545;
     public static final Integer[] BEACON_ARRAY = {BEACON_1, BEACON_2, BEACON_3, BEACON_4};
 
-    public static final Point BEACON_1_POINT = new Point(0.32f, 0.25f);
-    public static final Point BEACON_2_POINT = new Point(0.32f, 0.75f);
-    public static final Point BEACON_3_POINT = new Point(0.68f, 0.75f);
-    public static final Point BEACON_4_POINT = new Point(0.68f, 0.25f);
+    // OFFERS
+    public static final Point SPORTING_GOODS_OFFER_POINT = new Point(0.25, 0.1);
+    public static final Point AUTO_CARE_OFFER_POINT = new Point(0.25, 0.28);
+    public static final Point TOYS_OFFER_POINT = new Point(0.25, 0.45);
+    public static final Point HOME_OFFER_POINT = new Point(0.25, 0.6);
+    public static final Point APPAREL_OFFER_POINT = new Point(0.25, 0.75);
+    public static final Point JEWELRY_OFFER_POINT = new Point(0.25, 0.9);
+
+    public static final Point PETS_OFFER_POINT = new Point(0.38, 0.2);
+    public static final Point HEALTH_OFFER_POINT = new Point(0.38, 0.45);
+    public static final Point BEAUTY_OFFER_POINT = new Point(0.38, 0.78);
+    public static final Point PAPER_CLEANING_OFFER_POINT = new Point(0.62, 0.32);
+    public static final Point BOOKS_OFFER_POINT = new Point(0.62, 0.58);
+    public static final Point CARDS_OFFER_POINT = new Point(0.62, 0.8);
+
+    public static final Point CRAFTS_OFFER_POINT = new Point(0.75, 0.05);
+    public static final Point HOME_OFFICE_OFFER_POINT = new Point(0.75, 0.2);
+    public static final Point ELECTRONICS_OFFER_POINT = new Point(0.75, 0.42);
+    public static final Point FROZEN_FOODS_OFFER_POINT = new Point(0.75, 0.67);
+    public static final Point GROCERY_OFFER_POINT = new Point(0.75, 0.82);
+    public static final Point DELI_OFFER_POINT = new Point(0.75, 0.88);
+    public static final Point SOME_OFFER_POINT = new Point(0.75, 0.95);
+
+    public static final Point[] OFFER_ARRAY = {
+            SPORTING_GOODS_OFFER_POINT,
+            AUTO_CARE_OFFER_POINT,
+            TOYS_OFFER_POINT,
+            HOME_OFFER_POINT,
+            APPAREL_OFFER_POINT,
+            JEWELRY_OFFER_POINT,
+            PETS_OFFER_POINT,
+            HEALTH_OFFER_POINT,
+            BEAUTY_OFFER_POINT,
+            PAPER_CLEANING_OFFER_POINT,
+            BOOKS_OFFER_POINT,
+            CARDS_OFFER_POINT,
+            CRAFTS_OFFER_POINT,
+            HOME_OFFICE_OFFER_POINT,
+            ELECTRONICS_OFFER_POINT,
+            FROZEN_FOODS_OFFER_POINT,
+            GROCERY_OFFER_POINT,
+            DELI_OFFER_POINT,
+            SOME_OFFER_POINT
+    };
+    public static final Map<String, Point> offerPointMap = configureOfferPointMap();
+
+    private static Map<String, Point> configureOfferPointMap() {
+        Map<String, Point> OfferMap = new HashMap<>();
+        for (int i = 0; i < OFFER_ARRAY.length; i++) {
+            OfferMap.put(OFFER_ARRAY[i].toString(),OFFER_ARRAY[i]);
+        }
+        return  OfferMap;
+    }
+
+    public static final double CLOSEST_DISTANCE_TO_PATH = 0.07;
+
+    public static final Point BEACON_1_POINT = new Point(0.315, 0.25);
+    public static final Point BEACON_2_POINT = new Point(0.315, 0.75);
+    public static final Point BEACON_3_POINT = new Point(0.685, 0.75);
+    public static final Point BEACON_4_POINT = new Point(0.685, 0.25);
 
     public static final Map<Integer, Point> beaconPointMap = configureBeaconPointMap();
 

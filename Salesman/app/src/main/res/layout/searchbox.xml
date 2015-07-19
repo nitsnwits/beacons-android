@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/searchBoxBackground"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <!-- Editext for Search -->
+    <EditText android:id="@+id/searchEditText"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:hint="Search products..."
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:inputType="textAutoComplete"
+        android:textAlignment="center"
+        android:paddingLeft="50dp"
+        android:background="@drawable/searchbox_background"
+        />
+
+    <ImageButton
+        android:id="@+id/menuButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/menu"
+        android:layout_alignTop="@id/searchEditText"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="10dp"
+        android:background="@null"
+        android:visibility="visible"
+        android:focusable="true"
+        />
+
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/back_black"
+        android:layout_alignTop="@id/searchEditText"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="10dp"
+        android:background="@null"
+        android:visibility="invisible"
+        android:focusable="true"
+        />
+
+    <!-- List View -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/search_result"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="70dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="5dp"
+        android:visibility="invisible">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Recent History"
+            android:textColor="@color/blue"
+            android:background="@drawable/searchbox_background"
+            android:padding="10dp"
+            android:layout_marginTop="5dp"/>
+
+        <ListView
+            android:id="@+id/history_list_view"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/searchbox_background"
+           />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Quick Search"
+            android:textColor="@color/blue"
+            android:background="@drawable/searchbox_background"
+            android:padding="10dp"
+            android:layout_marginTop="5dp"/>
+        <ListView
+            android:id="@+id/poi_list_view"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/searchbox_background"
+            />
+    </LinearLayout>
+
+
+
+</RelativeLayout>

@@ -30,8 +30,8 @@ public class MyApplication extends Application {
     private NotificationManager notificationManager;
     private static final int NOTIFICATION_ID = 123;
     private static final String TAG = MyApplication.class.getSimpleName();
-    private static final Region ALL_ESTIMOTE_BEACONS_REGION = new Region("rid", null, null, null);
-    private int  counter = 0;
+    private static final Region ALL_ESTIMOTE_BEACONS_REGION = new Region("rid", "B9407F30-F5F8-466E-AFF9-25556B57FE6D", 6472, 19249);
+    private boolean enteredRegion;
     private  boolean foregroud;
 
 
@@ -70,18 +70,16 @@ public class MyApplication extends Application {
                 System.out.println("Beacon Discovered");
                 try {
                     foregroud = new ForegroundCheckTask().execute(getApplicationContext()).get();
-                    if(!foregroud){
-                        counter++;
+                    System.out.println("Foreground______"+foregroud);
+                    if(!foregroud & !enteredRegion) {
+                        // Call Rest api with for beacon
+                        postNotification("Welcome to Electronics Section");
+                        enteredRegion = true;
                     }
-
-                System.out.println("Foreground______"+foregroud);
-                } catch(Exception e)
+                }
+                catch(Exception e)
                 {
                     e.printStackTrace();
-                }
-
-                if(counter == 1 &&  !foregroud) {
-                        postNotification("Welcome to Electronics Section");
                 }
             }
         });

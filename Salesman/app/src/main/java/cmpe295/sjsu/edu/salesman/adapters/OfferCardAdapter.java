@@ -52,7 +52,7 @@ public class OfferCardAdapter extends RecyclerView.Adapter<OfferViewHolder> {
     public void onBindViewHolder(OfferViewHolder offerViewHolder,final int position) {
         Offer offer = offers.get(position);
         offerViewHolder.titleText.setText(offer.getName());
-        offerViewHolder.contentText.setText(offer.getPrice());
+        offerViewHolder.contentText.setText(offer.getOriginalPrice());
         //offerViewHolder.offerImage.setImageBitmap(offer.getResourceId());
         new ImageLoadTask(offer.getUrl(), offerViewHolder.offerImage).execute();
 

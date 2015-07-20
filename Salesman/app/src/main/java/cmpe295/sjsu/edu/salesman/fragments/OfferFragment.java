@@ -15,14 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.entity.BufferedHttpEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
-
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -34,8 +26,6 @@ import cmpe295.sjsu.edu.salesman.RestError;
 import cmpe295.sjsu.edu.salesman.adapters.OfferCardAdapter;
 import cmpe295.sjsu.edu.salesman.pojo.Offer;
 import cmpe295.sjsu.edu.salesman.pojo.OfferResponse;
-import cmpe295.sjsu.edu.salesman.resetPwdResponse;
-import cmpe295.sjsu.edu.salesman.utils.ImageLoadTask;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -46,6 +36,7 @@ import retrofit.client.Response;
 public class OfferFragment extends Fragment implements OfferCardAdapter.OnItemClickListener{
 
     ArrayList<Offer> offers = new ArrayList<>();
+    private OfferResponse offerDetails;
     private Activity activity;
     private RecyclerView recyclerView;
 
@@ -88,7 +79,7 @@ public class OfferFragment extends Fragment implements OfferCardAdapter.OnItemCl
                 System.out.println("-----Inside getOffers success--------" + offerResponses.size());
                 for (OfferResponse offerResponse : offerResponses) {
 
-                       // Bitmap bitmap = getBitmapFromURL(offerResponse.getProduct().getImage());
+                    // Bitmap bitmap = getBitmapFromURL(offerResponse.getProduct().getImage());
                         /*try {
                             URL url = new URL(offerResponse.getProduct().getImage());
 
@@ -109,7 +100,7 @@ public class OfferFragment extends Fragment implements OfferCardAdapter.OnItemCl
                         }
                         */
 
-                    offers.add(new Offer(offerResponse.getProduct().getName(), Float.toString(offerResponse.getProduct().getPrice()), Color.parseColor("#d32f2f"), offerResponse.getProduct().getImage()));
+                    offers.add(new Offer(offerResponse.getProduct().getName(), Float.toString(offerResponse.getProduct().getPrice()), offerResponse.getProduct().getImage(), offerResponse.getOfferId(), offerResponse.getProduct().getDescription(), offerResponse.getDiscount(), Float.toString(offerResponse.getOfferPrice())));
                 }
 
                 // Note that results are not delivered on UI thread.
@@ -172,48 +163,14 @@ public class OfferFragment extends Fragment implements OfferCardAdapter.OnItemCl
     private void selectOffer(int position) {
 
         OfferDetailsFragment offerDetailsFragment = new OfferDetailsFragment();
-        offerDetailsFragment.setOfferId("877d2a68-2c24-491a-8a2b-6d1b07704dd0");
+        Offer selectedOffer = offers.get(position);
+        System.out.println("Selected Offer______"+selectedOffer.getOfferId());
+        offerDetailsFragment.setOffer(selectedOffer);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();
         ft.addToBackStack(null);
         ft.replace(R.id.content_frame, offerDetailsFragment);
         ft.commit();
     }
-
-    private void getOfferDetailsByOfferId(String offerId){
-        RestClient.get().getOfferDetails(offerId, new Callback<OfferResponse>(){
-            @Override
-            public void success(OfferResponse offerResponse, Response response) {
-                System.out.println("----------Inside getOfferDetails Success");
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                RestError body = (RestError) error.getBodyAs(RestError.class);
-                //dynamic error handling
-                if(body.errorCode==400){
-                    Toast.makeText(getActivity().getApplicationContext(), body.getErrorMessage(),
-                            Toast.LENGTH_SHORT).show();
-                }
-                if(body.errorCode==401){
-                    Toast.makeText(getActivity().getApplicationContext(), body.getErrorMessage(),
-                            Toast.LENGTH_SHORT).show();
-                }
-                if(body.errorCode==404){
-                    Toast.makeText(getActivity().getApplicationContext(), body.getErrorMessage(),
-                            Toast.LENGTH_SHORT).show();
-                }
-                if(body.errorCode==500){
-                    Toast.makeText(getActivity().getApplicationContext(), body.getErrorMessage(),
-                            Toast.LENGTH_SHORT).show();
-                }
-                if(body.errorCode==503){
-                    Toast.makeText(getActivity().getApplicationContext(), body.getErrorMessage(),
-                            Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
-
 
 }

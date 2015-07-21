@@ -78,7 +78,7 @@ public class OfferDetailsFragment  extends Fragment {
     private void navigateToStoreMap() {
 
         StoreMapFragment mapFragment = ((HomeActivity)(this.getActivity())).getStoreMapFragment();
-        mapFragment.setPoiPoint(Constants.BOOKS_OFFER_POINT);
+        mapFragment.setPoiPoint(new Point(offer.getX(), offer.getY()));
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();
         ft.addToBackStack(null);
@@ -87,16 +87,6 @@ public class OfferDetailsFragment  extends Fragment {
 
     }
 
-    private void initializeOfferMap(){
-        offerMap = new HashMap<>();
-        offerMap.put(1, new Point(1d, 3d));
-
-    }
-
-    private Point getRandomOfferPoint() {
-        int offerId = new Random().nextInt(3);
-        return  offerMap.get(offerId);
-    }
 
     public Offer getOffer() {
         return offer;

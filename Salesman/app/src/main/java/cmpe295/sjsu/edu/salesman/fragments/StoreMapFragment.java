@@ -54,9 +54,6 @@ public class StoreMapFragment extends Fragment  {
     private static final String TAG = StoreMapFragment.class.getSimpleName();
     private List<DrawablePath> locationPathList;
 
-    private static final int REQUEST_ENABLE_BT = 1234;
-    private static final Region ALL_ESTIMOTE_BEACONS_REGION = new Region("rid", null, null, null);
-
     private BeaconManager beaconManager;
     private ImageView userLocationView;
     private ImageView pointLocationView;
@@ -70,6 +67,7 @@ public class StoreMapFragment extends Fragment  {
     private ImageButton backButton;
     private EditText searchEditText;
     private Point poiPoint;
+
 
 
     @Override
@@ -105,9 +103,7 @@ public class StoreMapFragment extends Fragment  {
         //addBeacon(0.75, 0.75);
 
         // add offers
-        for (int count = 0; count < Constants.OFFER_ARRAY.length; count++){
-            addOffer(Constants.OFFER_ARRAY[count].getX(), Constants.OFFER_ARRAY[count].getY());
-        }
+        addOffersMarker();
         // center markers along both axes
         tileView.setMarkerAnchorPoints(-0.5f, -0.5f);
 
@@ -116,7 +112,7 @@ public class StoreMapFragment extends Fragment  {
         tileView.setScale(0.25);
 
         getActivity().getActionBar().hide();
-       // setContentView(rootView);
+
 
         userLocationView = new ImageView( context );
         userLocationView.setImageResource(R.drawable.beacon);
@@ -153,6 +149,12 @@ public class StoreMapFragment extends Fragment  {
         return relativeLayout;
     }
 
+    private void addOffersMarker() {
+        for (int count = 0; count < Constants.OFFER_ARRAY.length; count++){
+            addOffer(Constants.OFFER_ARRAY[count].getX(), Constants.OFFER_ARRAY[count].getY());
+        }
+    }
+
 
     private void addMapIcons(LayoutInflater inflater, ViewGroup container) {
 
@@ -181,7 +183,7 @@ public class StoreMapFragment extends Fragment  {
 
         searchEditText = (EditText) searchView.findViewById(R.id.searchEditText);
         searchEditText.clearFocus();
-        //searchEditText.setOnFocusChangeListener(searchFocusChangeListener);
+
         searchResultLayout = (LinearLayout) searchView.findViewById(R.id.search_result);
         ListView poiListView = (ListView) searchView.findViewById(R.id.poi_list_view);
         poiListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -285,7 +287,6 @@ public class StoreMapFragment extends Fragment  {
     private MarkerEventListener markerEventListener = new MarkerEventListener() {
         @Override
         public void onMarkerTap( View v, int x, int y ) {
-            //Toast.makeText(context.getApplicationContext(), "You tapped a pin: " + String.valueOf(x) + "," + String.valueOf(y) + "!", Toast.LENGTH_LONG).show();
             if(v.getTag() != null && v.getTag() instanceof String) {
                 Point destinationPoint = Constants.offerPointMap.get(v.getTag());
                 if(destinationPoint != null) {
@@ -351,7 +352,6 @@ public class StoreMapFragment extends Fragment  {
 
     /**
      * This is a convenience method to moveToAndCenter after layout (which won't happen if called directly in onCreate
-     * see https://github.com/moagrius/TileView/wiki/FAQ
      */
     public void frameTo( final double x, final double y ) {
         getTileView().post(new Runnable() {

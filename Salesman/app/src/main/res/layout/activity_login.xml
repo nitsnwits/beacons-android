@@ -39,7 +39,8 @@
         android:drawablePadding="10dp"
         style="@style/Base.TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
+        android:layout_marginRight="20dp"
+        android:text="jinali@gmail.com">
         <requestFocus />
     </EditText>
 
@@ -57,7 +58,8 @@
         style="@style/Base.TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
+        android:layout_marginRight="20dp"
+        android:text="123">
 
     </EditText>
 

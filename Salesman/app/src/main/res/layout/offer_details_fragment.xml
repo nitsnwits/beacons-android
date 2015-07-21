@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="220dp"
         android:id="@+id/offerImage"
-        android:src="@drawable/offer1" />
+       />
     <ImageView
         android:id="@+id/backBtn"
 

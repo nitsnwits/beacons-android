@@ -22,6 +22,7 @@ import cmpe295.sjsu.edu.salesman.algorithm.Constants;
 import cmpe295.sjsu.edu.salesman.pojo.Offer;
 import cmpe295.sjsu.edu.salesman.pojo.OfferResponse;
 import cmpe295.sjsu.edu.salesman.pojo.Point;
+import cmpe295.sjsu.edu.salesman.utils.ImageLoadTask;
 
 /**
  * Created by jijhaver on 6/25/15.
@@ -73,6 +74,9 @@ public class OfferDetailsFragment  extends Fragment {
         discount.setText(offer.getDiscount());
         TextView originalPrice = (TextView) rootView.findViewById(R.id.originalPrice);
         originalPrice.setText(offer.getOriginalPrice());
+        ImageView offerImage = (ImageView)rootView.findViewById(R.id.offerImage);
+        new ImageLoadTask(offer.getUrl(), offerImage).execute();
+
     }
 
     private void navigateToStoreMap() {

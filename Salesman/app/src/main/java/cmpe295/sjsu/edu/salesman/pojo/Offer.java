@@ -14,9 +14,11 @@ public class Offer {
     private String offerDescription;
     private String discount;
     private String offerPrice;
+    private float x;
+    private float y;
 
 
-    public Offer(String name, String originalPrice, String url, String offerId, String offerDescription, String discount,String offerPrice) {
+    public Offer(String name, String originalPrice, String url, String offerId, String offerDescription, String discount,String offerPrice,float x, float y) {
         this.name = name;
         this.originalPrice = originalPrice;
 
@@ -25,6 +27,8 @@ public class Offer {
         this.offerDescription = offerDescription;
         this.discount = discount;
         this.offerPrice = offerPrice;
+        this.x = x;
+        this.y = y;
     }
 
     public String getOriginalPrice() {
@@ -88,6 +92,23 @@ public class Offer {
     public void setOfferPrice(String offerPrice) {
         this.offerPrice = offerPrice;
     }
+
+    public float getX() {
+        return x;
+    }
+
+    public void setX(float x) {
+        this.x = x;
+    }
+
+    public float getY() {
+        return y;
+    }
+
+    public void setY(float y) {
+        this.y = y;
+    }
+
 
 
 

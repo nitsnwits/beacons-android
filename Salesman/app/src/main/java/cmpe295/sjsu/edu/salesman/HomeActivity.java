@@ -56,15 +56,15 @@ public class HomeActivity extends Activity  implements NavDrawerAdapter.OnItemCl
 
     // Beacon
     private StoreMapFragment storeMapFragment;
-    private static BeaconManager beaconManager;
+    //private static BeaconManager beaconManager;
     private static final String TAG = HomeActivity.class.getSimpleName();
     private static final int REQUEST_ENABLE_BT = 1234;
 
     private static final Region ALL_ESTIMOTE_BEACONS_REGION = new Region("rid", null, null, null);
 
-    public static BeaconManager getBeaconManager(){
+    /* public static BeaconManager getBeaconManager(){
         return beaconManager;
-    }
+    } */
 
     public StoreMapFragment getStoreMapFragment(){
         return storeMapFragment;
@@ -120,7 +120,7 @@ public class HomeActivity extends Activity  implements NavDrawerAdapter.OnItemCl
 
         // Initialize beacons
         // Configure BeaconManager.
-        beaconManager = new BeaconManager(this);
+        //beaconManager = new BeaconManager(this);
         storeMapFragment = new StoreMapFragment();
 
         if (savedInstanceState == null) {
@@ -247,7 +247,7 @@ public class HomeActivity extends Activity  implements NavDrawerAdapter.OnItemCl
     protected void onStart(){
         super.onStart();
         // Check if device supports Bluetooth Low Energy.
-        if (!beaconManager.hasBluetooth()) {
+        /*if (!beaconManager.hasBluetooth()) {
             Toast.makeText(this, "Device does not have Bluetooth Low Energy", Toast.LENGTH_LONG).show();
             return;
         }
@@ -260,17 +260,19 @@ public class HomeActivity extends Activity  implements NavDrawerAdapter.OnItemCl
         }else {
            connectToService();
         }
+        */
     }
 
     @Override
     protected void onStop(){
-        try{
+        /*try{
             beaconManager.stopRanging(ALL_ESTIMOTE_BEACONS_REGION);
         }
         catch (RemoteException e){
             Log.d(TAG, "Error while stopping ranging", e);
-        }
+        }*/
         super.onStop();
+
     }
 
     @Override
@@ -287,7 +289,7 @@ public class HomeActivity extends Activity  implements NavDrawerAdapter.OnItemCl
     }
 
     private void connectToService(){
-        beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
+        /*beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
             @Override
             public void onServiceReady() {
                 try {
@@ -298,6 +300,7 @@ public class HomeActivity extends Activity  implements NavDrawerAdapter.OnItemCl
                 }
             }
         });
+        */
     }
 
 

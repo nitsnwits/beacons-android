@@ -100,6 +100,7 @@ public class OfferFragment extends Fragment implements OfferCardAdapter.OnItemCl
                         }
                         */
 
+                   // offers.add(new Offer(offerResponse.getProduct().getName(), Double.toString(offerResponse.getProduct().getPrice()), Color.parseColor("#d32f2f"), offerResponse.getProduct().getImage()));
                     offers.add(new Offer(offerResponse.getProduct().getName(), Float.toString(offerResponse.getProduct().getPrice()), offerResponse.getProduct().getImage(), offerResponse.getOfferId(), offerResponse.getProduct().getDescription(), offerResponse.getDiscount(), Float.toString(offerResponse.getOfferPrice()),offerResponse.getCategory().getxCoord(),offerResponse.getCategory().getyCoord()));
                 }
 

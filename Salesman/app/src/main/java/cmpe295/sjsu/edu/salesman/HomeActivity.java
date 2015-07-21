@@ -34,6 +34,7 @@ import com.estimote.sdk.Region;
 import cmpe295.sjsu.edu.salesman.adapters.NavDrawerAdapter;
 import cmpe295.sjsu.edu.salesman.fragments.AboutSalesmanFragment;
 import cmpe295.sjsu.edu.salesman.fragments.OfferFragment;
+import cmpe295.sjsu.edu.salesman.fragments.ProductFragment;
 import cmpe295.sjsu.edu.salesman.fragments.SettingsFragment;
 import cmpe295.sjsu.edu.salesman.fragments.StoreMapFragment;
 
@@ -48,6 +49,7 @@ public class HomeActivity extends Activity  implements NavDrawerAdapter.OnItemCl
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
     private String[] mMenuTitles;
+
 
 
     SharedPreferences sharedpreferences ;
@@ -185,12 +187,15 @@ public class HomeActivity extends Activity  implements NavDrawerAdapter.OnItemCl
                 fragment = new OfferFragment();
                 break;
             case 1:
-                fragment = new StoreMapFragment();
+                fragment = new ProductFragment();
                 break;
             case 2:
-                fragment = new SettingsFragment();
+                fragment = new StoreMapFragment();
                 break;
             case 3:
+                fragment = new SettingsFragment();
+                break;
+            case 4:
                 fragment = new AboutSalesmanFragment();
                 break;
             default:

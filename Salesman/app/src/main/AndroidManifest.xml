@@ -36,6 +36,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
             <meta-data
                 android:name="com.google.android.gms.version"
                 android:value="1.3.0" />
@@ -43,12 +44,15 @@
         <activity
             android:name=".LoginActivity"
             android:gravity="center_horizontal"
+
+            android:label="@string/app_name" >
             android:label="@string/app_name"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cmpe295.sjsu.edu.salesman.MainActivity" />
+
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"></action>
                 <category android:name="android.intent.category.DEFAULT"></category>
@@ -101,14 +105,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cmpe295.sjsu.edu.salesman.OfferActivity" />
         </activity>
-        <!--<activity
-            android:name=".NavigationActivity"
-            android:label="@string/title_activity_navigation"
-            android:parentActivityName=".OfferDetailActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="cmpe295.sjsu.edu.salesman.OfferDetailActivity" />
-        </activity>-->
+
+
         <!--<activity-->
             <!--android:name=".PhotoUploadActivity"-->
             <!--android:label="@string/title_activity_photo_upload"-->
@@ -123,6 +121,38 @@
 
 
 
+        <activity
+            android:name=".ProductActivity"
+            android:label="@string/title_activity_product"
+            android:parentActivityName=".HomeActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable">
+            </meta-data>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                
+                android:value="cmpe295.sjsu.edu.salesman.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".ProductDetailActivity"
+            android:label="@string/title_activity_product_detail"
+            android:parentActivityName=".ProductActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cmpe295.sjsu.edu.salesman.ProductActivity" />
+        </activity>
+        <activity
+            android:name=".ProductNavigationActivity"
+            android:label="@string/title_activity_product_navigation"
+            android:parentActivityName=".ProductDetailActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cmpe295.sjsu.edu.salesman.ProductDetailActivity" />
+        </activity>
     </application>
 
 </manifest>

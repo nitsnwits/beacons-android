@@ -38,6 +38,7 @@ public class PickYourFavouritesActivity extends Activity {
         userSharedpreferences = getBaseContext().getSharedPreferences("userPrefs",0);
         userId = userSharedpreferences.getString("userId","default");
         accessToken = userSharedpreferences.getString("accessToken","default");
+
         RestClient.get().getCategories(accessToken, new Callback<ArrayList<categoryResponse>>() {
             @Override
             public void success(ArrayList<categoryResponse> categoryResponses, Response response) {

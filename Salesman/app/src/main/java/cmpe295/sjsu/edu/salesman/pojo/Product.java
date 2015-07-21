@@ -1,7 +1,11 @@
 package cmpe295.sjsu.edu.salesman.pojo;
 
 /**
+<<<<<<< HEAD
+ * Created by Rucha on 7/10/15.
+=======
  * Created by jijhaver on 7/18/15.
+>>>>>>> 5d225cf5f2d1f64ffb2f857f0458091f378b7317
  */
 public class Product {
 
@@ -13,6 +17,18 @@ public class Product {
     private float price;
     private String productId;
     private long updated;
+
+    public Product(String categoryId, long created, String description, String image, String name, float price, String productId, long updated) {
+        this.categoryId = categoryId;
+        this.created = created;
+        this.description = description;
+        this.image = image;
+        this.name = name;
+        this.price = price;
+        this.productId = productId;
+        this.updated = updated;
+    }
+
 
     public String getCategoryId() {
         return categoryId;
@@ -59,7 +75,7 @@ public class Product {
     }
 
     public void setPrice(float price) {
-        this.price = price;
+
     }
 
     public String getProductId() {

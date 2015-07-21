@@ -7,6 +7,8 @@
     <string name="title_activity_user_registration">UserRegistrationActivity</string>
     <string name="username">E-mail</string>
 
+    <string name="search_title">Search products</string>
+
 
     <string name="button_login">Login</string>
     <string name="hello_world">Hello world!</string>
@@ -26,11 +28,18 @@
     <string-array name="nav_drawer_items">
 
         <item>Offers</item>
+        <item>Products</item>
         <item>Store Map</item>
         <item>Settings</item>
         <item>About Salesman</item>
     </string-array>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+
+    <!--<string name="title_activity_main">MainActivity</string>-->
+    <string name="title_activity_product">ProductActivity</string>
+    <string name="title_activity_product_detail">ProductDetailActivity</string>
+    <string name="title_activity_product_navigation">ProductNavigationActivity</string>
+
     <string name="title_activity_main">Salesman</string>
 </resources>

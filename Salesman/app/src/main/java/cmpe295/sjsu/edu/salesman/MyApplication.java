@@ -26,7 +26,7 @@ import cmpe295.sjsu.edu.salesman.utils.ForegroundCheckTask;
  */
 public class MyApplication extends Application {
 
-    private BeaconManager beaconManager;
+    private static BeaconManager beaconManager;
     private NotificationManager notificationManager;
     private static final int NOTIFICATION_ID = 123;
     private static final String TAG = MyApplication.class.getSimpleName();
@@ -34,7 +34,9 @@ public class MyApplication extends Application {
     private boolean enteredRegion;
     private  boolean foregroud;
 
-
+    public static BeaconManager getBeaconManager(){
+        return beaconManager;
+    }
 
 
     @Override

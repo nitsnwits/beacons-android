@@ -18,6 +18,7 @@ import java.util.Random;
 
 import cmpe295.sjsu.edu.salesman.HomeActivity;
 import cmpe295.sjsu.edu.salesman.R;
+import cmpe295.sjsu.edu.salesman.algorithm.Constants;
 import cmpe295.sjsu.edu.salesman.pojo.Offer;
 import cmpe295.sjsu.edu.salesman.pojo.OfferResponse;
 import cmpe295.sjsu.edu.salesman.pojo.Point;
@@ -77,7 +78,7 @@ public class OfferDetailsFragment  extends Fragment {
     private void navigateToStoreMap() {
 
         StoreMapFragment mapFragment = ((HomeActivity)(this.getActivity())).getStoreMapFragment();
-        mapFragment.addLocationMarker(4d,3d); //Added by Jinali
+        mapFragment.setPoiPoint(Constants.BOOKS_OFFER_POINT);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();
         ft.addToBackStack(null);

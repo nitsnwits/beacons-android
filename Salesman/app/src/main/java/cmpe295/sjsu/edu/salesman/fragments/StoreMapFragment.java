@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cmpe295.sjsu.edu.salesman.HomeActivity;
+import cmpe295.sjsu.edu.salesman.MyApplication;
 import cmpe295.sjsu.edu.salesman.R;
 import cmpe295.sjsu.edu.salesman.algorithm.Constants;
 import cmpe295.sjsu.edu.salesman.algorithm.LocationAlgorithm;
@@ -68,6 +69,8 @@ public class StoreMapFragment extends Fragment  {
     private ImageButton menuButton;
     private ImageButton backButton;
     private EditText searchEditText;
+    private Point poiPoint;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -122,7 +125,7 @@ public class StoreMapFragment extends Fragment  {
         pointLocationView.setImageResource(R.drawable.marker_icon );
 
         // Configure BeaconManager.
-        beaconManager = HomeActivity.getBeaconManager();
+        beaconManager = MyApplication.getBeaconManager();
         locationAlgorithm = new LocationAlgorithm();
         beaconManager.setRangingListener(new BeaconManager.RangingListener() {
             @Override
@@ -140,6 +143,11 @@ public class StoreMapFragment extends Fragment  {
             }
         });
 
+        if (poiPoint != null){
+            addLocationMarker(poiPoint.getX(), poiPoint.getY());
+            poiPoint = null;
+            frameTo(pointLocationView);
+        }
         relativeLayout.addView(tileView);
         addMapIcons(inflater, container);
         return relativeLayout;
@@ -270,7 +278,6 @@ public class StoreMapFragment extends Fragment  {
         public void onClick(View v) {
             Point userLocation = locationAlgorithm.getUserLocation();
             if(userLocation != null)
-                //frameTo(userLocation.getX(), userLocation.getY());
                 frameTo(userLocationView);
         }
     };
@@ -333,6 +340,15 @@ public class StoreMapFragment extends Fragment  {
         return tileView;
     }
 
+    public Point getPoiPoint() {
+        return poiPoint;
+    }
+
+    public void setPoiPoint(Point poiPoint) {
+        this.poiPoint = poiPoint;
+    }
+
+
     /**
      * This is a convenience method to moveToAndCenter after layout (which won't happen if called directly in onCreate
      * see https://github.com/moagrius/TileView/wiki/FAQ
@@ -354,6 +370,8 @@ public class StoreMapFragment extends Fragment  {
             }
         });
     }
+
+
 }
 
 

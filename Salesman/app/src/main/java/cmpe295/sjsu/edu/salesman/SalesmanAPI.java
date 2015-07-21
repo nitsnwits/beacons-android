@@ -5,11 +5,8 @@ package cmpe295.sjsu.edu.salesman;
 import java.util.ArrayList;
 import java.util.List;
 
-<<<<<<< HEAD
 import cmpe295.sjsu.edu.salesman.pojo.Product;
-=======
 import cmpe295.sjsu.edu.salesman.pojo.OfferResponse;
->>>>>>> 5d225cf5f2d1f64ffb2f857f0458091f378b7317
 import retrofit.Callback;
 import retrofit.http.Body;
 import retrofit.http.EncodedPath;
@@ -62,11 +59,7 @@ public interface SalesmanAPI {
     @GET("/users/{userId}/verify")
     public void verifyUser(@Path("userId")String userId,Callback<String> cb);
 
-<<<<<<< HEAD
-    //Get the products on the product fragment
-    @GET("/products/search")
-    public void searchProduct(@Header("Authorization") String accessToken,@Query("query") String query,Callback<ArrayList<Product>> cb);
-=======
+
     //Get all offers
 
     @GET("/offers")
@@ -75,7 +68,12 @@ public interface SalesmanAPI {
     //6. Get Offer Details
     @GET("/offers/{offerId}")
     public  void getOfferDetails(@Path("offerId")String offerId, Callback<OfferResponse> cb);
->>>>>>> 5d225cf5f2d1f64ffb2f857f0458091f378b7317
+
+    //7.Get the products on the product fragment
+    @GET("/products/search")
+    public void searchProduct(@Header("Authorization") String accessToken,@Query("query") String query,Callback<ArrayList<Product>> cb);
+
+
 
 
 }

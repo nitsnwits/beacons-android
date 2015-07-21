@@ -14,12 +14,11 @@ public class Product {
     private String description;
     private String image;
     private String name;
-<<<<<<< HEAD
     private double price;
     private String productId;
-    private String updated;
+    private long updated;
 
-    public Product(String categoryId, long created, String description, String image, String name, double price, String productId, String updated) {
+    public Product(String categoryId, long created, String description, String image, String name, double price, String productId, long updated) {
         this.categoryId = categoryId;
         this.created = created;
         this.description = description;
@@ -29,11 +28,7 @@ public class Product {
         this.productId = productId;
         this.updated = updated;
     }
-=======
-    private float price;
-    private String productId;
-    private long updated;
->>>>>>> 5d225cf5f2d1f64ffb2f857f0458091f378b7317
+
 
     public String getCategoryId() {
         return categoryId;
@@ -75,20 +70,12 @@ public class Product {
         this.name = name;
     }
 
-<<<<<<< HEAD
     public double getPrice() {
         return price;
     }
 
     public void setPrice(double price) {
-=======
-    public float getPrice() {
-        return price;
-    }
 
-    public void setPrice(float price) {
->>>>>>> 5d225cf5f2d1f64ffb2f857f0458091f378b7317
-        this.price = price;
     }
 
     public String getProductId() {
@@ -99,15 +86,6 @@ public class Product {
         this.productId = productId;
     }
 
-<<<<<<< HEAD
-    public String getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(String updated) {
-        this.updated = updated;
-    }
-=======
     public long getUpdated() {
         return updated;
     }
@@ -118,5 +96,4 @@ public class Product {
 
 
 
->>>>>>> 5d225cf5f2d1f64ffb2f857f0458091f378b7317
 }

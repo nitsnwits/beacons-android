@@ -14,6 +14,16 @@ import cmpe295.sjsu.edu.salesman.R;
  */
 public class ProductDetailsFragment extends Fragment {
 
+    private String productId;
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

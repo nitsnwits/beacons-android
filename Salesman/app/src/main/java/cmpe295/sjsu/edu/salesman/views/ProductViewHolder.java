@@ -11,12 +11,13 @@ import cmpe295.sjsu.edu.salesman.R;
 /**
  * Created by Rucha on 7/10/15.
  */
-public class ProductViewHolder extends RecyclerView.ViewHolder{
+public class ProductViewHolder extends RecyclerView.ViewHolder {
 
     public TextView titleText;
     public TextView contentText;
     public CardView card;
     public ImageView productImage;
+
 
     public ProductViewHolder(View itemView) {
         super(itemView);
@@ -25,7 +26,10 @@ public class ProductViewHolder extends RecyclerView.ViewHolder{
         productImage = (ImageView) itemView.findViewById(R.id.productImage);
         card = (CardView) itemView;
 
-
     }
+
+
+
+
 
 }

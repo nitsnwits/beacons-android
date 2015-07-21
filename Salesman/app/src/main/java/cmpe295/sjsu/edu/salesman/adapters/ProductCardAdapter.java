@@ -22,6 +22,7 @@ import java.util.List;
 import cmpe295.sjsu.edu.salesman.R;
 import cmpe295.sjsu.edu.salesman.pojo.Offer;
 import cmpe295.sjsu.edu.salesman.pojo.Product;
+import cmpe295.sjsu.edu.salesman.utils.ImageLoadTask;
 import cmpe295.sjsu.edu.salesman.views.OfferViewHolder;
 import cmpe295.sjsu.edu.salesman.views.ProductViewHolder;
 
@@ -32,9 +33,9 @@ import static com.google.api.client.http.AbstractInputStreamContent.copy;
  */
 public class ProductCardAdapter extends RecyclerView.Adapter<ProductViewHolder> {
 
-    private static final int IO_BUFFER_SIZE = 4*1024;
+
     private List<Product> products;
-    private OnItemClickListener mListener;
+    private static OnItemClickListener mListener;
     Bitmap bmp = null;
     InputStream in = null;
     BufferedOutputStream out = null;
@@ -65,27 +66,18 @@ public class ProductCardAdapter extends RecyclerView.Adapter<ProductViewHolder> 
     public void onBindViewHolder(ProductViewHolder productViewHolder,final int position) {
         Product product = products.get(position);
 
+
+        //System.out.println(product.getProductId());
         productViewHolder.titleText.setText(product.getName());
-        productViewHolder.contentText.setText(product.getDescription());
-try{
-        in = new BufferedInputStream(new URL(product.getImage()).openStream(), IO_BUFFER_SIZE);
-        final ByteArrayOutputStream dataStream = new ByteArrayOutputStream();
-        out = new BufferedOutputStream(dataStream, IO_BUFFER_SIZE);
-        copy(in, out);
-        out.flush();
+        productViewHolder.contentText.setText(Double.toString(product.getPrice()));
 
-        final byte[] data = dataStream.toByteArray();
-        BitmapFactory.Options options = new BitmapFactory.Options();
+        new ImageLoadTask(product.getImage(), productViewHolder.productImage).execute();
 
-        bmp = BitmapFactory.decodeByteArray(data, 0, data.length,options);
-        productViewHolder.productImage.setImageBitmap(bmp);
-        } catch (IOException e) {
-                     System.out.println("Could not load Bitmap from: " + product.getImage());
-        }
         productViewHolder.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mListener.onClick(view, position);
+
             }
         });
 

@@ -64,10 +64,7 @@ public class ProductFragment extends Fragment implements ProductCardAdapter.OnIt
         View rootView = inflater.inflate(R.layout.fragment_products, container, false);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerList);
         getActivity().getActionBar().show();
-//        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
-//        llm.setOrientation(LinearLayoutManager.VERTICAL);
-//        recyclerView.setLayoutManager(llm);
-//        recyclerView.setAdapter(new ProductCardAdapter(generateProducts(), this));
+
         //get the search text from edittext
         searchET = (EditText) rootView.findViewById(R.id.searchET);
 
@@ -105,6 +102,8 @@ public class ProductFragment extends Fragment implements ProductCardAdapter.OnIt
     private void selectProduct(int position) {
 
         ProductDetailsFragment productDetailsFragment = new ProductDetailsFragment();
+        // productDetailsFragment.setProductId();
+        System.out.println("Product Id for product details is ::" +  productDetailsFragment.getProductId());
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();
         ft.addToBackStack(null);
@@ -113,7 +112,7 @@ public class ProductFragment extends Fragment implements ProductCardAdapter.OnIt
     }
 
     public List<Product> getProducts(){
-        ProductCardAdapter.OnItemClickListener mListener = null;
+        final ProductCardAdapter.OnItemClickListener mListener = null;
 
         String query = searchET.getText().toString();
         System.out.println("User entered to search for::" + query);
@@ -124,20 +123,29 @@ public class ProductFragment extends Fragment implements ProductCardAdapter.OnIt
             public void success(ArrayList<Product> products, Response response) {
 
                 for(Product product : products) {
-                    Toast.makeText(getActivity(), product.getName(), Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getActivity(), product.getName(), Toast.LENGTH_SHORT).show();
                     productList.add(product);
                 }
-
                 LinearLayoutManager llm = new LinearLayoutManager(getActivity());
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(llm);
-        recyclerView.setAdapter(new ProductCardAdapter(generateProducts(), new ProductCardAdapter.OnItemClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-                finalMListener.onClick(view, position);
-            }
+                llm.setOrientation(LinearLayoutManager.VERTICAL);
+                recyclerView.setLayoutManager(llm);
+                recyclerView.setAdapter(new ProductCardAdapter(generateProducts(), new ProductCardAdapter.OnItemClickListener() {
+                    @Override
+                    public void onClick(View view, int position) {
+                        ProductDetailsFragment productDetailsFragment = new ProductDetailsFragment();
+                        // productDetailsFragment.setProductId();
+                        
+                        System.out.println("Product Id for product details is ::" +  productDetailsFragment.getProductId());
+                        FragmentManager fragmentManager = getFragmentManager();
+                        FragmentTransaction ft = fragmentManager.beginTransaction();
+                        ft.addToBackStack(null);
+                        ft.replace(R.id.content_frame, productDetailsFragment);
+                        ft.commit();
+                    }
         }));
             }
+
+
 
             @Override
             public void failure(RetrofitError error) {

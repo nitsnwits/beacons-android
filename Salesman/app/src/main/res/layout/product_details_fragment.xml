@@ -1,16 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
-    <TextView android:text="Product Details" android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tmpText"/>
-    <Button
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/productDetailsLayout"
+    android:layout_height="match_parent"
+    android:background="@color/background_floating_material_light">
+
+    <!--<TextView android:text="Product Details" android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/tmpText"/>-->
+    <!--<Button-->
+        <!--android:id="@+id/backBtn"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/tmpText"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="50dp"-->
+        <!--android:onClick="goBackToProducts"-->
+        <!--android:text="Back" />-->
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:id="@+id/productImage"
+        />
+    <ImageView
         android:id="@+id/backBtn"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_margin="15dp"
+        android:onClick="goBackToProductSearch"
+        android:src="@drawable/white_arrow" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_below="@+id/productImage"
+        android:layout_alignParentStart="false"
+        android:background="@color/white"
+        android:id="@+id/relativeLayout">
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tmpText"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="18dp"
+        android:id="@+id/productTitle"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:textStyle="normal"
+        android:padding="10dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Price"
+        android:id="@+id/productPriceTitle"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/productTitle"
+        android:paddingStart="10dp"
+        android:password="false" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/productPrice"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:paddingStart="10dp"
+            android:paddingBottom="10dp" />
+    </RelativeLayout>
+    <Space
+        android:id="@+id/spacer"
+        android:layout_below="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="40px"
+        android:layout_marginLeft="10px"
+        android:paddingLeft="30px" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/productDesc"
+        android:layout_height="350px"
+        android:layout_below="@+id/spacer"
+        android:layout_alignParentStart="true"
+        android:background="@color/white"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/aboutThisProduct"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:text="About this Product"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/productDescription"
+            android:layout_below="@+id/aboutThisProduct" />
+    </RelativeLayout>
+    <!-- Footer aligned to bottom -->
+    <Space
+        android:id="@+id/spacer2"
+        android:layout_below="@+id/productDesc"
+        android:layout_width="match_parent"
+        android:layout_height="40px"
+        android:layout_marginLeft="10px"
+        android:paddingLeft="30px" />
+    <RelativeLayout
+        android:background="@color/white"
+        android:id="@+id/footer"
+        android:layout_below="@+id/spacer2"
+        android:layout_width="match_parent"
+        android:layout_height="180px"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:onClick="goBackToProducts"
-        android:text="Back" />
-</LinearLayout>
+        android:weightSum="1">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Inspired by Your Shopping Trends"
+            android:id="@+id/recommendedProducts"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:textStyle="bold"
+           />
+    </RelativeLayout>
+
+</RelativeLayout>

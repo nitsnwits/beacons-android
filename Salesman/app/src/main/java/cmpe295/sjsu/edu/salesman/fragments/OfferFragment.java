@@ -100,11 +100,8 @@ public class OfferFragment extends Fragment implements OfferCardAdapter.OnItemCl
                         }
                         */
 
-<<<<<<< HEAD
-                    offers.add(new Offer(offerResponse.getProduct().getName(), Double.toString(offerResponse.getProduct().getPrice()), Color.parseColor("#d32f2f"), offerResponse.getProduct().getImage()));
-=======
+                   // offers.add(new Offer(offerResponse.getProduct().getName(), Double.toString(offerResponse.getProduct().getPrice()), Color.parseColor("#d32f2f"), offerResponse.getProduct().getImage()));
                     offers.add(new Offer(offerResponse.getProduct().getName(), Float.toString(offerResponse.getProduct().getPrice()), offerResponse.getProduct().getImage(), offerResponse.getOfferId(), offerResponse.getProduct().getDescription(), offerResponse.getDiscount(), Float.toString(offerResponse.getOfferPrice()),offerResponse.getCategory().getxCoord(),offerResponse.getCategory().getyCoord()));
->>>>>>> ef22aebf146dffe488fc6c1a90753062a4b98c67
                 }
 
                 // Note that results are not delivered on UI thread.

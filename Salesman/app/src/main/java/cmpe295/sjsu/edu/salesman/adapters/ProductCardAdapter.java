@@ -35,7 +35,7 @@ public class ProductCardAdapter extends RecyclerView.Adapter<ProductViewHolder> 
 
 
     private List<Product> products;
-    private static OnItemClickListener mListener;
+    private OnItemClickListener mListener;
     Bitmap bmp = null;
     InputStream in = null;
     BufferedOutputStream out = null;
@@ -65,11 +65,8 @@ public class ProductCardAdapter extends RecyclerView.Adapter<ProductViewHolder> 
     @Override
     public void onBindViewHolder(ProductViewHolder productViewHolder,final int position) {
         Product product = products.get(position);
-
-
-        //System.out.println(product.getProductId());
         productViewHolder.titleText.setText(product.getName());
-        productViewHolder.contentText.setText(Double.toString(product.getPrice()));
+        productViewHolder.contentText.setText(Float.toString(product.getPrice()));
 
         new ImageLoadTask(product.getImage(), productViewHolder.productImage).execute();
 

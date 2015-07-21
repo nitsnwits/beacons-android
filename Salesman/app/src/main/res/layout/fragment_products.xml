@@ -8,17 +8,12 @@
     android:background="#ffe6e6e6"
     tools:context="cmpe295.sjsu.edu.salesman.ProductActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-
     <EditText android:id="@+id/searchET"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:imeOptions="actionSearch"
         android:inputType="text"
+        android:layout_alignParentTop="true"
         android:hint="@string/search_title"/>
 
     <ImageButton android:id="@+id/searchProductButton"
@@ -28,5 +23,10 @@
         android:layout_alignParentRight="true"
         android:onClick="getProducts"
        />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/searchET"/>
 
 </RelativeLayout>

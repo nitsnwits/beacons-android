@@ -53,6 +53,9 @@ public class ProductFragment extends Fragment implements ProductCardAdapter.OnIt
     final List<Product> productList = new ArrayList<Product>();
     RecyclerView recyclerView;
 
+    //adding part for the recommendations
+    static final ArrayList<Product> recommendationList = new ArrayList<Product>();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -84,15 +87,14 @@ public class ProductFragment extends Fragment implements ProductCardAdapter.OnIt
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(llm);
-        recyclerView.setAdapter(new ProductCardAdapter(generateProducts(), this));
+        recyclerView.setAdapter(new ProductCardAdapter(generateProducts(),this));
 
         return rootView;
     }
 
 
-
     private List<Product> generateProducts() {
-        System.out.println("I am in generate Products");
+      //  System.out.println("I am in generate Products");
         System.out.println(productList.size());
         return productList;
     }
@@ -106,8 +108,14 @@ public class ProductFragment extends Fragment implements ProductCardAdapter.OnIt
 
         ProductDetailsFragment productDetailsFragment = new ProductDetailsFragment();
         Product selectedProduct = productList.get(position);
-        System.out.println("Selected product______"+selectedProduct.getProductId());
+        System.out.println("Selected product______" + selectedProduct.getProductId());
         productDetailsFragment.setProduct(selectedProduct);
+
+        //Get the recommendations here
+        getRecommendations(selectedProduct.getProductId());
+        System.out.println("Recommendation size ::" + recommendationList.size());
+        productDetailsFragment.setRecommendationList(recommendationList);
+
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();
         ft.addToBackStack(null);
@@ -140,21 +148,6 @@ public class ProductFragment extends Fragment implements ProductCardAdapter.OnIt
                         setProductsInList(productList);
                     }
                 });
-
-                // recyclerView.setAdapter(new ProductCardAdapter(productList,this));
-//                recyclerView.setAdapter(new ProductCardAdapter(generateProducts(), new ProductCardAdapter.OnItemClickListener() {
-//                    @Override
-//                    public void onClick(View view, int position) {
-//                        ProductDetailsFragment productDetailsFragment = new ProductDetailsFragment();
-//
-//                        System.out.println("Product Id for product details is ::" +  productDetailsFragment.getProductId());
-//                        FragmentManager fragmentManager = getFragmentManager();
-//                        FragmentTransaction ft = fragmentManager.beginTransaction();
-//                        ft.addToBackStack(null);
-//                        ft.replace(R.id.content_frame, productDetailsFragment);
-//                        ft.commit();
-//                    }
-//        }));
             }
 
 
@@ -191,6 +184,55 @@ public class ProductFragment extends Fragment implements ProductCardAdapter.OnIt
 
     private void setProductsInList(List<Product> productList) {
         recyclerView.setAdapter(new ProductCardAdapter(productList, this));
+    }
+
+    public void getRecommendations(String productId){
+
+        RestClient.get().getRecommendations(productId, new Callback<ArrayList<Product>>() {
+            @Override
+            public void success(ArrayList<Product> products, Response response) {
+                System.out.println("I am in success");
+                System.out.println(products.size());
+                for(Product product : products ){
+                    recommendationList.add(product);
+                }
+
+                System.out.println("Recommendations for you are ::" + recommendationList.size());
+                for(Product p : recommendationList){
+                    System.out.println("You can buy::" + p.getName());
+                }
+
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                RestError body = (RestError) error.getBodyAs(RestError.class);
+                //dynamic error handling
+                if (body.errorCode == 400) {
+                    Toast.makeText(getActivity(), body.getErrorMessage(),
+                            Toast.LENGTH_SHORT).show();
+                }
+                if (body.errorCode == 401) {
+                    Toast.makeText(getActivity(), body.getErrorMessage(),
+                            Toast.LENGTH_SHORT).show();
+                }
+                if (body.errorCode == 404) {
+                    Toast.makeText(getActivity(), body.getErrorMessage(),
+                            Toast.LENGTH_SHORT).show();
+                }
+                if (body.errorCode == 500) {
+                    Toast.makeText(getActivity(), body.getErrorMessage(),
+                            Toast.LENGTH_SHORT).show();
+                }
+                if (body.errorCode == 503) {
+                    Toast.makeText(getActivity(), body.getErrorMessage(),
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+
     }
 
 

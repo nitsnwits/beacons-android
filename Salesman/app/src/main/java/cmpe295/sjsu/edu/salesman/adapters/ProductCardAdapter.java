@@ -33,6 +33,8 @@ import static com.google.api.client.http.AbstractInputStreamContent.copy;
  */
 public class ProductCardAdapter extends RecyclerView.Adapter<ProductViewHolder> {
 
+    //adding for recommendation
+    //private ArrayList<Product> recommendationList;
 
     private List<Product> products;
     private OnItemClickListener mListener;
@@ -51,6 +53,7 @@ public class ProductCardAdapter extends RecyclerView.Adapter<ProductViewHolder> 
         this.products = new ArrayList<Product>();
         this.mListener = listener;
         this.products.addAll(products);
+       // this.recommendationList.addAll(recommendationList);
     }
 
     @Override

@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import cmpe295.sjsu.edu.salesman.R;
 import cmpe295.sjsu.edu.salesman.pojo.Product;
 import cmpe295.sjsu.edu.salesman.utils.ImageLoadTask;
@@ -20,6 +22,15 @@ public class ProductDetailsFragment extends Fragment {
 
     private String productId;
     private Product product;
+    private ArrayList<Product> recommendationList;
+
+    public ArrayList<Product> getRecommendationList() {
+        return recommendationList;
+    }
+
+    public void setRecommendationList(ArrayList<Product> recommendationList) {
+        this.recommendationList = recommendationList;
+    }
 
     public Product getProduct() {
         return product;
@@ -57,6 +68,7 @@ public class ProductDetailsFragment extends Fragment {
 
 
     private void setProductValues(View rootView){
+        System.out.println("Recommendations in product details::" + recommendationList.size());
         TextView productTitle = (TextView)rootView.findViewById(R.id.productTitle);
         productTitle.setText(product.getName());
         TextView productPrice = (TextView)rootView.findViewById(R.id.productPrice);

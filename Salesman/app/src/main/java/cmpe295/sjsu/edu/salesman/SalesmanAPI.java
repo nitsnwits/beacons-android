@@ -73,7 +73,8 @@ public interface SalesmanAPI {
     @GET("/products/search")
     public void searchProduct(@Header("Authorization") String accessToken,@Query("query") String query,Callback<ArrayList<Product>> cb);
 
-
-
+    //8.Get recommmendations
+    @GET("/products/{productId}/recommendations")
+    public void getRecommendations(@Path("productId") String productId,Callback<ArrayList<Product>> cb);
 
 }

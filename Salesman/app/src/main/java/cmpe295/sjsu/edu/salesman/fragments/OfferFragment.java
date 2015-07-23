@@ -20,6 +20,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+import cmpe295.sjsu.edu.salesman.MyApplication;
 import cmpe295.sjsu.edu.salesman.R;
 import cmpe295.sjsu.edu.salesman.RestClient;
 import cmpe295.sjsu.edu.salesman.RestError;
@@ -35,7 +36,7 @@ import retrofit.client.Response;
  */
 public class OfferFragment extends Fragment implements OfferCardAdapter.OnItemClickListener{
 
-    ArrayList<Offer> offers = new ArrayList<>();
+    ArrayList<Offer> offers;
     private OfferResponse offerDetails;
     private Activity activity;
     private RecyclerView recyclerView;
@@ -44,6 +45,7 @@ public class OfferFragment extends Fragment implements OfferCardAdapter.OnItemCl
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        offers = MyApplication.getOffers();
         activity = this.getActivity();
         View rootView = inflater.inflate(R.layout.fragment_offers, container, false);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerList);
@@ -51,7 +53,16 @@ public class OfferFragment extends Fragment implements OfferCardAdapter.OnItemCl
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(llm);
-        generateOffers();
+        if (offers.isEmpty()) {
+            generateOffers();
+        }else {
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run(){
+                    setOffersInList(offers);
+                }
+            });
+        }
         return rootView;
     }
 
@@ -79,26 +90,7 @@ public class OfferFragment extends Fragment implements OfferCardAdapter.OnItemCl
                 System.out.println("-----Inside getOffers success--------" + offerResponses.size());
                 for (OfferResponse offerResponse : offerResponses) {
 
-                    // Bitmap bitmap = getBitmapFromURL(offerResponse.getProduct().getImage());
-                        /*try {
-                            URL url = new URL(offerResponse.getProduct().getImage());
 
-                                HttpGet httpRequest = null;
-                                httpRequest = new HttpGet(url.toURI());
-
-                                HttpClient httpclient = new DefaultHttpClient();
-                                HttpResponse httpResponse = (HttpResponse) httpclient.execute(httpRequest);
-
-                                HttpEntity entity = httpResponse.getEntity();
-                                BufferedHttpEntity b_entity = new BufferedHttpEntity(entity);
-                                InputStream input = b_entity.getContent();
-
-                                 bitmap = BitmapFactory.decodeStream(input);
-                        }
-                        catch(Exception ex) {
-                            ex.printStackTrace();
-                        }
-                        */
 
                    // offers.add(new Offer(offerResponse.getProduct().getName(), Double.toString(offerResponse.getProduct().getPrice()), Color.parseColor("#d32f2f"), offerResponse.getProduct().getImage()));
                     offers.add(new Offer(offerResponse.getProduct().getName(), Float.toString(offerResponse.getProduct().getPrice()), offerResponse.getProduct().getImage(), offerResponse.getOfferId(), offerResponse.getProduct().getDescription(), offerResponse.getDiscount(), Float.toString(offerResponse.getOfferPrice()),offerResponse.getCategory().getxCoord(),offerResponse.getCategory().getyCoord()));
@@ -141,12 +133,6 @@ public class OfferFragment extends Fragment implements OfferCardAdapter.OnItemCl
             }
         });
 
-       /* offers.add(new Offer("Hotel Grand Cotton Duvet Set", "$29.99", Color.parseColor("#d32f2f"),R.drawable.offer1));
-        offers.add(new Offer("JCPenny Portraits", "$19.99", Color.parseColor("#ff4081"),R.drawable.offer2));
-        offers.add(new Offer("Sun glasses", "$9.99", Color.parseColor("#7b1fa2"),R.drawable.offer3));
-        offers.add(new Offer("Eyelash Extensions", "$50", Color.parseColor("#536dfe"), R.drawable.offer4));
-        offers.add(new Offer("Down Alternative Blankets", "$19.99", Color.parseColor("#388e3c"), R.drawable.offer5));
-        offers.add(new Offer("3 - Piece Printed Quilt Sets", "$19.99", Color.parseColor("#ff5722"), R.drawable.offer6));*/
 
         return offers;
     }

@@ -15,9 +15,11 @@ import com.estimote.sdk.Beacon;
 import com.estimote.sdk.BeaconManager;
 import com.estimote.sdk.Region;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import cmpe295.sjsu.edu.salesman.pojo.Offer;
 import cmpe295.sjsu.edu.salesman.pojo.Point;
 import cmpe295.sjsu.edu.salesman.utils.ForegroundCheckTask;
 
@@ -33,6 +35,7 @@ public class MyApplication extends Application {
     private static final Region ALL_ESTIMOTE_BEACONS_REGION = new Region("rid", "B9407F30-F5F8-466E-AFF9-25556B57FE6D", 6472, 19249);
     private boolean enteredRegion;
     private  boolean foregroud;
+    private static ArrayList<Offer> offers = new ArrayList<>();
 
     public static BeaconManager getBeaconManager(){
         return beaconManager;
@@ -72,15 +75,13 @@ public class MyApplication extends Application {
                 System.out.println("Beacon Discovered");
                 try {
                     foregroud = new ForegroundCheckTask().execute(getApplicationContext()).get();
-                    System.out.println("Foreground______"+foregroud);
-                    if(!foregroud & !enteredRegion) {
+                    System.out.println("Foreground______" + foregroud);
+                    if (!foregroud & !enteredRegion) {
                         // Call Rest api with for beacon
                         postNotification("Welcome to Electronics Section");
                         enteredRegion = true;
                     }
-                }
-                catch(Exception e)
-                {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -118,6 +119,10 @@ public class MyApplication extends Application {
         });
     }
 
+
+    public static ArrayList<Offer> getOffers() {
+        return offers;
+    }
 
 }
 

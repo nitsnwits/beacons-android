@@ -32,6 +32,7 @@ import com.qozix.tileview.paths.DrawablePath;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import cmpe295.sjsu.edu.salesman.HomeActivity;
 import cmpe295.sjsu.edu.salesman.MyApplication;
@@ -39,6 +40,7 @@ import cmpe295.sjsu.edu.salesman.R;
 import cmpe295.sjsu.edu.salesman.algorithm.Constants;
 import cmpe295.sjsu.edu.salesman.algorithm.LocationAlgorithm;
 import cmpe295.sjsu.edu.salesman.algorithm.Utility;
+import cmpe295.sjsu.edu.salesman.pojo.Offer;
 import cmpe295.sjsu.edu.salesman.pojo.Point;
 
 /**
@@ -67,6 +69,9 @@ public class StoreMapFragment extends Fragment  {
     private ImageButton backButton;
     private EditText searchEditText;
     private Point poiPoint;
+    private ArrayList<String> poiListItems=new ArrayList<String>();
+    private ArrayList<String> offerListItems=new ArrayList<String>();
+    private ArrayList<ImageView> offersViewList = new ArrayList<>();
 
 
 
@@ -103,7 +108,7 @@ public class StoreMapFragment extends Fragment  {
         //addBeacon(0.75, 0.75);
 
         // add offers
-        addOffersMarker();
+        //addOffersMarker();
         // center markers along both axes
         tileView.setMarkerAnchorPoints(-0.5f, -0.5f);
 
@@ -151,9 +156,16 @@ public class StoreMapFragment extends Fragment  {
 
     private void addOffersMarker() {
         for (int count = 0; count < Constants.OFFER_ARRAY.length; count++){
-            addOffer(Constants.OFFER_ARRAY[count].getX(), Constants.OFFER_ARRAY[count].getY());
+            offersViewList.add(addOffer(Constants.OFFER_ARRAY[count].getX(), Constants.OFFER_ARRAY[count].getY()));
         }
     }
+    private void removeOffersMarker(){
+        for (int i = 0; i < offersViewList.size(); i++) {
+            getTileView().removeMarker(offersViewList.get(i));
+        }
+        offersViewList.clear();
+    }
+
 
 
     private void addMapIcons(LayoutInflater inflater, ViewGroup container) {
@@ -186,22 +198,24 @@ public class StoreMapFragment extends Fragment  {
 
         searchResultLayout = (LinearLayout) searchView.findViewById(R.id.search_result);
         ListView poiListView = (ListView) searchView.findViewById(R.id.poi_list_view);
-        poiListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                searchResultLayout.setVisibility(View.INVISIBLE);
-                menuButton.setVisibility(View.VISIBLE);
-                backButton.setVisibility(View.INVISIBLE);
-                searchBoxBackground.setBackgroundColor(Color.TRANSPARENT);
+        ListView historyListView = (ListView) searchView.findViewById(R.id.history_list_view);
+        poiListView.setOnItemClickListener(listItemClickListener);
+        historyListView.setOnItemClickListener(listItemClickListener);
+
+        if(poiListItems.isEmpty()) {
+            poiListItems.add(" All Offers");
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, poiListItems);
+            poiListView.setAdapter(adapter);
+        }
+
+        if (offerListItems.isEmpty()){
+            ArrayList<Offer> offers = MyApplication.getOffers();
+            for (int i = 0; i < offers.size() ; i++) {
+                offerListItems.add(offers.get(i).getName());
             }
-        });
-
-        ArrayList<String> listItems=new ArrayList<String>();
-        listItems.add(" Offers");
-        listItems.add(" Sale");
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, listItems);
-        poiListView.setAdapter(adapter);
-
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, offerListItems);
+            historyListView.setAdapter(adapter);
+        }
 
         searchEditText.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
@@ -230,12 +244,36 @@ public class StoreMapFragment extends Fragment  {
         });
     }
 
-    private void addOffer(double x, double y )
+    private AdapterView.OnItemClickListener listItemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            searchResultLayout.setVisibility(View.INVISIBLE);
+            menuButton.setVisibility(View.VISIBLE);
+            backButton.setVisibility(View.INVISIBLE);
+            searchBoxBackground.setBackgroundColor(Color.TRANSPARENT);
+            if (((TextView)view).getText().equals(" All Offers")){
+                removeOffersMarker();
+                addOffersMarker();
+                getTileView().removeMarker(pointLocationView);
+            }else{
+                removeOffersMarker();
+                setPoiPoint(Constants.OFFER_ARRAY[new Random().nextInt(Constants.OFFER_ARRAY.length)]);
+                if (poiPoint != null){
+                    addLocationMarker(poiPoint.getX(), poiPoint.getY());
+                    poiPoint = null;
+                    frameTo(pointLocationView);
+                }
+            }
+        }
+    };
+
+    private ImageView addOffer(double x, double y )
     {
         ImageView imageView = new ImageView(context);
-        imageView.setTag(String.valueOf(x)+","+String.valueOf(y));
+        imageView.setTag(String.valueOf(x) + "," + String.valueOf(y));
         imageView.setImageResource(R.drawable.offer);
         getTileView().addMarker(imageView, x, y);
+        return imageView;
     }
 
     private void addBeacon( double x, double y ) {
@@ -309,7 +347,6 @@ public class StoreMapFragment extends Fragment  {
                         // Place a marker
                         addLocationMarker(path.get(path.size()-1).getX(), path.get(path.size()-1).getY());
                         //break;
-
                     }
                 }
             }

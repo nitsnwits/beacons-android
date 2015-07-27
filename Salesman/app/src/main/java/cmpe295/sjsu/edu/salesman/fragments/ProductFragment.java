@@ -52,9 +52,10 @@ public class ProductFragment extends Fragment implements ProductCardAdapter.OnIt
     String accessToken;
     final List<Product> productList = new ArrayList<Product>();
     RecyclerView recyclerView;
+    final ProductDetailsFragment productDetailsFragment = new ProductDetailsFragment();
 
     //adding part for the recommendations
-    static final ArrayList<Product> recommendationList = new ArrayList<Product>();
+    //ArrayList<Product> recommendationList= new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -105,16 +106,15 @@ public class ProductFragment extends Fragment implements ProductCardAdapter.OnIt
     }
 
     private void selectProduct(int position) {
-
-        ProductDetailsFragment productDetailsFragment = new ProductDetailsFragment();
         Product selectedProduct = productList.get(position);
         System.out.println("Selected product______" + selectedProduct.getProductId());
         productDetailsFragment.setProduct(selectedProduct);
 
         //Get the recommendations here
-        getRecommendations(selectedProduct.getProductId());
-        System.out.println("Recommendation size ::" + recommendationList.size());
-        productDetailsFragment.setRecommendationList(recommendationList);
+       // getRecommendations(selectedProduct.getProductId());
+
+       // System.out.println("Recommendation size ::" + recommendationList.size());
+       // productDetailsFragment.setRecommendationList(recommendationList);
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();
@@ -122,6 +122,8 @@ public class ProductFragment extends Fragment implements ProductCardAdapter.OnIt
         ft.replace(R.id.content_frame, productDetailsFragment);
         ft.commit();
     }
+
+
 
     public List<Product> getProducts(){
         final ProductCardAdapter.OnItemClickListener mListener = null;
@@ -186,54 +188,63 @@ public class ProductFragment extends Fragment implements ProductCardAdapter.OnIt
         recyclerView.setAdapter(new ProductCardAdapter(productList, this));
     }
 
-    public void getRecommendations(String productId){
-
-        RestClient.get().getRecommendations(productId, new Callback<ArrayList<Product>>() {
-            @Override
-            public void success(ArrayList<Product> products, Response response) {
-                System.out.println("I am in success");
-                System.out.println(products.size());
-                for(Product product : products ){
-                    recommendationList.add(product);
-                }
-
-                System.out.println("Recommendations for you are ::" + recommendationList.size());
-                for(Product p : recommendationList){
-                    System.out.println("You can buy::" + p.getName());
-                }
-
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                RestError body = (RestError) error.getBodyAs(RestError.class);
-                //dynamic error handling
-                if (body.errorCode == 400) {
-                    Toast.makeText(getActivity(), body.getErrorMessage(),
-                            Toast.LENGTH_SHORT).show();
-                }
-                if (body.errorCode == 401) {
-                    Toast.makeText(getActivity(), body.getErrorMessage(),
-                            Toast.LENGTH_SHORT).show();
-                }
-                if (body.errorCode == 404) {
-                    Toast.makeText(getActivity(), body.getErrorMessage(),
-                            Toast.LENGTH_SHORT).show();
-                }
-                if (body.errorCode == 500) {
-                    Toast.makeText(getActivity(), body.getErrorMessage(),
-                            Toast.LENGTH_SHORT).show();
-                }
-                if (body.errorCode == 503) {
-                    Toast.makeText(getActivity(), body.getErrorMessage(),
-                            Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-
-
-    }
+//    public void getRecommendations(String productId){
+//
+//        RestClient.get().getRecommendations(productId, new Callback<ArrayList<Product>>() {
+//            @Override
+//            public void success(ArrayList<Product> products, Response response) {
+//                System.out.println("I am in success");
+//                System.out.println(products.size());
+//                for(Product product : products ){
+//                    recommendationList.add(product);
+//                }
+//
+//                System.out.println("Recommendations for you are ::" + recommendationList.size());
+//                for(Product p : recommendationList){
+//                    System.out.println("You can buy::" + p.getName());
+//                }
+//                activity.runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        productDetailsFragment.setRecommendationList(recommendationList);
+//                    }
+//                });
+//
+//
+//
+//
+//            }
+//
+//            @Override
+//            public void failure(RetrofitError error) {
+//                RestError body = (RestError) error.getBodyAs(RestError.class);
+//                //dynamic error handling
+//                if (body.errorCode == 400) {
+//                    Toast.makeText(getActivity(), body.getErrorMessage(),
+//                            Toast.LENGTH_SHORT).show();
+//                }
+//                if (body.errorCode == 401) {
+//                    Toast.makeText(getActivity(), body.getErrorMessage(),
+//                            Toast.LENGTH_SHORT).show();
+//                }
+//                if (body.errorCode == 404) {
+//                    Toast.makeText(getActivity(), body.getErrorMessage(),
+//                            Toast.LENGTH_SHORT).show();
+//                }
+//                if (body.errorCode == 500) {
+//                    Toast.makeText(getActivity(), body.getErrorMessage(),
+//                            Toast.LENGTH_SHORT).show();
+//                }
+//                if (body.errorCode == 503) {
+//                    Toast.makeText(getActivity(), body.getErrorMessage(),
+//                            Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
+//
+//
+//
+//    }
 
 
 }

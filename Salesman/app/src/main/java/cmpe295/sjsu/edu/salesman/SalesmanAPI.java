@@ -66,8 +66,8 @@ public interface SalesmanAPI {
     public void getOffers(Callback<ArrayList<OfferResponse>> cb);
 
     //6. Get Offer Details
-    @GET("/offers/{offerId}")
-    public  void getOfferDetails(@Path("offerId")String offerId, Callback<OfferResponse> cb);
+        @GET("/offers/{offerId}")
+        public  void getOfferDetails(@Path("offerId")String offerId, Callback<OfferResponse> cb);
 
     //7.Get the products on the product fragment
     @GET("/products/search")

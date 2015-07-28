@@ -29,7 +29,7 @@
             android:text="Title"
             android:textColor="@android:color/black"
             android:textStyle="bold"
-            android:textSize="15dp"
+            android:textSize="17dp"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:layout_alignBottom="@id/offerImage"/>
@@ -38,14 +38,35 @@
             android:id="@+id/hexValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/name"
             android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
             android:gravity="center_vertical"
             android:text="Content"
             android:textStyle="bold"
             android:textColor="@android:color/holo_green_light"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:layout_marginEnd="34dp"
+            android:layout_below="@+id/offerImage"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Small Text"
+            android:id="@+id/productOriginalPrice"
+            android:textColor="@color/switch_thumb_disabled_material_light"
+            android:layout_alignBottom="@+id/hexValue"
+            android:layout_marginLeft="100dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Original Price"
+            android:id="@+id/textView2"
+            android:layout_alignTop="@+id/productOriginalPrice"
+            android:layout_alignStart="@+id/name" />
 
     </RelativeLayout>
 

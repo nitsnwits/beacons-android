@@ -1,5 +1,6 @@
 package cmpe295.sjsu.edu.salesman.adapters;
 
+import android.graphics.Paint;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.internal.widget.AdapterViewCompat;
 import android.support.v7.widget.CardView;
@@ -52,7 +53,11 @@ public class OfferCardAdapter extends RecyclerView.Adapter<OfferViewHolder> {
     public void onBindViewHolder(OfferViewHolder offerViewHolder,final int position) {
         Offer offer = offers.get(position);
         offerViewHolder.titleText.setText(offer.getName());
-        offerViewHolder.contentText.setText(offer.getOriginalPrice());
+        offerViewHolder.contentText.setText("$" + offer.getOfferPrice());
+
+        TextView t = offerViewHolder.originalPrice;
+        t.setText("$" + offer.getOriginalPrice());
+        t.setPaintFlags(t.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         //offerViewHolder.offerImage.setImageBitmap(offer.getResourceId());
         new ImageLoadTask(offer.getUrl(), offerViewHolder.offerImage).execute();
 

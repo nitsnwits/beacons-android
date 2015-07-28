@@ -19,6 +19,7 @@ public class OfferViewHolder extends RecyclerView.ViewHolder{
 
     public TextView titleText;
     public TextView contentText;
+    public TextView originalPrice;
     public CardView card;
     public ImageView offerImage;
 
@@ -27,6 +28,7 @@ public class OfferViewHolder extends RecyclerView.ViewHolder{
         titleText = (TextView) itemView.findViewById(R.id.name);
         contentText = (TextView) itemView.findViewById(R.id.hexValue);
         offerImage = (ImageView) itemView.findViewById(R.id.offerImage);
+        originalPrice = (TextView) itemView.findViewById(R.id.productOriginalPrice);
         card = (CardView) itemView;
 
 

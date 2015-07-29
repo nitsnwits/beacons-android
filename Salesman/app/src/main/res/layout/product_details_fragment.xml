@@ -67,6 +67,16 @@
             android:layout_alignParentStart="true"
             android:paddingStart="10dp"
             android:paddingBottom="10dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Show Map"
+            android:id="@+id/button"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="10dp"
+            android:background="#70AA37" />
     </RelativeLayout>
     <Space
         android:id="@+id/spacer"
@@ -82,7 +92,8 @@
         android:layout_below="@+id/spacer"
         android:layout_alignParentStart="true"
         android:background="@color/white"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:layout_alignParentEnd="true">
 
         <TextView
             android:layout_width="wrap_content"

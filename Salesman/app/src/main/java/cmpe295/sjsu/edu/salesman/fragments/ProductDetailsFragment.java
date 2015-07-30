@@ -1,6 +1,8 @@
 package cmpe295.sjsu.edu.salesman.fragments;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,9 +16,12 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import cmpe295.sjsu.edu.salesman.HomeActivity;
 import cmpe295.sjsu.edu.salesman.R;
 import cmpe295.sjsu.edu.salesman.RestClient;
 import cmpe295.sjsu.edu.salesman.RestError;
+import cmpe295.sjsu.edu.salesman.pojo.Category;
+import cmpe295.sjsu.edu.salesman.pojo.Point;
 import cmpe295.sjsu.edu.salesman.pojo.Product;
 import cmpe295.sjsu.edu.salesman.utils.ImageLoadTask;
 import retrofit.Callback;
@@ -67,6 +72,7 @@ public class ProductDetailsFragment extends Fragment {
 
         setProductValues(rootView);
         ImageView button = (ImageView) rootView.findViewById(R.id.backBtn);
+        Button mapBtn = (Button) rootView.findViewById(R.id.mapButton);
         // Method will be called on Back button click
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,9 +80,28 @@ public class ProductDetailsFragment extends Fragment {
                 getFragmentManager().popBackStack();
             }
         });
+        mapBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navigateToStoreMap();
+            }
+        });
         return rootView;
     }
 
+    private void navigateToStoreMap() {
+
+        StoreMapFragment mapFragment = ((HomeActivity)(this.getActivity())).getStoreMapFragment();
+        Category category = new Category();
+        category.setCategoryId(product.getCategoryId());
+        mapFragment.setPoiPoint(new Point(category.getxCoord(), category.getyCoord()));
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction ft = fragmentManager.beginTransaction();
+        ft.addToBackStack(null);
+        ft.replace(R.id.content_frame, mapFragment);
+        ft.commit();
+
+    }
 
     private void setProductValues(View rootView){
 
@@ -91,18 +116,6 @@ public class ProductDetailsFragment extends Fragment {
         getRecommendations(product.getProductId());
 
          System.out.println("Size is::" + recommendationList.size());
-//        TextView recommendation1 = (TextView)rootView.findViewById(R.id.recommendation1);
-//        recommendation1.setText(recommendationList.get(0).getName());
-//        TextView recommendation2 = (TextView)rootView.findViewById(R.id.recommendation2);
-//        recommendation2.setText(recommendationList.get(1).getName());
-//        TextView recommendation3 = (TextView)rootView.findViewById(R.id.recommendation3);
-//        recommendation3.setText(recommendationList.get(2).getName());
-//        TextView recommendation4 = (TextView)rootView.findViewById(R.id.recommendation4);
-//        recommendation4.setText(recommendationList.get(3).getName());
-//        TextView recommendation5 = (TextView)rootView.findViewById(R.id.recommendation5);
-//        recommendation5.setText(recommendationList.get(4).getName());
-
-
     }
 
     public void getRecommendations(String productId){

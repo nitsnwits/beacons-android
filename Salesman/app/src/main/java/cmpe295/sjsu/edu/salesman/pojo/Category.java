@@ -7,7 +7,7 @@ public class Category {
 
 
     private String beaconId;
-    private long updated;
+    private double updated;
     private long created;
     private String categoryId;
     private String name;
@@ -62,11 +62,11 @@ public class Category {
         this.name = name;
     }
 
-    public long getUpdated() {
+    public double getUpdated() {
         return updated;
     }
 
-    public void setUpdated(long updated) {
+    public void setUpdated(double updated) {
         this.updated = updated;
     }
 

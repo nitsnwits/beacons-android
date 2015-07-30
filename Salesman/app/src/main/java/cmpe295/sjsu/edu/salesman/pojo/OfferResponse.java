@@ -15,7 +15,7 @@ public class OfferResponse {
     private Product product;
     private Category category;
     private String discount;
-    private int  timeRemaining;
+    private long  timeRemaining;
 
     public String getDiscount() {
         return discount;
@@ -93,11 +93,11 @@ public class OfferResponse {
         this.startDate = startDate;
     }
 
-    public int getTimeRemaining() {
+    public long getTimeRemaining() {
         return timeRemaining;
     }
 
-    public void setTimeRemaining(int timeRemaining) {
+    public void setTimeRemaining(long timeRemaining) {
         this.timeRemaining = timeRemaining;
     }
 

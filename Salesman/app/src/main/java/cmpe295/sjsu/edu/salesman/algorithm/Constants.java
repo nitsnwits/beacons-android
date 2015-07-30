@@ -69,6 +69,8 @@ public class Constants {
     };
     public static final Map<String, Point> offerPointMap = configureOfferPointMap();
 
+    public static final Map<String,String> beaconOfferMap = configureBeaconOfferMap();
+
     private static Map<String, Point> configureOfferPointMap() {
         Map<String, Point> OfferMap = new HashMap<>();
         for (int i = 0; i < OFFER_ARRAY.length; i++) {
@@ -97,7 +99,27 @@ public class Constants {
         return  beaconMap;
     }
 
+    public static final Map<Point,String> beaconIdMap = configureBeaconIdMap();
 
+    private static Map<Point, String> configureBeaconIdMap() {
 
+        Map<Point,String> beaconMap = new HashMap<>();
+        beaconMap.put(BEACON_1_POINT, "35b1784b-5bb8-4da6-83d4-ee6d01300355");
+        beaconMap.put(BEACON_2_POINT, "3f8d0c46-6ac0-4b06-8ab3-03ed50afb43a");
+        beaconMap.put(BEACON_3_POINT, "a57622bb-d10e-413b-b669-334c6c793bfc");
+        beaconMap.put(BEACON_4_POINT, "7ff16ebf-40de-4758-b480-d4345412b6aa");
+
+        return  beaconMap;
+    }
+
+    private static Map configureBeaconOfferMap(){
+        Map<String,String> beaconOfferMap = new HashMap<>();
+        beaconOfferMap.put("35b1784b-5bb8-4da6-83d4-ee6d01300355", "Health");
+        beaconOfferMap.put("3f8d0c46-6ac0-4b06-8ab3-03ed50afb43a", "Grocery");
+        beaconOfferMap.put("a57622bb-d10e-413b-b669-334c6c793bfc", "Books");
+        beaconOfferMap.put("7ff16ebf-40de-4758-b480-d4345412b6aa", "Electronics");
+
+        return  beaconOfferMap;
+    }
 
 }

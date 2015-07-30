@@ -77,4 +77,9 @@ public interface SalesmanAPI {
     @GET("/products/{productId}/recommendations")
     public void getRecommendations(@Path("productId") String productId,Callback<ArrayList<Product>> cb);
 
+    // Get offers by beacon
+    @GET("/beacons/{beaconId}/offers")
+    public void getOffersByBeacon(@Path("beaconId") String beaconId,Callback<ArrayList<OfferResponse>> cb);
+
+
 }

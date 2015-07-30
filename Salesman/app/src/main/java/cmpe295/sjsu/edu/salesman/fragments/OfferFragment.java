@@ -107,29 +107,9 @@ public class OfferFragment extends Fragment implements OfferCardAdapter.OnItemCl
 
             @Override
             public void failure(RetrofitError error) {
-                System.out.println("------------Inside Failure-----------");
-                RestError body = (RestError) error.getBodyAs(RestError.class);
-                //dynamic error handling
-                if (body.errorCode == 400) {
-                    Toast.makeText(getActivity().getApplicationContext(), body.getErrorMessage(),
-                            Toast.LENGTH_SHORT).show();
-                }
-                if (body.errorCode == 401) {
-                    Toast.makeText(getActivity().getApplicationContext(), body.getErrorMessage(),
-                            Toast.LENGTH_SHORT).show();
-                }
-                if (body.errorCode == 404) {
-                    Toast.makeText(getActivity().getApplicationContext(), body.getErrorMessage(),
-                            Toast.LENGTH_SHORT).show();
-                }
-                if (body.errorCode == 500) {
-                    Toast.makeText(getActivity().getApplicationContext(), body.getErrorMessage(),
-                            Toast.LENGTH_SHORT).show();
-                }
-                if (body.errorCode == 503) {
-                    Toast.makeText(getActivity().getApplicationContext(), body.getErrorMessage(),
-                            Toast.LENGTH_SHORT).show();
-                }
+                System.out.println("------------Inside Failure-----------" + error.getMessage());
+
+
             }
         });
 

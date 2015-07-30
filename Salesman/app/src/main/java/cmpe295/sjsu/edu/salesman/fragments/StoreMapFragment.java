@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -114,7 +115,7 @@ public class StoreMapFragment extends Fragment  {
 
 
         // scale it down to manageable size
-        tileView.setScale(0.25);
+        tileView.setScale(0.5);
 
         getActivity().getActionBar().hide();
 
@@ -171,6 +172,17 @@ public class StoreMapFragment extends Fragment  {
     private void addMapIcons(LayoutInflater inflater, ViewGroup container) {
 
         // Current location button
+        RelativeLayout.LayoutParams llp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        llp.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+        llp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+
+        ImageButton navigateBtn = new ImageButton(context);
+        navigateBtn.setFocusable(true);
+        navigateBtn.setImageResource(R.drawable.navigate);
+        navigateBtn.setBackgroundColor(Color.TRANSPARENT);
+        navigateBtn.setOnClickListener(navigateClickListener);
+        relativeLayout.addView(navigateBtn, llp);
+
         RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         lp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         lp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
@@ -204,18 +216,18 @@ public class StoreMapFragment extends Fragment  {
 
         if(poiListItems.isEmpty()) {
             poiListItems.add(" All Offers");
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, poiListItems);
-            poiListView.setAdapter(adapter);
         }
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, poiListItems);
+        poiListView.setAdapter(adapter);
 
         if (offerListItems.isEmpty()){
             ArrayList<Offer> offers = MyApplication.getOffers();
             for (int i = 0; i < offers.size() ; i++) {
                 offerListItems.add(offers.get(i).getName());
             }
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, offerListItems);
-            historyListView.setAdapter(adapter);
         }
+        ArrayAdapter<String> offerListAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, offerListItems);
+        historyListView.setAdapter(offerListAdapter);
 
         searchEditText.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
@@ -223,6 +235,8 @@ public class StoreMapFragment extends Fragment  {
                 menuButton.setVisibility(View.INVISIBLE);
                 backButton.setVisibility(View.VISIBLE);
                 searchBoxBackground.setBackgroundColor(Color.WHITE);
+                InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
             }
 
         });
@@ -251,13 +265,23 @@ public class StoreMapFragment extends Fragment  {
             menuButton.setVisibility(View.VISIBLE);
             backButton.setVisibility(View.INVISIBLE);
             searchBoxBackground.setBackgroundColor(Color.TRANSPARENT);
+            // remove path
+            for (int j = 0; j < locationPathList.size(); j++) {
+                getTileView().removePath(locationPathList.get(j));
+            }
+
             if (((TextView)view).getText().equals(" All Offers")){
                 removeOffersMarker();
                 addOffersMarker();
                 getTileView().removeMarker(pointLocationView);
             }else{
                 removeOffersMarker();
-                setPoiPoint(Constants.OFFER_ARRAY[new Random().nextInt(Constants.OFFER_ARRAY.length)]);
+                ArrayList<Offer> offers = MyApplication.getOffers();
+                String searchedOfferName = ((TextView)view).getText().toString();
+                Offer searchedOffer = Utility.searchOfferByName(offers, searchedOfferName);
+                if (searchedOffer == null) return;
+                setPoiPoint(new Point(searchedOffer.getX(), searchedOffer.getY()));
+                //setPoiPoint(Constants.OFFER_ARRAY[new Random().nextInt(Constants.OFFER_ARRAY.length)]);
                 if (poiPoint != null){
                     addLocationMarker(poiPoint.getX(), poiPoint.getY());
                     poiPoint = null;
@@ -285,7 +309,9 @@ public class StoreMapFragment extends Fragment  {
 
     public void addLocationMarker(double x, double y ) {
         getTileView().removeMarker(pointLocationView);
+        pointLocationView.setTag(String.valueOf(x) + "," + String.valueOf(y));
         getTileView().addMarker(pointLocationView, x, y - 0.02);
+        //getTileView().addMarkerEventListener(markerEventListener);
     }
 
     private void setUserLocation(Point userLocationPoint){
@@ -322,36 +348,61 @@ public class StoreMapFragment extends Fragment  {
         }
     };
 
+    private View.OnClickListener navigateClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            if (pointLocationView != null) {
+                if (pointLocationView.getTag() != null && pointLocationView.getTag() instanceof String) {
+                    Point destinationPoint = Constants.offerPointMap.get(pointLocationView.getTag());
+                    if (destinationPoint == null) {
+                        String[] points = ((String) pointLocationView.getTag()).split(",");
+                        destinationPoint = new Point(Double.valueOf(points[0]), Double.valueOf(points[1]));
+                    }
+                    navigateToPoint(destinationPoint);
+                }
+            }
+        }
+    };
+
     private MarkerEventListener markerEventListener = new MarkerEventListener() {
         @Override
         public void onMarkerTap( View v, int x, int y ) {
             if(v.getTag() != null && v.getTag() instanceof String) {
                 Point destinationPoint = Constants.offerPointMap.get(v.getTag());
+                if (destinationPoint == null){
+                    String[] points = ((String) v.getTag()).split(",");
+                    destinationPoint = new Point(Double.valueOf(points[0]), Double.valueOf(points[1]));
+                }
                 if(destinationPoint != null) {
-                    List<List<Point>> pathList = locationAlgorithm.getAllPathsFromCurrentLocationTo(destinationPoint);
-                    int[] colorList = {Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW};
-                    int i = 0;
-                    for (int j = 0; j < locationPathList.size(); j++) {
-                        getTileView().removePath(locationPathList.get(j));
-                    }
-                    for (List<Point> path : pathList) {
-                        String pathString = Utility.ListToString(path);
-                        Paint pathPaint = new Paint(getTileView().getPathPaint()); //getTileView().getPathPaint();
-                        pathPaint.setColor(colorList[i++]);
-                        pathPaint.setShadowLayer(4, 2, 2, 0x66000000);
-                        pathPaint.setPathEffect(new CornerPathEffect(5));
-                        DrawablePath locationPath = getTileView().drawPath(Utility.getDoubleList(path), pathPaint);
-                        if(locationPath != null)
-                            locationPathList.add(locationPath);
-                       // Log.i(TAG, "Path: " + pathString.toString());
-                        // Place a marker
-                        addLocationMarker(path.get(path.size()-1).getX(), path.get(path.size()-1).getY());
-                        //break;
-                    }
+                    navigateToPoint(destinationPoint);
                 }
             }
         }
     };
+
+    private void navigateToPoint(Point destinationPoint) {
+        List<List<Point>> pathList = locationAlgorithm.getAllPathsFromCurrentLocationTo(destinationPoint);
+        int[] colorList = {Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW};
+        int i = 0;
+        for (int j = 0; j < locationPathList.size(); j++) {
+            getTileView().removePath(locationPathList.get(j));
+        }
+        for (List<Point> path : pathList) {
+            String pathString = Utility.ListToString(path);
+            Paint pathPaint = new Paint(getTileView().getPathPaint()); //getTileView().getPathPaint();
+            pathPaint.setColor(colorList[i++]);
+            pathPaint.setShadowLayer(4, 2, 2, 0x66000000);
+            pathPaint.setPathEffect(new CornerPathEffect(5));
+            DrawablePath locationPath = getTileView().drawPath(Utility.getDoubleList(path), pathPaint);
+            if(locationPath != null)
+                locationPathList.add(locationPath);
+           // Log.i(TAG, "Path: " + pathString.toString());
+            // Place a marker
+            addLocationMarker(path.get(path.size()-1).getX(), path.get(path.size()-1).getY());
+            //break;
+        }
+    }
 
 
     @Override

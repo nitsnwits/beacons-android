@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/switch1"
+        android:layout_marginTop="48dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Recommendations"
+        android:id="@+id/textView3"
+        android:layout_alignBaseline="@+id/switch3"
+        android:layout_alignBottom="@+id/switch3"
+        android:layout_alignParentStart="true"
+        android:textColor="@android:color/holo_green_light"
+        android:textStyle="bold" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/switch3"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Notifications"
+        android:id="@+id/textView4"
+        android:layout_alignTop="@+id/switch1"
+        android:layout_alignStart="@+id/textView3"
+        android:textColor="@android:color/holo_green_light"
+        android:textStyle="bold" />
+</RelativeLayout>

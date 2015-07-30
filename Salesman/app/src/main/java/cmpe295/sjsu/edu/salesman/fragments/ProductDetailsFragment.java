@@ -94,7 +94,8 @@ public class ProductDetailsFragment extends Fragment {
         StoreMapFragment mapFragment = ((HomeActivity)(this.getActivity())).getStoreMapFragment();
         Category category = new Category();
         category.setCategoryId(product.getCategoryId());
-        mapFragment.setPoiPoint(new Point(category.getxCoord(), category.getyCoord()));
+        //mapFragment.setPoiPoint(new Point(category.getxCoord(), category.getyCoord()));
+        mapFragment.setPoiPoint(new Point(0.38,0.45));
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();
         ft.addToBackStack(null);

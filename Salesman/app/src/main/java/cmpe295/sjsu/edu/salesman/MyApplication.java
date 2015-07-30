@@ -120,7 +120,7 @@ public class MyApplication extends Application {
                         notificationStr += offerResponses.size() + " offers are going on.";
                     } else {
                         notificationStr = "Welcome to " + Constants.beaconOfferMap.get(beaconId) + " section";
-                        notificationStr += offerResponses.size() + " offers are going on.";
+                        //notificationStr += offerResponses.size() + " offers are going on.";
                     }
                     postNotification(notificationStr);
                 } catch (Exception e) {

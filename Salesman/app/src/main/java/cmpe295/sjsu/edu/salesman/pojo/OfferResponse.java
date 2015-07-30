@@ -5,8 +5,8 @@ package cmpe295.sjsu.edu.salesman.pojo;
  */
 public class OfferResponse {
 
-    private long updated;
-    private long created;
+    private double updated;
+    private double created;
     private String offerId;
     private float offerPrice;
     private String productId;
@@ -35,11 +35,11 @@ public class OfferResponse {
         this.category = category;
     }
 
-    public long getCreated() {
+    public double getCreated() {
         return created;
     }
 
-    public void setCreated(long created) {
+    public void setCreated(double created) {
         this.created = created;
     }
 
@@ -101,11 +101,11 @@ public class OfferResponse {
         this.timeRemaining = timeRemaining;
     }
 
-    public long getUpdated() {
+    public double getUpdated() {
         return updated;
     }
 
-    public void setUpdated(long updated) {
+    public void setUpdated(double updated) {
         this.updated = updated;
     }
 

@@ -10,15 +10,15 @@ package cmpe295.sjsu.edu.salesman.pojo;
 public class Product {
 
     private String categoryId;
-    private long created;
+    private double created;
     private String description;
     private String image;
     private String name;
     private float price;
     private String productId;
-    private long updated;
+    private double updated;
 
-    public Product(String categoryId, long created, String description, String image, String name, float price, String productId, long updated) {
+    public Product(String categoryId, long created, String description, String image, String name, float price, String productId, double updated) {
         this.categoryId = categoryId;
         this.created = created;
         this.description = description;
@@ -38,11 +38,11 @@ public class Product {
         this.categoryId = categoryId;
     }
 
-    public long getCreated() {
+    public double getCreated() {
         return created;
     }
 
-    public void setCreated(long created) {
+    public void setCreated(double created) {
         this.created = created;
     }
 
@@ -86,11 +86,11 @@ public class Product {
         this.productId = productId;
     }
 
-    public long getUpdated() {
+    public double getUpdated() {
         return updated;
     }
 
-    public void setUpdated(long updated) {
+    public void setUpdated(double updated) {
         this.updated = updated;
     }
 
